@@ -4,6 +4,7 @@ import './globals.css';
 
 import { Header } from '@/components/Header';
 import Area from '@/components/wrappers/Area';
+import Sidebar from '@/components/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c1 via-c1 to-c2`}>
         <Header />
         <Area>
-          <Area.Side>Navbar</Area.Side>
+          <Area.Side>
+            <Sidebar />
+          </Area.Side>
           <Area.Page>{children}</Area.Page>
         </Area>
       </body>

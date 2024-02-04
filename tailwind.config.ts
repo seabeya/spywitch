@@ -12,6 +12,8 @@ const config: Config = {
         c1: '#141a1f',
         c2: '#112231',
         c3: '#101418',
+        c4: '#11161a',
+        c5: '#141a1f',
       },
     },
     container: {
