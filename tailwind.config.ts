@@ -15,6 +15,7 @@ const config: Config = {
         c_body2: '#112231',
         c_header: '#101418',
         c_main: '#11161a',
+        c_active: '#121f2a',
       },
     },
     container: {
