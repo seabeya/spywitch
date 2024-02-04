@@ -3,13 +3,13 @@ import Container from '@/components/wrappers/Container';
 export default function Area({ children }: { children: React.ReactNode }) {
   return (
     <Container>
-      <main className="flex flex-wrap items-start gap-5 py-5">{children}</main>
+      <main className="flex flex-wrap items-start gap-3 py-3 sm:gap-5 sm:py-5">{children}</main>
     </Container>
   );
 }
 
 function Side({ children }: { children: React.ReactNode }) {
-  return <div className="w-full lg:flex-[2]">{children}</div>;
+  return <div className="sticky top-1 w-full sm:static lg:flex-[2]">{children}</div>;
 }
 
 Area.Side = Side;
