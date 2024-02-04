@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c1 via-c1 to-c2`}>
+      <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c_body via-c_body to-c_body2`}>
         <Header />
         <Area>
           <Area.Side>

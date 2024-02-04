@@ -9,9 +9,9 @@ function Info({ value, label }: { value: string; label: string }) {
 
 export default function Statusbar() {
   return (
-    <div className="min-w-max overflow-hidden rounded-xl border border-gray-800 bg-c4 text-white">
-      <div className="border-b border-gray-700 bg-c5 px-7 pt-6">
-        <div className="flex justify-between divide-x divide-gray-700">
+    <div className="min-w-max overflow-hidden rounded-xl border border-c_border1 bg-c_main text-white">
+      <div className="border-b border-c_border2 bg-c_body px-7 pt-6">
+        <div className="flex justify-between divide-x divide-c_border2">
           <Info value="0" label="Users" />
           <Info value="0" label="Channels" />
           <Info value="00:00" label="Up Time" />

@@ -9,11 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        c1: '#141a1f',
-        c2: '#112231',
-        c3: '#101418',
-        c4: '#11161a',
-        c5: '#141a1f',
+        c_border1: '#1f2937',
+        c_border2: '#374151',
+        c_body: '#141a1f',
+        c_body2: '#112231',
+        c_header: '#101418',
+        c_main: '#11161a',
       },
     },
     container: {
