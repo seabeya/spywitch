@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 import { Header } from '@/components/Header';
+import Area from '@/components/wrappers/Area';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +21,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c1 via-c1 to-c2`}>
         <Header />
-        {children}
+        <Area>
+          <Area.Side>Navbar</Area.Side>
+          <Area.Page>{children}</Area.Page>
+        </Area>
       </body>
     </html>
   );
