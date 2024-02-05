@@ -9,6 +9,7 @@ import Sidebar from '@/components/Sidebar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://spywitch.seabeya.com'),
   title: 'SpyWitch',
   description: "An open-source tool to track users' chat messages on Twitch.tv.",
   keywords: [
@@ -25,13 +26,13 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     type: 'website',
-    url: 'https://spywitch.seabeya.com',
+    url: '/',
     title: 'SpyWitch',
     description: "An open-source tool to track users' chat messages on Twitch.tv.",
     siteName: 'SpyWitch',
     images: [
       {
-        url: 'https://spywitch.seabeya.com/icons/icon-96x96.png',
+        url: '/icon-96x96.png',
         alt: 'SpyWitch',
       },
     ],
