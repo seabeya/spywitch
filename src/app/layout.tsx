@@ -9,8 +9,33 @@ import Sidebar from '@/components/Sidebar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '-',
-  description: '-',
+  title: 'SpyWitch',
+  description: "An open-source tool to track users' chat messages on Twitch.tv.",
+  keywords: [
+    'spywitch',
+    'twitch',
+    'chat',
+    'messages',
+    'track',
+    'open-source',
+    'tool',
+    'osint-tool',
+    'osint',
+    'twitch-chat',
+  ],
+  openGraph: {
+    type: 'website',
+    url: 'https://spywitch.seabeya.com',
+    title: 'SpyWitch',
+    description: "An open-source tool to track users' chat messages on Twitch.tv.",
+    siteName: 'SpyWitch',
+    images: [
+      {
+        url: 'https://spywitch.seabeya.com/icons/icon-96x96.png',
+        alt: 'SpyWitch',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
