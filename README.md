@@ -1,3 +1,5 @@
 # SpyWitch
 
-> The refactored project will be available soon.
+> Will be back soon.
+
+Web: https://spywitch.seabeya.com
