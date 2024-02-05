@@ -1,11 +1,11 @@
-'use client';
-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import IconChevron from '@/components/icons/IconChevron';
 
-export default function NavBtn({ href, label }: { href: string; label: string }) {
+type NavBtnProps = { href: string; label: string; icon?: JSX.Element };
+
+export default function NavBtn({ href, label }: NavBtnProps) {
   const currPath = usePathname();
   const isActive = currPath === href;
 
@@ -26,3 +26,22 @@ export default function NavBtn({ href, label }: { href: string; label: string })
     </Link>
   );
 }
+
+function Fixed({ href, label, icon }: NavBtnProps) {
+  const currPath = usePathname();
+  const isActive = currPath === href;
+
+  return (
+    <Link
+      href={href}
+      className={`flex flex-col items-center py-2 text-sm text-gray-400 
+      hover:text-gray-300
+    ${isActive ? '!text-sky-500' : ''}`}
+    >
+      {icon}
+      {label}
+    </Link>
+  );
+}
+
+NavBtn.Fixed = Fixed;

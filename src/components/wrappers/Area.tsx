@@ -3,7 +3,7 @@ import Container from '@/components/wrappers/Container';
 export default function Area({ children }: { children: React.ReactNode }) {
   return (
     <Container>
-      <main className="flex flex-wrap items-start gap-3 py-3 sm:gap-5 sm:py-5">{children}</main>
+      <main className="flex flex-wrap items-start gap-3 pb-16 pt-3 sm:gap-5 sm:pt-5 lg:pb-5">{children}</main>
     </Container>
   );
 }
