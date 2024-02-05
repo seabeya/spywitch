@@ -1,3 +1,3 @@
 export default function Page() {
-  return <main className="text-3xl text-purple-600">Lists</main>;
+  return <main className="h-[1200px] text-white">Lists</main>;
 }

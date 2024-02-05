@@ -1,3 +1,9 @@
 export default function Home() {
-  return <main className="h-[1680px] text-3xl text-purple-600">SpyWitch</main>;
+  return (
+    <main>
+      <div className="rounded-md bg-yellow-500 p-2 font-medium">
+        The project is being refactored and will be back soon.
+      </div>
+    </main>
+  );
 }

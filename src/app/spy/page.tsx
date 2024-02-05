@@ -1,3 +1,3 @@
 export default function Page() {
-  return <main className="text-3xl text-purple-600">Spy</main>;
+  return <main className="text-white">Spy</main>;
 }
