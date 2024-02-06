@@ -11,9 +11,9 @@ export default function NavBtn({ href, label }: NavBtnProps) {
 
   return (
     <Link
-      className={`group flex items-center justify-between overflow-hidden rounded-lg 
-        border border-c_border1 bg-c_body px-4 py-2 text-gray-400
-        hover:border-c_border2
+      className={`group flex justify-between overflow-hidden rounded-lg
+        border border-c_border1 bg-c_body px-4 py-2 text-sm text-gray-400 hover:border-c_border2
+        xl:text-base
         ${isActive ? '!border-sky-900 !bg-c_active !text-gray-200' : ''}`}
       href={href}
     >
