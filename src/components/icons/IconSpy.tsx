@@ -1,12 +1,21 @@
 function IconSpy({ className }: { className?: string }) {
   return (
-    <svg fill="none" viewBox="1 2 22 21" height="1em" width="1em" className={className}>
-      <path
-        fill="currentColor"
-        d="M5.636 20.364a9 9 0 1112.728 0l1.414 1.414A10.966 10.966 0 0023 14c0-6.075-4.925-11-11-11S1 7.925 1 14c0 3.038 1.231 5.788 3.222 7.778l1.414-1.414z"
-      />
-      <path fill="currentColor" d="M16.95 18.95a7 7 0 10-9.9 0l1.415-1.414a5 5 0 117.071 0l1.414 1.414z" />
-      <path fill="currentColor" d="M14.121 16.121a3 3 0 10-4.243 0l1.415-1.414a1 1 0 111.414 0l1.414 1.414z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M4 10a7.31 7.31 0 0 0 10 10Z" />
+      <path d="m9 15 3-3" />
+      <path d="M17 13a6 6 0 0 0-6-6" />
+      <path d="M21 13A10 10 0 0 0 11 3" />
     </svg>
   );
 }
