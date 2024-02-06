@@ -3,9 +3,9 @@
 import NavBtn from '@/components/parts/NavBtn';
 
 import IconHome from '@/components/icons/IconHome';
-import IconSpy from './icons/IconSpy';
-import IconLogs from './icons/IconLogs';
-import IconLists from './icons/IconLists';
+import IconSpy from '@/components/icons/IconSpy';
+import IconLogs from '@/components/icons/IconLogs';
+import IconLists from '@/components/icons/IconLists';
 
 const icons = {
   home: <IconHome className="h-5 w-5" />,
