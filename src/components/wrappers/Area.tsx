@@ -1,5 +1,7 @@
 import Container from '@/components/wrappers/Container';
 
+import SectionTitle from '@/components/parts/SectionTitle';
+
 export default function Area({ children }: { children: React.ReactNode }) {
   return (
     <Container>
@@ -15,7 +17,22 @@ function Side({ children }: { children: React.ReactNode }) {
 Area.Side = Side;
 
 function Page({ children }: { children: React.ReactNode }) {
-  return <div className="w-full rounded-xl border border-c_border1 bg-c_main p-5 lg:flex-[5]">{children}</div>;
+  return (
+    <div className="flex w-full flex-col gap-16 rounded-xl border border-c_border1 bg-c_main p-5 lg:flex-[5]">
+      {children}
+    </div>
+  );
 }
 
 Area.Page = Page;
+
+function Section({ children, title }: { children: React.ReactNode; title: string }) {
+  return (
+    <section>
+      <SectionTitle>{title}</SectionTitle>
+      <div className="mt-4 flex flex-col gap-4">{children}</div>
+    </section>
+  );
+}
+
+Area.Section = Section;
