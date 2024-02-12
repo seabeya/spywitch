@@ -13,6 +13,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "idb": "^8.0.0",
     "jotai": "^2.6.4",
     "next": "14.1.0",
     "react": "^18",

@@ -17,10 +17,9 @@ import { getSanitizedInput, getUniqueItems, getValidItems } from '@/lib/utils';
 
 import tmi from 'tmi.js';
 import { useState } from 'react';
+import { deleteDB, openDB } from 'idb';
 
 export default function Command() {
-  console.log('Command component rendered!');
-
   // Input handlers {
   const [usersInput, setUsersInput] = useAtom(atom_usersInput);
   const [channelsInput, setChannelsInput] = useAtom(atom_channelsInput);
@@ -70,6 +69,30 @@ export default function Command() {
         setIsLoading(false);
       });
     // }
+
+    // Idb Setup {
+    await deleteDB('spywitch');
+    const idb = await openDB('spywitch', 1, {
+      upgrade(db) {
+        const store = db.createObjectStore('logs', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+        store.createIndex('user', 'user');
+      },
+    });
+    // }
+
+    // Tmi & Idb {
+    client.on('message', async (channel, tags, message) => {
+      await idb.add('logs', {
+        user: tags['display-name'],
+        channel: channel.substring(1),
+        message,
+        date: new Date(),
+      });
+    });
+    // }
   };
   // }
 
@@ -85,6 +108,8 @@ export default function Command() {
 
         setUsers([]);
         setChannels([]);
+
+        deleteDB('spywitch');
       })
       .finally(() => {
         setIsLoading(false);
