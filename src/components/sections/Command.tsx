@@ -60,10 +60,11 @@ export default function Command() {
       .connect()
       .then(() => {
         setTmiConn(client);
-        setIsSpyOn(true);
 
         setUsers(usersArr);
         setChannels(channelsArr);
+
+        setIsSpyOn(true);
       })
       .finally(() => {
         setIsLoading(false);
@@ -103,8 +104,9 @@ export default function Command() {
     tmiConn
       .disconnect()
       .then(() => {
-        setTmiConn({} as tmi.Client);
         setIsSpyOn(false);
+
+        setTmiConn({} as tmi.Client);
 
         setUsers([]);
         setChannels([]);
