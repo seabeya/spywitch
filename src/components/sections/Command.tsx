@@ -2,7 +2,7 @@
 
 import Label from '@/components/parts/Label';
 import Input from '@/components/parts/Input';
-import SpyBtn from '@/components/parts/SpyBtn';
+import ControlBtn from '@/components/parts/ControlBtn';
 
 import { useAtom } from 'jotai';
 import { atom_channelsInput, atom_usersInput } from '@/atoms';
@@ -33,8 +33,9 @@ export default function Command() {
           onChange={handleChannelsChange}
         />
       </Label>
-      <div className="mt-2 flex justify-end xl:mt-4">
-        <SpyBtn label="Start" />
+      <div className="mt-2 flex justify-end gap-2 xl:mt-4">
+        <ControlBtn variant="stop" isDisabled={false} onClick={() => {}} />
+        <ControlBtn variant="start" isDisabled={false} onClick={() => {}} />
       </div>
     </>
   );
