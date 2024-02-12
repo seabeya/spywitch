@@ -39,7 +39,7 @@ export default function Command() {
 
   const setUsers = useSetAtom(atom_usersArr);
   const setChannels = useSetAtom(atom_channelsArr);
-  const setTmiConn = useSetAtom(atom_tmiConn);
+  const [tmiConn, setTmiConn] = useAtom(atom_tmiConn);
   const [isSpyOn, setIsSpyOn] = useAtom(atom_isSpyOn);
 
   const handleStart = async () => {
@@ -73,6 +73,25 @@ export default function Command() {
   };
   // }
 
+  // Stop handler {
+  const handleStop = () => {
+    setIsLoading(true);
+
+    tmiConn
+      .disconnect()
+      .then(() => {
+        setTmiConn({} as tmi.Client);
+        setIsSpyOn(false);
+
+        setUsers([]);
+        setChannels([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+  // }
+
   return (
     <>
       <Label title="Users:" desc="the users you are going to track">
@@ -87,7 +106,7 @@ export default function Command() {
       </Label>
       <div className="mt-2 flex justify-end gap-2 xl:mt-4">
         {isSpyOn ? (
-          <ControlBtn variant="stop" isDisabled={isLoading} onClick={() => {}} />
+          <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
         ) : (
           <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />
         )}
