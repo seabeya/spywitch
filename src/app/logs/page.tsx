@@ -1,27 +1,31 @@
 'use client';
 
-import Area from '@/components/wrappers/Area';
-import UserTabs from '@/components/sections/UserTabs';
-
-import IconSpyWitch from '@/components/icons/IconSpyWitch';
-
+import { useState } from 'react';
 import Link from 'next/link';
 
 import { useAtomValue } from 'jotai';
 import { atom_isSpyOn } from '@/atoms';
 
+import Area from '@/components/wrappers/Area';
+import UserTabs from '@/components/sections/UserTabs';
+
+import IconSpyWitch from '@/components/icons/IconSpyWitch';
+
 export default function Page() {
   const isSpyOn = useAtomValue(atom_isSpyOn);
+
+  const [activeTab, setActiveTab] = useState('');
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+  };
 
   return (
     <>
       {isSpyOn ? (
         <>
           <Area.Section title="Users">
-            <UserTabs />
-          </Area.Section>
-          <Area.Section title="Messages">
-            <UserTabs />
+            <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
           </Area.Section>
         </>
       ) : (
