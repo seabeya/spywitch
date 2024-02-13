@@ -15,7 +15,7 @@ export default function UserTab({ user, activeTab, handleTabClick }: UserTabProp
     ${active ? '!border-green-500 !bg-gray-600 !text-gray-100' : ''}
     `}
     >
-      {user}
+      {user.substring(0, 25)}
     </button>
   );
 }
