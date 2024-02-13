@@ -8,6 +8,7 @@ import { atom_isSpyOn } from '@/atoms';
 
 import Area from '@/components/wrappers/Area';
 import UserTabs from '@/components/sections/UserTabs';
+import ChatLogs from '@/components/sections/ChatLogs';
 
 import IconSpyWitch from '@/components/icons/IconSpyWitch';
 
@@ -26,6 +27,15 @@ export default function Page() {
         <>
           <Area.Section title="Users">
             <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
+          </Area.Section>
+          <Area.Section title="Chat Logs">
+            {activeTab !== '' ? (
+              <ChatLogs user={activeTab} />
+            ) : (
+              <p className="py-6 text-center text-sm text-gray-300 xl:text-base">
+                Select a user to view their chat logs.
+              </p>
+            )}
           </Area.Section>
         </>
       ) : (
