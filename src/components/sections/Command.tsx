@@ -87,7 +87,7 @@ export default function Command() {
     // Tmi & Idb {
     client.on('message', async (channel, tags, message) => {
       await idb.add('logs', {
-        user: tags['display-name'],
+        user: tags['username'],
         channel: channel.substring(1),
         message,
         date: new Date(),

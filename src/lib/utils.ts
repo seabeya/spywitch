@@ -1,5 +1,5 @@
 export const getSanitizedInput = (input: string) => {
-  return input.replace(/\W+/g, ' ').trim().split(' ');
+  return input.replace(/\W+/g, ' ').trim().toLowerCase().split(' ');
 };
 
 export const getUniqueItems = (input: string[]) => {
