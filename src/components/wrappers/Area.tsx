@@ -5,20 +5,22 @@ import SectionTitle from '@/components/parts/SectionTitle';
 export default function Area({ children }: { children: React.ReactNode }) {
   return (
     <Container>
-      <main className="flex flex-wrap items-start gap-3 pb-16 pt-3 sm:gap-5 sm:pt-5 lg:pb-5">{children}</main>
+      <main className="grid grid-cols-1 items-start gap-3 pb-16 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7 lg:pb-5">
+        {children}
+      </main>
     </Container>
   );
 }
 
 function Side({ children }: { children: React.ReactNode }) {
-  return <div className="sticky top-1 w-full sm:static lg:flex-[2]">{children}</div>;
+  return <div className="sticky top-1 sm:static lg:col-start-1 lg:col-end-3">{children}</div>;
 }
 
 Area.Side = Side;
 
 function Page({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex w-full flex-col gap-16 rounded-xl border border-c_border1 bg-c_main p-5 lg:flex-[5]">
+    <div className="flex flex-col gap-16 rounded-xl border border-c_border1 bg-c_main p-5 lg:col-start-3 lg:col-end-8">
       {children}
     </div>
   );
