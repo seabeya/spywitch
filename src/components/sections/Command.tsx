@@ -8,6 +8,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import {
   atom_channelsArr,
   atom_channelsInput,
+  atom_isLoading,
   atom_isSpyOn,
   atom_tmiConn,
   atom_usersArr,
@@ -16,7 +17,6 @@ import {
 import { getSanitizedInput, getUniqueItems, getValidItems } from '@/lib/utils';
 
 import tmi from 'tmi.js';
-import { useState } from 'react';
 import { deleteDB, openDB } from 'idb';
 
 export default function Command() {
@@ -34,7 +34,7 @@ export default function Command() {
   // }
 
   // Start handler {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useAtom(atom_isLoading);
 
   const setUsers = useSetAtom(atom_usersArr);
   const setChannels = useSetAtom(atom_channelsArr);

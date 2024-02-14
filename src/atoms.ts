@@ -14,3 +14,6 @@ export const atom_tmiConn = atom({} as tmi.Client);
 
 // Spy switch atom:
 export const atom_isSpyOn = atom(false);
+
+// isLoading atom:
+export const atom_isLoading = atom(false);
