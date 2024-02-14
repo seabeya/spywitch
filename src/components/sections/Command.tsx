@@ -59,6 +59,11 @@ export default function Command() {
     // Create a new tmi client:
     const client = new tmi.Client({
       channels: channelsArr,
+      logger: {
+        info: () => {},
+        warn: () => {},
+        error: () => {},
+      },
     });
 
     try {
@@ -101,6 +106,11 @@ export default function Command() {
             date: new Date(),
           });
         }
+      });
+
+      // Connection info log message:
+      client.on('connected', () => {
+        console.log('Connected.');
       });
     } catch (_) {
       console.log('Something went wrong while starting the application. Please refresh the page and try again.');
