@@ -91,13 +91,16 @@ export default function Command() {
 
       // Listen to messages:
       client.on('message', async (channel, tags, message) => {
-        await idb.add('logs', {
-          uniqueId: tags['id'],
-          user: tags['username'],
-          channel: channel.substring(1),
-          message,
-          date: new Date(),
-        });
+        // Only save the messages from the users we are tracking:
+        if (usersArr.includes(tags['username'] as string)) {
+          await idb.add('logs', {
+            uniqueId: tags['id'],
+            user: tags['username'],
+            channel: channel.substring(1),
+            message,
+            date: new Date(),
+          });
+        }
       });
     } catch (_) {
       console.log('Something went wrong while starting the application. Please refresh the page and try again.');
