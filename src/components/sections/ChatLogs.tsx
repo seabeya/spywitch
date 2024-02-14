@@ -1,10 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { openDB } from 'idb';
 
 import { useAtomValue } from 'jotai';
-import { atom_tmiConn } from '@/atoms';
+import { atom_idbConn, atom_tmiConn } from '@/atoms';
 import { ChatUserstate } from 'tmi.js';
 
 import ChatLog from '@/components/parts/ChatLog';
@@ -18,18 +17,18 @@ export type MessageData = {
 };
 
 export default function ChatLogs({ user }: { user: string }) {
+  const idbConn = useAtomValue(atom_idbConn);
   const [initialMessageData, setInitialMessageData] = useState<MessageData[]>([]);
 
   const tmiConn = useAtomValue(atom_tmiConn);
   const [messageData, setMessageData] = useState<MessageData[]>([]);
 
+  // Getting data from IndexedDB:
   useEffect(() => {
     (async () => {
-      // Getting data from IndexedDB:
       try {
-        const db = await openDB('spywitch', 1);
-        setInitialMessageData(await db.getAllFromIndex('logs', 'user', user));
-      } catch (error) {
+        setInitialMessageData(await idbConn.getAllFromIndex('logs', 'user', user));
+      } catch (_) {
         console.log('Something went wrong while fetching data from IndexedDB. Please refresh the page and try again.');
       }
     })();

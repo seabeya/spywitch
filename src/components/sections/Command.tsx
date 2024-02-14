@@ -8,6 +8,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import {
   atom_channelsArr,
   atom_channelsInput,
+  atom_idbConn,
   atom_isLoading,
   atom_isSpyOn,
   atom_tmiConn,
@@ -38,85 +39,98 @@ export default function Command() {
 
   const setUsers = useSetAtom(atom_usersArr);
   const setChannels = useSetAtom(atom_channelsArr);
+  const [idbConn, setIdbConn] = useAtom(atom_idbConn);
   const [tmiConn, setTmiConn] = useAtom(atom_tmiConn);
   const [isSpyOn, setIsSpyOn] = useAtom(atom_isSpyOn);
 
   const handleStart = async () => {
+    // Get valid input values
     const usersArr = getValidItems(getUniqueItems(getSanitizedInput(usersInput)));
     const channelsArr = getValidItems(getUniqueItems(getSanitizedInput(channelsInput)));
 
+    // return; if inputs are empty
     if (usersArr.length === 0 || channelsArr.length === 0) {
       return;
     }
 
+    // Set global loading state:
     setIsLoading(true);
 
-    // Tmi {
+    // Create a new tmi client:
     const client = new tmi.Client({
       channels: channelsArr,
     });
 
-    client
-      .connect()
-      .then(() => {
-        setTmiConn(client);
+    try {
+      // Delete db if exists (to delete the old data):
+      await deleteDB('spywitch');
 
-        setUsers(usersArr);
-        setChannels(channelsArr);
-
-        setIsSpyOn(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
+      // Create a new db:
+      const idb = await openDB('spywitch', 1, {
+        upgrade(db) {
+          const store = db.createObjectStore('logs', {
+            keyPath: 'id',
+            autoIncrement: true,
+          });
+          store.createIndex('user', 'user');
+        },
       });
-    // }
 
-    // Idb Setup {
-    await deleteDB('spywitch');
-    const idb = await openDB('spywitch', 1, {
-      upgrade(db) {
-        const store = db.createObjectStore('logs', {
-          keyPath: 'id',
-          autoIncrement: true,
+      // Set the db connection as a global state for later use:
+      setIdbConn(idb);
+
+      // Connect to Twitch:
+      await client.connect();
+
+      // Set the tmi connection as a global state for later use:
+      setTmiConn(client);
+
+      // Set the users and channels as global states (these are used to display the data):
+      setUsers(usersArr);
+      setChannels(channelsArr);
+
+      // Listen to messages:
+      client.on('message', async (channel, tags, message) => {
+        await idb.add('logs', {
+          uniqueId: tags['id'],
+          user: tags['username'],
+          channel: channel.substring(1),
+          message,
+          date: new Date(),
         });
-        store.createIndex('user', 'user');
-      },
-    });
-    // }
-
-    // Tmi & Idb {
-    client.on('message', async (channel, tags, message) => {
-      await idb.add('logs', {
-        uniqueId: tags['id'],
-        user: tags['username'],
-        channel: channel.substring(1),
-        message,
-        date: new Date(),
       });
-    });
-    // }
+    } catch (_) {
+      console.log('Something went wrong while starting the application. Please refresh the page and try again.');
+    } finally {
+      // Application is ready state:
+      setIsSpyOn(true);
+      setIsLoading(false);
+    }
   };
   // }
 
   // Stop handler {
-  const handleStop = () => {
+  const handleStop = async () => {
     setIsLoading(true);
 
-    tmiConn
-      .disconnect()
-      .then(() => {
-        setIsSpyOn(false);
+    try {
+      await tmiConn.disconnect();
 
-        setTmiConn({} as tmi.Client);
+      setIsSpyOn(false);
 
-        setUsers([]);
-        setChannels([]);
+      setTmiConn({} as tmi.Client);
 
-        deleteDB('spywitch');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      setUsers([]);
+      setChannels([]);
+
+      // Close the db connection and delete it:
+      idbConn.close();
+      await deleteDB('spywitch');
+    } catch (_) {
+      console.log('Something went wrong while stopping the application. Please refresh the page.');
+    } finally {
+      setIsLoading(false);
+    }
   };
   // }
 
