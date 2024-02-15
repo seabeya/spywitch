@@ -11,7 +11,7 @@ export default function ChatLog({ data }: { data: MessageData }) {
   });
 
   return (
-    <li className="inline break-words border-l-2 border-gray-600 pl-2 text-xs hover:border-gray-400 hover:bg-gray-800 sm:text-sm xl:text-base">
+    <li className="mb-2 inline-block w-full break-words border-l-2 border-gray-600 pl-2 text-xs hover:border-gray-400 hover:bg-gray-800 sm:text-sm xl:text-base">
       <div className="inline-flex gap-1 text-gray-400">
         <span className="group">
           {time.substring(0, 5)}
