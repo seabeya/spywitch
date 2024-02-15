@@ -13,7 +13,7 @@ export default function Area({ children }: { children: React.ReactNode }) {
 }
 
 function Side({ children }: { children: React.ReactNode }) {
-  return <div className="sticky top-1 sm:static lg:col-start-1 lg:col-end-3">{children}</div>;
+  return <div className="sticky top-1 z-10 sm:static lg:col-start-1 lg:col-end-3">{children}</div>;
 }
 
 Area.Side = Side;
