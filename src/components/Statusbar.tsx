@@ -26,7 +26,10 @@ export default function Statusbar() {
   const [uptime, setUptime] = useState('00:00');
 
   useEffect(() => {
-    if (!isSpyOn) return;
+    if (!isSpyOn) {
+      setUptime('00:00');
+      return;
+    }
 
     const startTime = new Date();
 
