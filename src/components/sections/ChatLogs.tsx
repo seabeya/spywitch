@@ -18,8 +18,6 @@ export type MessageData = {
 
 export default function ChatLogs({ user }: { user: string }) {
   const idbConn = useAtomValue(atom_idbConn);
-  const [initialMessageData, setInitialMessageData] = useState<MessageData[]>([]);
-
   const tmiConn = useAtomValue(atom_tmiConn);
   const [messageData, setMessageData] = useState<MessageData[]>([]);
 
@@ -27,7 +25,7 @@ export default function ChatLogs({ user }: { user: string }) {
   useEffect(() => {
     (async () => {
       try {
-        setInitialMessageData(await idbConn.getAllFromIndex('logs', 'user', user));
+        setMessageData(await idbConn.getAllFromIndex('logs', 'user', user));
       } catch (_) {
         console.log('Something went wrong while fetching data from IndexedDB. Please refresh the page and try again.');
       }
@@ -66,12 +64,9 @@ export default function ChatLogs({ user }: { user: string }) {
     <div>
       <div className="pb-2 text-sm text-gray-300 xl:text-base">
         Sender: <span className="font-medium text-gray-200 underline">{user.substring(0, 25)}</span>
-        <i>({initialMessageData.length + messageData.length})</i>
+        <i>({messageData.length})</i>
       </div>
       <ul className="scrollbar flex max-h-[512px] flex-col gap-2 overflow-auto rounded-sm border border-c_border1 bg-c_body p-1">
-        {initialMessageData.map((data) => (
-          <ChatLog key={data.uniqueId} data={data} />
-        ))}
         {messageData.map((data) => (
           <ChatLog key={data.uniqueId} data={data} />
         ))}
