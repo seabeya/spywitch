@@ -9,6 +9,7 @@ import { ChatUserstate } from 'tmi.js';
 import { Virtuoso } from 'react-virtuoso';
 
 import ChatLog from '@/components/parts/ChatLog';
+import LogsInfo from '@/components/parts/LogsInfo';
 
 export type MessageData = {
   uniqueId: number;
@@ -63,12 +64,12 @@ export default function ChatLogs({ user }: { user: string }) {
   }, [user]);
 
   return (
-    <div>
-      <div className="pb-2 text-sm text-gray-300 xl:text-base">
-        Sender: <span className="font-medium text-gray-200 underline">{user.substring(0, 25)}</span>
-        <i>({messageData.length})</i>
+    <div className="overflow-hidden">
+      <div className="flex flex-wrap justify-around gap-2 rounded-t-sm border border-b-0 border-c_border1 px-1 pb-2 pt-1">
+        <LogsInfo label="Sender" data={user.substring(0, 25)} />
+        <LogsInfo label="Count" data={messageData.length} />
       </div>
-      <div className="rounded-sm border border-c_border1 bg-c_body p-1">
+      <div className="rounded-b-sm border border-c_border1 bg-c_body p-1">
         <Virtuoso
           style={{ height: '512px' }}
           className="scrollbar"
