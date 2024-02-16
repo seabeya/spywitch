@@ -8,6 +8,7 @@ import { ChatUserstate } from 'tmi.js';
 
 import { Virtuoso } from 'react-virtuoso';
 
+import Area from '@/components/wrappers/Area';
 import ChatLog from '@/components/parts/ChatLog';
 import LogsInfo from '@/components/parts/LogsInfo';
 
@@ -64,20 +65,22 @@ export default function ChatLogs({ user }: { user: string }) {
   }, [user]);
 
   return (
-    <div className="overflow-hidden">
-      <div className="flex flex-wrap justify-around gap-2 rounded-t-sm border border-b-0 border-c_border1 px-1 pb-2 pt-1">
-        <LogsInfo label="Sender" data={user.substring(0, 25)} />
-        <LogsInfo label="Count" data={messageData.length} />
+    <Area.Section title="Chat Logs">
+      <div className="overflow-hidden">
+        <div className="flex flex-wrap justify-around gap-2 rounded-t-sm border border-b-0 border-c_border1 px-1 pb-2 pt-1">
+          <LogsInfo label="Sender" data={user.substring(0, 25)} />
+          <LogsInfo label="Count" data={messageData.length} />
+        </div>
+        <div className="rounded-b-sm border border-c_border1 bg-c_body p-1">
+          <Virtuoso
+            style={{ height: '512px' }}
+            className="scrollbar"
+            data={messageData}
+            itemContent={(_, data) => <ChatLog key={data.uniqueId} data={data} />}
+            followOutput={true}
+          />
+        </div>
       </div>
-      <div className="rounded-b-sm border border-c_border1 bg-c_body p-1">
-        <Virtuoso
-          style={{ height: '512px' }}
-          className="scrollbar"
-          data={messageData}
-          itemContent={(_, data) => <ChatLog key={data.uniqueId} data={data} />}
-          followOutput={true}
-        />
-      </div>
-    </div>
+    </Area.Section>
   );
 }

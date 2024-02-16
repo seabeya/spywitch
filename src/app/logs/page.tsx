@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useAtomValue } from 'jotai';
 import { atom_isSpyOn } from '@/atoms';
 
-import Area from '@/components/wrappers/Area';
 import UserTabs from '@/components/sections/UserTabs';
 import ChatLogs from '@/components/sections/ChatLogs';
 
@@ -25,18 +24,12 @@ export default function Page() {
     <>
       {isSpyOn ? (
         <>
-          <Area.Section title="Users">
-            <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
-          </Area.Section>
-          <Area.Section title="Chat Logs">
-            {activeTab !== '' ? (
-              <ChatLogs user={activeTab} />
-            ) : (
-              <p className="py-6 text-center text-sm text-gray-300 xl:text-base">
-                Select a user to view their chat logs.
-              </p>
-            )}
-          </Area.Section>
+          <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
+          {activeTab !== '' ? (
+            <ChatLogs user={activeTab} />
+          ) : (
+            <p className="text-center text-sm text-gray-300 xl:text-base">Select a user to view their chat logs.</p>
+          )}
         </>
       ) : (
         <Warn>

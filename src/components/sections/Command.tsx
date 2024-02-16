@@ -1,5 +1,6 @@
 'use client';
 
+import Area from '@/components/wrappers/Area';
 import Label from '@/components/parts/Label';
 import Input from '@/components/parts/Input';
 import ControlBtn from '@/components/parts/ControlBtn';
@@ -148,7 +149,7 @@ export default function Command() {
   // }
 
   return (
-    <>
+    <Area.Section title="Command">
       <Label title="Users:" desc="the users you are going to track">
         <Input placeholder="Enter usernames separated with spaces." value={usersInput} onChange={handleUsersChange} />
       </Label>
@@ -166,6 +167,6 @@ export default function Command() {
           <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />
         )}
       </div>
-    </>
+    </Area.Section>
   );
 }
