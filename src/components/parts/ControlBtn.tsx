@@ -18,10 +18,12 @@ export default function ControlBtn({
   variant,
   isDisabled,
   onClick,
+  type,
 }: {
   variant: 'start' | 'stop';
   isDisabled: boolean;
-  onClick: () => void;
+  onClick?: () => void;
+  type?: 'submit';
 }) {
   const btn = variants[variant];
 
@@ -33,6 +35,7 @@ export default function ControlBtn({
       `}
       disabled={isDisabled}
       onClick={onClick}
+      type={type}
     >
       {btn.label}
       {btn.icon}

@@ -44,7 +44,9 @@ export default function Command() {
   const [tmiConn, setTmiConn] = useAtom(atom_tmiConn);
   const [isSpyOn, setIsSpyOn] = useAtom(atom_isSpyOn);
 
-  const handleStart = async () => {
+  const handleStart = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     // Get valid input values
     const usersArr = getValidItems(getUniqueItems(getSanitizedInput(usersInput)));
     const channelsArr = getValidItems(getUniqueItems(getSanitizedInput(channelsInput)));
@@ -149,24 +151,26 @@ export default function Command() {
   // }
 
   return (
-    <Area.Section title="Command">
-      <Label title="Users:" desc="the users you are going to track">
-        <Input placeholder="Enter usernames separated with spaces." value={usersInput} onChange={handleUsersChange} />
-      </Label>
-      <Label title="Channels:" desc="the channels where you want to track the users">
-        <Input
-          placeholder="Enter channel names separated with spaces."
-          value={channelsInput}
-          onChange={handleChannelsChange}
-        />
-      </Label>
-      <div className="mt-2 flex justify-end gap-2 xl:mt-4">
-        {isSpyOn ? (
-          <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
-        ) : (
-          <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />
-        )}
-      </div>
-    </Area.Section>
+    <form onSubmit={handleStart}>
+      <Area.Section title="Command">
+        <Label title="Users:" desc="the users you are going to track">
+          <Input placeholder="Enter usernames separated with spaces." value={usersInput} onChange={handleUsersChange} />
+        </Label>
+        <Label title="Channels:" desc="the channels where you want to track the users">
+          <Input
+            placeholder="Enter channel names separated with spaces."
+            value={channelsInput}
+            onChange={handleChannelsChange}
+          />
+        </Label>
+        <div className="mt-2 flex justify-end gap-2 xl:mt-4">
+          {isSpyOn ? (
+            <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
+          ) : (
+            <ControlBtn variant="start" isDisabled={isLoading} type="submit" />
+          )}
+        </div>
+      </Area.Section>
+    </form>
   );
 }
