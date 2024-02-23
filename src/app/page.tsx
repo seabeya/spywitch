@@ -1,7 +1,7 @@
 import IconSpyWitch from '@/components/icons/IconSpyWitch';
 
-function Paragraph({ children }: { children: React.ReactNode }) {
-  return <p className="text-center text-sm text-gray-300 xl:text-base">{children}</p>;
+function Paragraph({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <p className={`text-center text-sm text-gray-300  ${className}`}>{children}</p>;
 }
 
 export default function Home() {
@@ -12,13 +12,13 @@ export default function Home() {
         <h1 className="text-base text-gray-100 xl:text-xl">
           Spy<b>Witch</b>
         </h1>
-        <Paragraph>{`An open source tool to track users' chat messages on Twitch.tv`}</Paragraph>
+        <Paragraph className="xl:text-base">{`An open source tool to track users' chat messages on Twitch.tv`}</Paragraph>
         <Paragraph>
           {`SpyWitch allows you to track anyone on the platform in any channel, showing you every message they type and
           when, while you are tracking them.`}
         </Paragraph>
       </div>
-      <p className="mt-2 text-xs text-gray-400">
+      <p className="mt-2 text-xs text-gray-400 xl:text-sm">
         *SpyWitch was created for Twitch channel moderation purposes in response to requests from many channel
         moderators.
       </p>
