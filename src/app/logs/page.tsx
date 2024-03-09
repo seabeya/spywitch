@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { useAtomValue } from 'jotai';
-import { atom_isSpyOn } from '@/atoms';
+import { atom_status } from '@/atoms';
 
 import UserTabs from '@/components/sections/UserTabs';
 import ChatLogs from '@/components/sections/ChatLogs';
@@ -12,7 +12,7 @@ import ChatLogs from '@/components/sections/ChatLogs';
 import Warn from '@/components/parts/Warn';
 
 export default function Page() {
-  const isSpyOn = useAtomValue(atom_isSpyOn);
+  const status = useAtomValue(atom_status);
 
   const [activeTab, setActiveTab] = useState('');
 
@@ -22,7 +22,7 @@ export default function Page() {
 
   return (
     <>
-      {isSpyOn ? (
+      {status.active ? (
         <>
           <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
           {activeTab !== '' ? (

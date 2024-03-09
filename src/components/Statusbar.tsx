@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAtomValue } from 'jotai';
-import { atom_channels, atom_isSpyOn, atom_users } from '@/atoms';
+import { atom_status } from '@/atoms';
 
 import { formatMilliseconds } from '@/lib/utils';
 
@@ -19,14 +19,12 @@ function Info({ value, label }: { value: string; label: string }) {
 }
 
 export default function Statusbar() {
-  const userCount = useAtomValue(atom_users).length.toString();
-  const channelsCount = useAtomValue(atom_channels).length.toString();
-  const isSpyOn = useAtomValue(atom_isSpyOn);
+  const status = useAtomValue(atom_status);
 
   const [uptime, setUptime] = useState('00:00');
 
   useEffect(() => {
-    if (!isSpyOn) {
+    if (!status.active) {
       setUptime('00:00');
       return;
     }
@@ -41,19 +39,19 @@ export default function Statusbar() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [isSpyOn]);
+  }, [status.active]);
 
   return (
     <div className="overflow-hidden rounded-xl border border-c_border1 bg-c_main">
       <div className="border-c_border2 sm:pt-3 lg:border-b lg:bg-c_body xl:pt-5">
         <div className="flex divide-x divide-c_border1 lg:divide-c_border2">
-          <Info value={userCount} label="Users" />
-          <Info value={channelsCount} label="Channels" />
+          <Info value={status.uCount.toString()} label="Users" />
+          <Info value={status.cCount.toString()} label="Channels" />
           <Info value={uptime} label="Up Time" />
         </div>
       </div>
       <div className="hidden py-4 text-center text-sm text-gray-300 lg:block xl:py-8 xl:text-base">
-        {isSpyOn ? 'Activated' : 'Not Activated'}
+        {status.active ? 'Activated' : 'Not Activated'}
       </div>
     </div>
   );
