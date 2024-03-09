@@ -27,6 +27,17 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isLoading || status.active) {
+      return;
+    }
+
+    if (event.key === 'Backspace' && inputValue.length === 0) {
+      const lastItem = items.at(-1);
+      setItems((prev) => [...prev.slice(0, -1)]);
+      setInputValue((lastItem || '') + ' ');
+      return;
+    }
+
     if (event.key !== ' ' && event.key !== 'Enter') {
       return;
     }
