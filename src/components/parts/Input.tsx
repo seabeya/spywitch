@@ -44,8 +44,9 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
 
     if (isValidInput(inputValue)) {
       setItems((prev) => getUniqueItems([...prev, inputValue.toLowerCase()]));
-      setInputValue('');
     }
+
+    setInputValue('');
 
     event.preventDefault();
   };
