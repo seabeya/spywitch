@@ -1,16 +1,9 @@
-export const getSanitizedInput = (input: string) => {
-  return input.replace(/\W+/g, ' ').trim().toLowerCase().split(' ');
+export const isValidInput = (input: string) => {
+  return input.length > 0 && input.length <= 25 && input[0] !== '_' && /\W+/g.test(input) === false;
 };
 
 export const getUniqueItems = (input: string[]) => {
   return Array.from(new Set(input));
-};
-
-export const getValidItems = (input: string[]) => {
-  // Removes empty items and items that start with '_'
-  return input.filter((item) => {
-    return item && item[0] !== '_';
-  });
 };
 
 export const formatMilliseconds = (milliseconds: number) => {

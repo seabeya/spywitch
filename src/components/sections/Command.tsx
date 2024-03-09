@@ -5,54 +5,26 @@ import Label from '@/components/parts/Label';
 import Input from '@/components/parts/Input';
 import ControlBtn from '@/components/parts/ControlBtn';
 
-import { useAtom, useSetAtom } from 'jotai';
-import {
-  atom_channelsArr,
-  atom_channelsInput,
-  atom_idbConn,
-  atom_isLoading,
-  atom_isSpyOn,
-  atom_tmiConn,
-  atom_usersArr,
-  atom_usersInput,
-} from '@/atoms';
-import { getSanitizedInput, getUniqueItems, getValidItems } from '@/lib/utils';
+import { useAtom, useAtomValue } from 'jotai';
+import { atom_users, atom_channels, atom_isLoading, atom_idbConn, atom_tmiConn, atom_isSpyOn } from '@/atoms';
 
 import tmi from 'tmi.js';
 import { deleteDB, openDB } from 'idb';
 
 export default function Command() {
-  // Input handlers {
-  const [usersInput, setUsersInput] = useAtom(atom_usersInput);
-  const [channelsInput, setChannelsInput] = useAtom(atom_channelsInput);
-
-  const handleUsersChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setUsersInput(event.target.value);
-  };
-
-  const handleChannelsChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setChannelsInput(event.target.value);
-  };
-  // }
+  const userItems = useAtomValue(atom_users);
+  const channelItems = useAtomValue(atom_channels);
 
   // Start handler {
   const [isLoading, setIsLoading] = useAtom(atom_isLoading);
 
-  const setUsers = useSetAtom(atom_usersArr);
-  const setChannels = useSetAtom(atom_channelsArr);
   const [idbConn, setIdbConn] = useAtom(atom_idbConn);
   const [tmiConn, setTmiConn] = useAtom(atom_tmiConn);
   const [isSpyOn, setIsSpyOn] = useAtom(atom_isSpyOn);
 
-  const handleStart = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Get valid input values
-    const usersArr = getValidItems(getUniqueItems(getSanitizedInput(usersInput)));
-    const channelsArr = getValidItems(getUniqueItems(getSanitizedInput(channelsInput)));
-
+  const handleStart = async () => {
     // return; if inputs are empty
-    if (usersArr.length === 0 || channelsArr.length === 0) {
+    if (userItems.length === 0 || channelItems.length === 0) {
       return;
     }
 
@@ -61,7 +33,8 @@ export default function Command() {
 
     // Create a new tmi client:
     const client = new tmi.Client({
-      channels: channelsArr,
+      // When we use `channelItems` directly, it modifies and adds '#' at the beginning of the each item. We don't want that.
+      channels: [...channelItems],
       logger: {
         info: () => {},
         warn: () => {},
@@ -93,14 +66,10 @@ export default function Command() {
       // Set the tmi connection as a global state for later use:
       setTmiConn(client);
 
-      // Set the users and channels as global states (these are used to display the data):
-      setUsers(usersArr);
-      setChannels(channelsArr);
-
       // Listen to messages:
       client.on('message', async (channel, tags, message) => {
         // Only save the messages from the users we are tracking:
-        if (usersArr.includes(tags['username'] as string)) {
+        if (userItems.includes(tags['username'] as string)) {
           await idb.add('logs', {
             uniqueId: tags['id'],
             user: tags['username'],
@@ -136,9 +105,6 @@ export default function Command() {
 
       setTmiConn({} as tmi.Client);
 
-      setUsers([]);
-      setChannels([]);
-
       // Close the db connection and delete it:
       idbConn.close();
       await deleteDB('spywitch');
@@ -151,26 +117,20 @@ export default function Command() {
   // }
 
   return (
-    <form onSubmit={handleStart}>
-      <Area.Section title="Command">
-        <Label title="Users:" desc="the users you are going to track">
-          <Input placeholder="Enter usernames separated with spaces." value={usersInput} onChange={handleUsersChange} />
-        </Label>
-        <Label title="Channels:" desc="the channels where you want to track the users">
-          <Input
-            placeholder="Enter channel names separated with spaces."
-            value={channelsInput}
-            onChange={handleChannelsChange}
-          />
-        </Label>
-        <div className="mt-2 flex justify-end gap-2 xl:mt-4">
-          {isSpyOn ? (
-            <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
-          ) : (
-            <ControlBtn variant="start" isDisabled={isLoading} type="submit" />
-          )}
-        </div>
-      </Area.Section>
-    </form>
+    <Area.Section title="Command">
+      <Label title="Users:" htmlFor="users" desc="the users you are going to track">
+        <Input id="users" placeholder="Enter usernames separated with spaces." itemsAtom={atom_users} />
+      </Label>
+      <Label title="Channels:" htmlFor="channels" desc="the channels where you want to track the users">
+        <Input id="channels" placeholder="Enter channel names separated with spaces." itemsAtom={atom_channels} />
+      </Label>
+      <div className="mt-2 flex justify-end gap-2 xl:mt-4">
+        {isSpyOn ? (
+          <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
+        ) : (
+          <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />
+        )}
+      </div>
+    </Area.Section>
   );
 }

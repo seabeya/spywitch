@@ -3,13 +3,9 @@ import { atom } from 'jotai';
 import tmi from 'tmi.js';
 import { IDBPDatabase } from 'idb';
 
-// Main form input atoms:
-export const atom_usersInput = atom('');
-export const atom_channelsInput = atom('');
-
 // Submitted form data atoms:
-export const atom_usersArr = atom([] as string[]);
-export const atom_channelsArr = atom([] as string[]);
+export const atom_users = atom([] as string[]);
+export const atom_channels = atom([] as string[]);
 
 // Connection atom:
 export const atom_tmiConn = atom({} as tmi.Client);

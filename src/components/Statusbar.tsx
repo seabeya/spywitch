@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { useAtomValue } from 'jotai';
-import { atom_channelsArr, atom_isSpyOn, atom_usersArr } from '@/atoms';
+import { atom_channels, atom_isSpyOn, atom_users } from '@/atoms';
 
 import { formatMilliseconds } from '@/lib/utils';
 
@@ -19,8 +19,8 @@ function Info({ value, label }: { value: string; label: string }) {
 }
 
 export default function Statusbar() {
-  const userCount = useAtomValue(atom_usersArr).length.toString();
-  const channelsCount = useAtomValue(atom_channelsArr).length.toString();
+  const userCount = useAtomValue(atom_users).length.toString();
+  const channelsCount = useAtomValue(atom_channels).length.toString();
   const isSpyOn = useAtomValue(atom_isSpyOn);
 
   const [uptime, setUptime] = useState('00:00');
