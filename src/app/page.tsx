@@ -7,7 +7,7 @@ function Paragraph({ children, className }: { children: React.ReactNode; classNa
 export default function Home() {
   return (
     <div>
-      <div className="flex flex-col items-center gap-2 rounded-md border border-c_border1 bg-c_body px-5 pb-8 pt-5">
+      <div className="flex flex-col items-center gap-2 rounded-md border border-c_border1 px-5 pb-8 pt-5">
         <IconSpyWitch className="h-24 w-24 shrink-0" />
         <h1 className="text-base text-gray-100 xl:text-xl">
           Spy<b>Witch</b>
