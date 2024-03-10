@@ -34,21 +34,17 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
     if (event.key === 'Backspace' && inputValue.length === 0) {
       const lastItem = items.at(-1);
       setItems((prev) => [...prev.slice(0, -1)]);
-      setInputValue((lastItem || '') + ' ');
-      return;
+      setInputValue(lastItem || '');
+      event.preventDefault();
     }
 
-    if (event.key !== ' ' && event.key !== 'Enter') {
-      return;
+    if (event.key === ' ' || event.key === 'Enter') {
+      if (isValidInput(inputValue)) {
+        setItems((prev) => getUniqueItems([...prev, inputValue.toLowerCase()]));
+      }
+      setInputValue('');
+      event.preventDefault();
     }
-
-    if (isValidInput(inputValue)) {
-      setItems((prev) => getUniqueItems([...prev, inputValue.toLowerCase()]));
-    }
-
-    setInputValue('');
-
-    event.preventDefault();
   };
 
   const handleItemRemove = (itemToRemove: string) => {
