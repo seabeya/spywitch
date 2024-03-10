@@ -1,8 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+
 import Area from '@/components/wrappers/Area';
 import Label from '@/components/parts/Label';
 import Input from '@/components/parts/Input';
+import InputError from '@/components/parts/InputError';
 import ControlBtn from '@/components/parts/ControlBtn';
 
 import { useAtom, useAtomValue } from 'jotai';
@@ -12,8 +15,21 @@ import tmi from 'tmi.js';
 import { deleteDB, openDB } from 'idb';
 
 export default function Command() {
+  const [isError, setIsError] = useState({
+    users: false,
+    channels: false,
+  });
+
   const userItems = useAtomValue(atom_users);
   const channelItems = useAtomValue(atom_channels);
+
+  if (userItems.length !== 0 && isError.users) {
+    isError.users = false;
+  }
+
+  if (channelItems.length !== 0 && isError.channels) {
+    isError.channels = false;
+  }
 
   // Start handler {
   const [isLoading, setIsLoading] = useAtom(atom_isLoading);
@@ -25,6 +41,10 @@ export default function Command() {
   const handleStart = async () => {
     // return; if inputs are empty
     if (userItems.length === 0 || channelItems.length === 0) {
+      setIsError({
+        users: userItems.length === 0,
+        channels: channelItems.length === 0,
+      });
       return;
     }
 
@@ -120,9 +140,11 @@ export default function Command() {
     <Area.Section title="Command">
       <Label title="Users:" htmlFor="users" desc="the users you are going to track">
         <Input id="users" placeholder="Enter usernames separated with spaces." itemsAtom={atom_users} />
+        {isError.users && <InputError message="Please enter at least one user." />}
       </Label>
       <Label title="Channels:" htmlFor="channels" desc="the channels where you want to track the users">
         <Input id="channels" placeholder="Enter channel names separated with spaces." itemsAtom={atom_channels} />
+        {isError.channels && <InputError message="Please enter at least one channel." />}
       </Label>
       <div className="mt-2 flex justify-end gap-2 xl:mt-4">
         {status.active ? (
