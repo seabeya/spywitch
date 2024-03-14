@@ -56,11 +56,9 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   return (
-    <ul className="scrollbar flex max-h-32 cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded-sm border border-c_border2 bg-c_body px-3 py-2 text-sm text-gray-200 focus-within:border-gray-600 xl:text-base">
+    <ul className="scrollbar relative flex max-h-32 cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded-sm border border-c_border2 bg-c_body px-3 py-2 text-sm text-gray-200 focus-within:border-gray-600 xl:text-base">
       {inputValue.length === 0 && items.length === 0 && (
-        <li className="absolute">
-          <span className="text-slate-500">{placeholder}</span>
-        </li>
+        <li className="absolute min-w-max text-slate-500">{placeholder}</li>
       )}
       {items.map((item) => (
         <li
