@@ -17,11 +17,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Cloudflare next-on-pages
-        run: npm install --save-dev @cloudflare/next-on-pages
-
       - name: Build
-        run: npx @cloudflare/next-on-pages@1
+        run: npx next build
 
       - name: Publish
         uses: cloudflare/pages-action@v1
@@ -29,4 +26,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
-          directory: '.vercel/output/static'
+          directory: 'out'
