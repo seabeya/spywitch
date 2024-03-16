@@ -87,9 +87,11 @@ export default function Command() {
       setTmiConn(client);
 
       // Listen to messages:
+      const trackingUsers = new Set(userItems);
+
       client.on('message', async (channel, tags, message) => {
         // Only save the messages from the users we are tracking:
-        if (userItems.includes(tags['username'] as string)) {
+        if (trackingUsers.has(tags['username'] as string)) {
           await idb.add('logs', {
             uniqueId: tags['id'],
             user: tags['username'],
