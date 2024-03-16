@@ -32,9 +32,11 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
     }
 
     if (event.key === 'Backspace' && inputValue.length === 0) {
-      const lastItem = items.at(-1);
-      setItems((prev) => [...prev.slice(0, -1)]);
-      setInputValue(lastItem || '');
+      setItems((prev) => {
+        const lastItem = prev.pop();
+        setInputValue(lastItem || '');
+        return [...prev];
+      });
       event.preventDefault();
     }
 
