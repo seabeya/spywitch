@@ -13,6 +13,7 @@ import { atom_users, atom_channels, atom_status, atom_isLoading, atom_idbConn, a
 
 import tmi from 'tmi.js';
 import { deleteDB, openDB } from 'idb';
+import Chat2Db from '@/lib/Chat2Db';
 
 export default function Command() {
   const [isError, setIsError] = useState({
@@ -87,20 +88,11 @@ export default function Command() {
       setTmiConn(client);
 
       // Listen to messages:
-      const trackingUsers = new Set(userItems);
-
-      client.on('message', async (channel, tags, message) => {
-        // Only save the messages from the users we are tracking:
-        if (trackingUsers.has(tags['username'] as string)) {
-          await idb.add('logs', {
-            uniqueId: tags['id'],
-            user: tags['username'],
-            channel: channel.substring(1),
-            message,
-            date: new Date(),
-          });
-        }
-      });
+      const handle = new Chat2Db(idb, userItems);
+      client.on('message', handle.onMessage.bind(handle));
+      client.on('subscription', handle.onSubscription.bind(handle));
+      client.on('resub', handle.onResub.bind(handle));
+      client.on('cheer', handle.onCheer.bind(handle));
 
       // Connection info log message:
       client.on('connected', () => {
