@@ -1,7 +1,7 @@
 import { MessageData } from '@/components/sections/ChatLogs';
 
 export default function ChatLog({ data }: { data: MessageData }) {
-  const { channel, message, date } = data;
+  const { channel, message, type, date } = data;
 
   const time = new Date(date).toLocaleTimeString([], {
     hour12: false,
@@ -20,7 +20,10 @@ export default function ChatLog({ data }: { data: MessageData }) {
         <span className="font-medium text-purple-500">{channel}</span>
         <span className="font-medium">/</span>
       </div>
-      <p className="ml-1 inline text-gray-200">{message}</p>
+      <p className="ml-1 inline text-gray-200">
+        {type !== null && <span className="mr-1 rounded-sm bg-yellow-400 px-1 text-black">{type}</span>}
+        {message}
+      </p>
     </div>
   );
 }

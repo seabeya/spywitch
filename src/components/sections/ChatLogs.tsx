@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import { useAtomValue } from 'jotai';
 import { atom_idbConn, atom_tmiConn } from '@/atoms';
-import { ChatUserstate } from 'tmi.js';
 
 import { Virtuoso } from 'react-virtuoso';
 
@@ -12,12 +11,11 @@ import Area from '@/components/wrappers/Area';
 import ChatLog from '@/components/parts/ChatLog';
 import LogsInfo from '@/components/parts/LogsInfo';
 
-export type MessageData = {
-  uniqueId: number;
-  channel: string;
-  user: string;
-  message: string;
-  date: string;
+import { ChatData } from '@/lib/HandleChat';
+import Chat2Log from '@/lib/Chat2Log';
+
+export type MessageData = ChatData & {
+  date: Date;
 };
 
 export default function ChatLogs({ user }: { user: string }) {
@@ -36,28 +34,23 @@ export default function ChatLogs({ user }: { user: string }) {
     })();
 
     // Listening to new messages:
-    const handleNewMessage = async (channel: string, tags: ChatUserstate, message: string) => {
-      if (tags['username'] !== user) return;
+    const handle = new Chat2Log(setMessageData, user);
 
-      setMessageData(
-        (prev) =>
-          [
-            ...prev,
-            {
-              uniqueId: tags['id'],
-              user: tags['username'],
-              channel: channel.substring(1),
-              message,
-              date: new Date(),
-            },
-          ] as MessageData[],
-      );
-    };
+    const handleMessage = handle.onMessage.bind(handle);
+    const handleSubscription = handle.onSubscription.bind(handle);
+    const handleResub = handle.onResub.bind(handle);
+    const handleCheer = handle.onCheer.bind(handle);
 
-    tmiConn.on('message', handleNewMessage);
+    tmiConn.on('message', handleMessage);
+    tmiConn.on('subscription', handleSubscription);
+    tmiConn.on('resub', handleResub);
+    tmiConn.on('cheer', handleCheer);
 
     return () => {
-      tmiConn.removeListener('message', handleNewMessage);
+      tmiConn.removeListener('message', handleMessage);
+      tmiConn.removeListener('subscription', handleSubscription);
+      tmiConn.removeListener('resub', handleResub);
+      tmiConn.removeListener('cheer', handleCheer);
       setMessageData(() => []);
     };
 
