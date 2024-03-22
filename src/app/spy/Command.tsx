@@ -103,7 +103,7 @@ export default function Command() {
       console.log('Something went wrong while starting the application. Please refresh the page and try again.');
     } finally {
       // Application is ready state:
-      setStatus({ active: true, uCount: userItems.length, cCount: channelItems.length });
+      setStatus({ running: true, uCount: userItems.length, cCount: channelItems.length });
       setIsLoading(false);
     }
   };
@@ -116,7 +116,7 @@ export default function Command() {
     try {
       await tmiConn.disconnect();
 
-      setStatus({ active: false, uCount: 0, cCount: 0 });
+      setStatus({ running: false, uCount: 0, cCount: 0 });
 
       setTmiConn({} as tmi.Client);
 
@@ -142,7 +142,7 @@ export default function Command() {
         {isError.channels && <InputError message="Please enter at least one channel." />}
       </Label>
       <div className="mt-2 flex justify-end gap-2 xl:mt-4">
-        {status.active ? (
+        {status.running ? (
           <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
         ) : (
           <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />

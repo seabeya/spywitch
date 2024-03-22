@@ -12,7 +12,7 @@ export const atom_tmiConn = atom({} as tmi.Client);
 export const atom_idbConn = atom({} as IDBPDatabase);
 
 // Spy general status atom:
-export const atom_status = atom({ active: false, uCount: 0, cCount: 0 });
+export const atom_status = atom({ running: false, uCount: 0, cCount: 0 });
 
 // isLoading atom:
 export const atom_isLoading = atom(false);

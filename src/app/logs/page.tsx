@@ -22,7 +22,7 @@ export default function Page() {
 
   return (
     <>
-      {status.active ? (
+      {status.running ? (
         <>
           <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
           {activeTab !== '' ? (

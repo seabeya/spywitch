@@ -19,7 +19,7 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   const [items, setItems] = useAtom(itemsAtom);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (isLoading || status.active) {
+    if (isLoading || status.running) {
       return;
     }
 
@@ -27,7 +27,7 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isLoading || status.active) {
+    if (isLoading || status.running) {
       return;
     }
 
@@ -50,7 +50,7 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   const handleItemRemove = (itemToRemove: string) => {
-    if (isLoading || status.active) {
+    if (isLoading || status.running) {
       return;
     }
 

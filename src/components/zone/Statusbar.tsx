@@ -15,7 +15,7 @@ export default function Statusbar() {
   const [uptime, setUptime] = useState('00:00');
 
   useEffect(() => {
-    if (!status.active) {
+    if (!status.running) {
       setUptime('00:00');
       return;
     }
@@ -30,7 +30,7 @@ export default function Statusbar() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [status.active]);
+  }, [status.running]);
 
   return (
     <div className="overflow-hidden rounded-xl border border-c_border1 bg-c_main">
@@ -42,7 +42,7 @@ export default function Statusbar() {
         </div>
       </div>
       <div className="hidden py-4 text-center text-sm text-gray-300 lg:block xl:py-8 xl:text-base">
-        {status.active ? 'Activated' : 'Not Activated'}
+        {status.running ? 'Activated' : 'Not Activated'}
       </div>
     </div>
   );
