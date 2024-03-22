@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import HandleChat, { ChatData } from '@/lib/HandleChat';
+import HandleChat from '@/lib/HandleChat';
 
-import { MessageData } from '@/components/sections/ChatLogs';
+import { ChatData, MessageData } from '@/types';
 
 export default class Chat2Log extends HandleChat {
   constructor(

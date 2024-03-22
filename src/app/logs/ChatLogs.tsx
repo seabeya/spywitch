@@ -7,16 +7,14 @@ import { atom_idbConn, atom_tmiConn } from '@/atoms';
 
 import { Virtuoso } from 'react-virtuoso';
 
-import Area from '@/components/wrappers/Area';
-import ChatLog from '@/components/parts/ChatLog';
-import LogsInfo from '@/components/parts/LogsInfo';
-
-import { ChatData } from '@/lib/HandleChat';
 import Chat2Log from '@/lib/Chat2Log';
 
-export type MessageData = ChatData & {
-  date: Date;
-};
+import SectionArea from '@/components/layout/SectionArea';
+
+import ChatLog from '@/components/ChatLog';
+import LogsInfo from '@/components/LogsInfo';
+
+import { MessageData } from '@/types';
 
 export default function ChatLogs({ user }: { user: string }) {
   const idbConn = useAtomValue(atom_idbConn);
@@ -58,7 +56,7 @@ export default function ChatLogs({ user }: { user: string }) {
   }, [user]);
 
   return (
-    <Area.Section title="Chat Logs">
+    <SectionArea title="Chat Logs">
       <div className="overflow-hidden">
         <div className="flex flex-wrap justify-around gap-2 rounded-t-sm border border-b-0 border-c_border1 px-1 pb-2 pt-1">
           <LogsInfo label="Sender" data={user.substring(0, 25)} />
@@ -74,6 +72,6 @@ export default function ChatLogs({ user }: { user: string }) {
           />
         </div>
       </div>
-    </Area.Section>
+    </SectionArea>
   );
 }

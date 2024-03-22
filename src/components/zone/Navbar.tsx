@@ -1,10 +1,10 @@
 'use client';
 
-import NavBtn from '@/components/parts/NavBtn';
+import IconHome from '@/components/shared/icons/IconHome';
+import IconSpy from '@/components/shared/icons/IconSpy';
+import IconLogs from '@/components/shared/icons/IconLogs';
 
-import IconHome from '@/components/icons/IconHome';
-import IconSpy from '@/components/icons/IconSpy';
-import IconLogs from '@/components/icons/IconLogs';
+import NavBtn from '@/components/NavBtn';
 
 const icons = {
   home: <IconHome className="h-5 w-5" />,

@@ -1,5 +1,5 @@
-import Statusbar from '@/components/Statusbar';
-import Navbar from '@/components/Navbar';
+import Statusbar from '@/components/zone/Statusbar';
+import Navbar from '@/components/zone/Navbar';
 
 export default function Sidebar() {
   return (

@@ -1,5 +1,5 @@
-import IconStart from '@/components/icons/IconStart';
-import IconStop from '@/components/icons/IconStop';
+import IconStart from '@/components/shared/icons/IconStart';
+import IconStop from '@/components/shared/icons/IconStop';
 
 const variants = {
   start: {

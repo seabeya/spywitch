@@ -1,4 +1,4 @@
-import IconSpyWitch from '@/components/icons/IconSpyWitch';
+import IconSpyWitch from '@/components/shared/icons/IconSpyWitch';
 
 function Paragraph({ children, className }: { children: React.ReactNode; className?: string }) {
   return <p className={`text-center text-sm text-gray-300  ${className}`}>{children}</p>;
