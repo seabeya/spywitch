@@ -11,8 +11,7 @@ export const atom_channels = atom([] as string[]);
 export const atom_tmiConn = atom({} as tmi.Client);
 export const atom_idbConn = atom({} as IDBPDatabase);
 
-// Spy general status atom:
-export const atom_status = atom({ running: false, uCount: 0, cCount: 0 });
-
-// isLoading atom:
+// General status atom:
+export const atom_started = atom(false);
 export const atom_isLoading = atom(false);
+export const atom_status = atom({ running: false, count1: 0, count2: 0 });

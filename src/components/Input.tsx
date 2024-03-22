@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { atom_isLoading, atom_status } from '@/atoms';
+import { atom_started } from '@/atoms';
 
 import { getUniqueItems, isValidInput } from '@/lib/utils';
 
@@ -12,25 +12,16 @@ type InputProps = {
 };
 
 export default function Input({ id, placeholder, itemsAtom }: InputProps) {
-  const isLoading = useAtomValue(atom_isLoading);
-  const status = useAtomValue(atom_status);
+  const started = useAtomValue(atom_started);
 
   const [inputValue, setInputValue] = useState('');
   const [items, setItems] = useAtom(itemsAtom);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (isLoading || status.running) {
-      return;
-    }
-
     setInputValue(event.target.value);
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isLoading || status.running) {
-      return;
-    }
-
     if (event.key === 'Backspace' && inputValue.length === 0) {
       setItems((prev) => {
         const lastItem = prev.pop();
@@ -50,7 +41,7 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   const handleItemRemove = (itemToRemove: string) => {
-    if (isLoading || status.running) {
+    if (started) {
       return;
     }
 
@@ -58,7 +49,10 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
   };
 
   return (
-    <ul className="scrollbar relative flex max-h-32 cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded-sm border border-c_border2 bg-c_body px-3 py-2 text-sm text-gray-200 focus-within:border-gray-600 xl:text-base">
+    <ul
+      className={`scrollbar relative flex max-h-32 cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded-sm border border-c_border2 bg-c_body px-3 py-2 text-sm text-gray-200 focus-within:border-gray-600 xl:text-base
+      ${started && '!cursor-default *:cursor-not-allowed'}`}
+    >
       {inputValue.length === 0 && items.length === 0 && (
         <li className="absolute min-w-max text-slate-500">{placeholder}</li>
       )}
@@ -79,6 +73,7 @@ export default function Input({ id, placeholder, itemsAtom }: InputProps) {
           value={inputValue}
           onChange={handleInputChange}
           onKeyDown={handleInputKeyDown}
+          disabled={started}
         />
       </li>
     </ul>

@@ -2,8 +2,16 @@
 
 import { useState } from 'react';
 
-import { useAtom, useAtomValue } from 'jotai';
-import { atom_users, atom_channels, atom_status, atom_isLoading, atom_idbConn, atom_tmiConn } from '@/atoms';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import {
+  atom_users,
+  atom_channels,
+  atom_status,
+  atom_isLoading,
+  atom_idbConn,
+  atom_tmiConn,
+  atom_started,
+} from '@/atoms';
 
 import tmi from 'tmi.js';
 import { deleteDB, openDB } from 'idb';
@@ -34,6 +42,7 @@ export default function Command() {
   }
 
   // Start handler {
+  const setStarted = useSetAtom(atom_started);
   const [isLoading, setIsLoading] = useAtom(atom_isLoading);
 
   const [idbConn, setIdbConn] = useAtom(atom_idbConn);
@@ -50,7 +59,8 @@ export default function Command() {
       return;
     }
 
-    // Set global loading state:
+    // Set global status state:
+    setStarted(true);
     setIsLoading(true);
 
     // Create a new tmi client:
@@ -100,10 +110,11 @@ export default function Command() {
         console.log('Connected.');
       });
     } catch (_) {
+      setStarted(false);
       console.log('Something went wrong while starting the application. Please refresh the page and try again.');
     } finally {
       // Application is ready state:
-      setStatus({ running: true, uCount: userItems.length, cCount: channelItems.length });
+      setStatus({ running: true, count1: userItems.length, count2: channelItems.length });
       setIsLoading(false);
     }
   };
@@ -116,7 +127,7 @@ export default function Command() {
     try {
       await tmiConn.disconnect();
 
-      setStatus({ running: false, uCount: 0, cCount: 0 });
+      setStatus({ running: false, count1: 0, count2: 0 });
 
       setTmiConn({} as tmi.Client);
 
@@ -127,6 +138,7 @@ export default function Command() {
       console.log('Something went wrong while stopping the application. Please refresh the page.');
     } finally {
       setIsLoading(false);
+      setStarted(false);
     }
   };
   // }

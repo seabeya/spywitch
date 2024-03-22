@@ -36,8 +36,8 @@ export default function Statusbar() {
     <div className="overflow-hidden rounded-xl border border-c_border1 bg-c_main">
       <div className="border-c_border2 sm:pt-3 lg:border-b lg:bg-c_body xl:pt-5">
         <div className="flex divide-x divide-c_border1 lg:divide-c_border2">
-          <StatusInfo value={status.uCount.toString()} label="Users" />
-          <StatusInfo value={status.cCount.toString()} label="Channels" />
+          <StatusInfo value={status.count1.toString()} label="Users" />
+          <StatusInfo value={status.count2.toString()} label="Channels" />
           <StatusInfo value={uptime} label="Up Time" />
         </div>
       </div>
