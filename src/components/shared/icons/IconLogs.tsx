@@ -1,4 +1,4 @@
-function IconLogs({ className }: { className?: string }) {
+export default function IconLogs({ className }: { className: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,5 +17,3 @@ function IconLogs({ className }: { className?: string }) {
     </svg>
   );
 }
-
-export default IconLogs;

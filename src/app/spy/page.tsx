@@ -1,4 +1,4 @@
-import Command from '@/components/sections/Command';
+import Command from './Command';
 
 export default function Page() {
   return <Command />;

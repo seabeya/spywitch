@@ -1,4 +1,4 @@
-import { MessageData } from '@/components/sections/ChatLogs';
+import { MessageData } from '@/types';
 
 export default function ChatLog({ data }: { data: MessageData }) {
   const { channel, message, type, date } = data;

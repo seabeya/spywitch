@@ -1,4 +1,4 @@
-import IconSpyWitch from '@/components/icons/IconSpyWitch';
+import IconSpyWitch from '@/components/shared/icons/IconSpyWitch';
 
 export default function Warn({ children }: { children: React.ReactNode }) {
   return (

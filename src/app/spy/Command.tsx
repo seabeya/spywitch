@@ -2,18 +2,27 @@
 
 import { useState } from 'react';
 
-import Area from '@/components/wrappers/Area';
-import Label from '@/components/parts/Label';
-import Input from '@/components/parts/Input';
-import InputError from '@/components/parts/InputError';
-import ControlBtn from '@/components/parts/ControlBtn';
-
-import { useAtom, useAtomValue } from 'jotai';
-import { atom_users, atom_channels, atom_status, atom_isLoading, atom_idbConn, atom_tmiConn } from '@/atoms';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import {
+  atom_users,
+  atom_channels,
+  atom_status,
+  atom_isLoading,
+  atom_idbConn,
+  atom_tmiConn,
+  atom_started,
+} from '@/atoms';
 
 import tmi from 'tmi.js';
 import { deleteDB, openDB } from 'idb';
 import Chat2Db from '@/lib/Chat2Db';
+
+import SectionArea from '@/components/layout/SectionArea';
+
+import Label from '@/components/Label';
+import Input from '@/components/Input';
+import InputError from '@/components/InputError';
+import ControlBtn from '@/components/ControlBtn';
 
 export default function Command() {
   const [isError, setIsError] = useState({
@@ -33,6 +42,7 @@ export default function Command() {
   }
 
   // Start handler {
+  const setStarted = useSetAtom(atom_started);
   const [isLoading, setIsLoading] = useAtom(atom_isLoading);
 
   const [idbConn, setIdbConn] = useAtom(atom_idbConn);
@@ -49,7 +59,8 @@ export default function Command() {
       return;
     }
 
-    // Set global loading state:
+    // Set global status state:
+    setStarted(true);
     setIsLoading(true);
 
     // Create a new tmi client:
@@ -99,10 +110,11 @@ export default function Command() {
         console.log('Connected.');
       });
     } catch (_) {
+      setStarted(false);
       console.log('Something went wrong while starting the application. Please refresh the page and try again.');
     } finally {
       // Application is ready state:
-      setStatus({ active: true, uCount: userItems.length, cCount: channelItems.length });
+      setStatus({ running: true, count1: userItems.length, count2: channelItems.length });
       setIsLoading(false);
     }
   };
@@ -115,7 +127,7 @@ export default function Command() {
     try {
       await tmiConn.disconnect();
 
-      setStatus({ active: false, uCount: 0, cCount: 0 });
+      setStatus({ running: false, count1: 0, count2: 0 });
 
       setTmiConn({} as tmi.Client);
 
@@ -126,12 +138,13 @@ export default function Command() {
       console.log('Something went wrong while stopping the application. Please refresh the page.');
     } finally {
       setIsLoading(false);
+      setStarted(false);
     }
   };
   // }
 
   return (
-    <Area.Section title="Command">
+    <SectionArea title="Command">
       <Label title="Users:" htmlFor="users" desc="the users you are going to track">
         <Input id="users" placeholder="Enter usernames separated with spaces." itemsAtom={atom_users} />
         {isError.users && <InputError message="Please enter at least one user." />}
@@ -141,12 +154,12 @@ export default function Command() {
         {isError.channels && <InputError message="Please enter at least one channel." />}
       </Label>
       <div className="mt-2 flex justify-end gap-2 xl:mt-4">
-        {status.active ? (
+        {status.running ? (
           <ControlBtn variant="stop" isDisabled={isLoading} onClick={handleStop} />
         ) : (
           <ControlBtn variant="start" isDisabled={isLoading} onClick={handleStart} />
         )}
       </div>
-    </Area.Section>
+    </SectionArea>
   );
 }

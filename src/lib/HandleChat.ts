@@ -1,12 +1,6 @@
 import { ChatUserstate, SubMethods, SubUserstate } from 'tmi.js';
 
-export type ChatData = {
-  uniqueId: string;
-  user: string;
-  channel: string;
-  message: string;
-  type: null | string;
-};
+import { ChatData } from '@/types';
 
 export default abstract class HandleChat {
   abstract event({ uniqueId, user, channel, message, type }: ChatData): void;

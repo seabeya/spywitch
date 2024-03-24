@@ -1,4 +1,4 @@
-function IconSpyWitch({ className }: { className?: string }) {
+export default function IconSpyWitch({ className }: { className: string }) {
   return (
     <svg version="1.1" viewBox="0 0 919 786" className={className}>
       <path
@@ -14,5 +14,3 @@ function IconSpyWitch({ className }: { className?: string }) {
     </svg>
   );
 }
-
-export default IconSpyWitch;

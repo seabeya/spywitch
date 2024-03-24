@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { useAtomValue } from 'jotai';
 import { atom_status } from '@/atoms';
 
-import UserTabs from '@/components/sections/UserTabs';
-import ChatLogs from '@/components/sections/ChatLogs';
+import Warn from '@/components/shared/Warn';
 
-import Warn from '@/components/parts/Warn';
+import UserTabs from './UserTabs';
+import ChatLogs from './ChatLogs';
 
 export default function Page() {
   const status = useAtomValue(atom_status);
@@ -22,7 +22,7 @@ export default function Page() {
 
   return (
     <>
-      {status.active ? (
+      {status.running ? (
         <>
           <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
           {activeTab !== '' ? (

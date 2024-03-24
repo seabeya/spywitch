@@ -4,9 +4,10 @@ import './globals.css';
 
 import { Provider } from 'jotai';
 
-import { Header } from '@/components/Header';
-import Area from '@/components/wrappers/Area';
-import Sidebar from '@/components/Sidebar';
+import Container from '@/components/layout/Container';
+
+import Header from '@/components/zone/Header';
+import Sidebar from '@/components/zone/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -51,12 +52,16 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c_body via-c_body to-c_body2`}>
         <Header />
         <Provider>
-          <Area>
-            <Area.Side>
-              <Sidebar />
-            </Area.Side>
-            <Area.Page>{children}</Area.Page>
-          </Area>
+          <Container>
+            <main className="grid grid-cols-1 items-start gap-3 pb-16 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7 lg:pb-5">
+              <div className="sticky top-1 z-10 sm:static lg:col-start-1 lg:col-end-3">
+                <Sidebar />
+              </div>
+              <div className="flex flex-col gap-16 rounded-xl border border-c_border1 bg-c_main p-5 lg:col-start-3 lg:col-end-8">
+                {children}
+              </div>
+            </main>
+          </Container>
         </Provider>
       </body>
     </html>

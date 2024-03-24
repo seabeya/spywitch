@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import IconChevron from '@/components/icons/IconChevron';
+import IconChevron from '@/components/shared/icons/IconChevron';
 
 type NavBtnProps = { href: string; label: string; icon?: JSX.Element };
 

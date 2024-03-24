@@ -1,6 +1,8 @@
 import { IDBPDatabase } from 'idb';
 
-import HandleChat, { ChatData } from '@/lib/HandleChat';
+import HandleChat from '@/lib/HandleChat';
+
+import { ChatData } from '@/types';
 
 export default class Chat2Db extends HandleChat {
   users: Set<string>;
