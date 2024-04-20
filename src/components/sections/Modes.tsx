@@ -8,7 +8,7 @@ type Modes = {
   desc: string;
 }[];
 
-export const modes: Modes = [
+const modes: Modes = [
   {
     name: 'Users',
     desc: "Track users' chat messages and related events in any Twitch channels.",
