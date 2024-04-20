@@ -2,12 +2,13 @@
 
 import SectionArea from '@/components/shared/SectionArea';
 import { useModeStore } from '@/store';
+import ModeUsers from '@/components/sections/ModeUsers';
 
 export default function Command() {
   const Mode = useModeStore((state) => state.mode);
 
   const modeSections = {
-    Users: <div>Users Mode!</div>,
+    Users: <ModeUsers />,
     Events: <div>Events Mode!</div>,
   };
 
