@@ -2,16 +2,19 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { getUniqueItems, isValidInput } from '@/lib/utils';
+import { Status } from '@/types';
 
 type InputBoxProps = {
   id: string;
   placeholder: string;
+  status: Status;
   items: string[];
-  isLocked: boolean;
   getItems: (items: string[]) => void;
 };
 
-export default function InputBox({ id, placeholder, items, isLocked, getItems }: InputBoxProps) {
+export default function InputBox({ id, placeholder, status, items, getItems }: InputBoxProps) {
+  const isLocked = status !== 'idle';
+
   const [inputItems, setInputItems] = useState(items);
   const [inputValue, setInputValue] = useState('');
 

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Mode } from '@/types';
+import { Mode, Status } from '@/types';
 
 type useMode = {
   mode: Mode;
@@ -18,4 +18,12 @@ type useItems = {
 export const useItemsStore = create<useItems>()(() => ({
   items1: [],
   items2: [],
+}));
+
+type useStatus = {
+  status: Status;
+};
+
+export const useStatusStore = create<useStatus>()(() => ({
+  status: 'idle',
 }));
