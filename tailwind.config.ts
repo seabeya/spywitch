@@ -16,6 +16,7 @@ const config: Config = {
           lower: '#a3a3a3', // neutral-400
         },
         brdr: {
+          active: '#525252', // neutral-600
           light: '#404040', // neutral-700
           DEFAULT: '#262626', // neutral-800
           dark: '#171717', // neutral-900
@@ -23,6 +24,7 @@ const config: Config = {
       },
       borderRadius: {
         outher: '12px',
+        middle: '8px',
         inner: '6px',
       },
     },
