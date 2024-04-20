@@ -11,11 +11,11 @@ type Modes = {
 export const modes: Modes = [
   {
     name: 'Users',
-    desc: "Track users' chat messages and related events in specific Twitch channels.",
+    desc: "Track users' chat messages and related events in any Twitch channels.",
   },
   {
     name: 'Events',
-    desc: 'Track events such as sub, resub, bit donations, etc., in specific Twitch channels.',
+    desc: 'Track events such as sub, resub, cheers, etc., in any Twitch channels.',
   },
 ];
 
