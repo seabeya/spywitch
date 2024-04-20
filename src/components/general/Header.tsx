@@ -31,7 +31,7 @@ function GitHub() {
       href="https://github.com/seabeya/spywitch"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 rounded-md border border-brdr-dark bg-neutral-950 px-2 py-1 text-sm text-txt-low duration-75 hover:border-brdr hover:text-txt"
+      className="flex items-center gap-2 rounded-inner border border-brdr-dark bg-neutral-950 px-2 py-1 text-sm text-txt-low duration-75 hover:border-brdr hover:text-txt"
     >
       <IconGithub className="h-4 w-4 shrink-0" />
       GitHub

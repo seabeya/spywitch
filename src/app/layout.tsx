@@ -22,11 +22,11 @@ export default function RootLayout({
         <Header />
         <main className="container grid grid-cols-1 items-start gap-3 pb-5 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7">
           {/* Sidebar Area: */}
-          <div className="sticky top-1 z-10 rounded-xl border border-brdr bg-neutral-950 sm:static lg:col-start-1 lg:col-end-3">
+          <div className="sticky top-1 z-10 rounded-outher border border-brdr bg-neutral-950 sm:static lg:col-start-1 lg:col-end-3">
             Sidebar
           </div>
           {/* Page Content Area: */}
-          <div className="flex flex-col gap-16 rounded-xl border border-brdr bg-neutral-950 p-5 lg:col-start-3 lg:col-end-8">
+          <div className="flex flex-col gap-16 rounded-outher border border-brdr bg-neutral-950 p-5 lg:col-start-3 lg:col-end-8">
             {children}
           </div>
         </main>

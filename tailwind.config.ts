@@ -20,6 +20,10 @@ const config: Config = {
           dark: '#171717', // neutral-900
         },
       },
+      borderRadius: {
+        outher: '12px',
+        inner: '6px',
+      },
     },
     container: {
       center: true,
