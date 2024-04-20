@@ -7,7 +7,20 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        txt: {
+          DEFAULT: '#fff', // white
+          light: '#f5f5f5', // neutral-100
+          low: '#d4d4d4', // neutral-300
+        },
+        brdr: {
+          light: '#404040', // neutral-700
+          DEFAULT: '#262626', // neutral-800
+          dark: '#171717', // neutral-900
+        },
+      },
+    },
     container: {
       center: true,
       padding: '5px',
