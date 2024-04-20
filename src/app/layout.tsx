@@ -27,8 +27,11 @@ export default function RootLayout({
             <Sidebar />
           </div>
           {/* Page Content Area: */}
-          <div className="flex flex-col gap-16 overflow-hidden rounded-outher border border-brdr bg-neutral-950 p-5 lg:col-start-3 lg:col-end-8">
-            {children}
+          <div className="lg:col-start-3 lg:col-end-8">
+            <div className="flex flex-col gap-16 overflow-hidden rounded-outher border border-brdr bg-neutral-950 p-5">
+              {children}
+            </div>
+            <p className="text-txt-lower px-2 pt-1 text-right text-xs">SpyWitch is not affiliated with Twitch.</p>
           </div>
         </main>
       </body>
