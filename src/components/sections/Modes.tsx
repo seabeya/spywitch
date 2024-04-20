@@ -1,4 +1,4 @@
-import SectionArea from '@/components/sections/SectionArea';
+import SectionArea from '@/components/shared/SectionArea';
 import ModeBtn from '@/components/ModeBtn';
 
 export const modes = [
