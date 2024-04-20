@@ -13,6 +13,7 @@ const config: Config = {
           DEFAULT: '#fff', // white
           light: '#f5f5f5', // neutral-100
           low: '#d4d4d4', // neutral-300
+          lower: '#a3a3a3', // neutral-400
         },
         brdr: {
           light: '#404040', // neutral-700
