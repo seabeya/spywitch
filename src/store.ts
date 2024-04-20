@@ -9,3 +9,13 @@ type useMode = {
 export const useModeStore = create<useMode>()(() => ({
   mode: 'Users',
 }));
+
+type useItems = {
+  items1: string[];
+  items2: string[];
+};
+
+export const useItemsStore = create<useItems>()(() => ({
+  items1: [],
+  items2: [],
+}));

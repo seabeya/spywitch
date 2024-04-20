@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { getUniqueItems, isValidInput } from '@/lib/utils';
@@ -14,6 +14,10 @@ type InputBoxProps = {
 export default function InputBox({ id, placeholder, items, isLocked, getItems }: InputBoxProps) {
   const [inputItems, setInputItems] = useState(items);
   const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    getItems(inputItems);
+  }, [inputItems]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (isLocked) return;
