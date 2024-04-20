@@ -9,6 +9,7 @@ import IconChevron from '@/components/shared/Icons/IconChevron';
 type NavBtnProps = {
   href: string;
   label: string;
+  icon?: JSX.Element;
 };
 
 export default function NavBtn({ href, label }: NavBtnProps) {
@@ -34,3 +35,22 @@ export default function NavBtn({ href, label }: NavBtnProps) {
     </Link>
   );
 }
+
+function Bottom({ href, label, icon }: NavBtnProps) {
+  const currPath = usePathname();
+  const isActive = href === currPath;
+
+  return (
+    <Link
+      href={href}
+      className={clsx('text-txt-lower flex flex-col items-center py-2 text-sm hover:text-txt-low', {
+        '!text-sky-500': isActive,
+      })}
+    >
+      {icon}
+      {label}
+    </Link>
+  );
+}
+
+NavBtn.Bottom = Bottom;
