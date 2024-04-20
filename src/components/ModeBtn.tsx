@@ -1,12 +1,22 @@
+'use client';
+
 import clsx from 'clsx';
 
+import { Mode } from '@/types';
+import { useModeStore } from '@/store';
+
 type ModeBtnProps = {
-  label: string;
+  label: Mode;
   desc: string;
 };
 
 export default function ModeBtn({ label, desc }: ModeBtnProps) {
-  const isActive = false;
+  const Mode = useModeStore((state) => state.mode);
+  const isActive = label === Mode;
+
+  const handleClick = () => {
+    useModeStore.setState({ mode: label });
+  };
 
   return (
     <button
@@ -16,6 +26,7 @@ export default function ModeBtn({ label, desc }: ModeBtnProps) {
           '!border-brdr-active !bg-neutral-800': isActive,
         },
       )}
+      onClick={handleClick}
     >
       <span
         className={clsx('text-sm text-txt-low xl:text-base', {

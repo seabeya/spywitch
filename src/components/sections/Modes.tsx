@@ -1,7 +1,14 @@
 import SectionArea from '@/components/shared/SectionArea';
 import ModeBtn from '@/components/ModeBtn';
 
-export const modes = [
+import { Mode } from '@/types';
+
+type Modes = {
+  name: Mode;
+  desc: string;
+}[];
+
+export const modes: Modes = [
   {
     name: 'Users',
     desc: "Track users' chat messages and related events in specific Twitch channels.",
