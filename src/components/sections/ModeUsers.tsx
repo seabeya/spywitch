@@ -1,5 +1,6 @@
 import Label from '@/components/shared/Label';
 import InputBox from '@/components/InputBox';
+import ControlBtn from '@/components/ControlBtn';
 
 import { useItemsStore } from '@/store';
 
@@ -14,6 +15,8 @@ export default function ModeUsers() {
   const getChannels = (items: string[]) => {
     useItemsStore.setState({ items2: items });
   };
+
+  const isLocked = false;
 
   return (
     <>
@@ -35,6 +38,13 @@ export default function ModeUsers() {
           getItems={getChannels}
         />
       </Label>
+      <div className="mt-2 flex justify-end xl:mt-4">
+        {true ? (
+          <ControlBtn variant="start" isDisabled={isLocked} onClick={() => {}} />
+        ) : (
+          <ControlBtn variant="stop" isDisabled={isLocked} onClick={() => {}} />
+        )}
+      </div>
     </>
   );
 }
