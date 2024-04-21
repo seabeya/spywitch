@@ -5,6 +5,6 @@
 @layer components {
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #5e6268 #151c26;
+    scrollbar-color: #636363 #2b2b2b;
   }
 }

@@ -1,17 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 
-import Warn from '@/components/shared/Warn';
 import { useStatusStore } from '@/store';
+import Warn from '@/components/shared/Warn';
+import ItemTabs from '@/components/sections/ItemTabs';
 
 export default function Page() {
   const Status = useStatusStore((state) => state.status);
 
+  const [activeTab, setActiveTab] = useState('');
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+  };
+
   return (
     <>
       {Status === 'running' ? (
-        <></>
+        <>
+          <ItemTabs activeTab={activeTab} handleTabClick={handleTabClick} />
+        </>
       ) : (
         <Warn>
           You need to start the application first in order to view the chat logs. Go to the{' '}
