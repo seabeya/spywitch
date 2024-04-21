@@ -20,6 +20,11 @@ export default function Page() {
       {Status === 'running' ? (
         <>
           <ItemTabs activeTab={activeTab} handleTabClick={handleTabClick} />
+          {activeTab !== '' ? (
+            <div>Chat Logs</div>
+          ) : (
+            <p className="text-center text-sm text-txt-low xl:text-base">Please select an item to view.</p>
+          )}
         </>
       ) : (
         <Warn>
