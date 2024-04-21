@@ -32,6 +32,8 @@ export default function ModeEvents() {
 
   //
   const startHandler = async () => {
+    useItemsStore.setState({ events: ['sub', 'resub', 'cheer'] });
+
     const channelsEmpty = isEmpty(Channels);
 
     if (channelsEmpty) {
