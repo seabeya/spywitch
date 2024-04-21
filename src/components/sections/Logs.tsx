@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useSpyStore } from '@/store';
 import { MessageData } from '@/types';
 import Chat2Print from '@/lib/Chat2Print';
+import SectionArea from '@/components/shared/SectionArea';
+import LogsInfo from '@/components/LogsInfo';
 
 type LogsProps = {
   item: string;
@@ -48,10 +50,13 @@ export default function Logs({ item }: LogsProps) {
   }, [item]);
 
   return (
-    <div>
-      {messageData.map((message) => {
-        return <div key={message.uniqueId}>{`${message.type} ||| ${message.message}`}</div>;
-      })}
-    </div>
+    <SectionArea title="Chat Logs">
+      <div className="overflow-hidden">
+        <div className="flex flex-wrap justify-around gap-2 rounded-t border border-brdr px-1 pb-[6px] pt-1">
+          <LogsInfo title="Target" data={item} />
+          <LogsInfo title="Count" data={messageData.length} />
+        </div>
+      </div>
+    </SectionArea>
   );
 }
