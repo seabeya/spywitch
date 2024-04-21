@@ -45,4 +45,10 @@ export default class Spy {
   public async start() {
     await this.tmiClient.connect();
   }
+
+  public async stop() {
+    await this.tmiClient.disconnect();
+    this.idb.close();
+    await deleteDB(`spywitch${this.mode}`);
+  }
 }

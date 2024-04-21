@@ -87,7 +87,21 @@ export default function ModeUsers() {
   };
 
   //
-  const stopHandler = () => {};
+  const stopHandler = async () => {
+    useStatusStore.setState({ status: 'loading' });
+
+    const Spy = useSpyStore.getState().spy;
+    try {
+      await Spy.stop();
+    } catch (_) {
+      console.log(
+        'Something went wrong while gracefully stopping the application! Please refresh the page to force stop.',
+      );
+    } finally {
+      useSpyStore.setState({ spy: {} as Spy });
+      useStatusStore.setState({ status: 'idle' });
+    }
+  };
 
   return (
     <>
