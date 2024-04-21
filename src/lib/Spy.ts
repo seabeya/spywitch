@@ -6,8 +6,15 @@ import { Mode } from '@/types';
 export default class Spy {
   public tmiClient = {} as tmi.Client;
   public idb = {} as IDBPDatabase;
+  public idbIndex: 'user' | 'channel';
 
-  constructor(private mode: Mode) {}
+  constructor(public mode: Mode) {
+    if (mode === 'Users') {
+      this.idbIndex = 'user';
+    } else {
+      this.idbIndex = 'channel';
+    }
+  }
 
   private initTmi(channels: string[]) {
     this.tmiClient = new tmi.Client({
@@ -22,17 +29,16 @@ export default class Spy {
 
   private async initIdb() {
     const dbName = `spywitch${this.mode}`;
-    const indexName = this.mode === 'Users' ? 'user' : 'channel';
 
     await deleteDB(dbName);
 
     this.idb = await openDB(dbName, 1, {
-      upgrade(db) {
+      upgrade: (db) => {
         const store = db.createObjectStore('logs', {
           keyPath: 'id',
           autoIncrement: true,
         });
-        store.createIndex(indexName, indexName);
+        store.createIndex(this.idbIndex, this.idbIndex);
       },
     });
   }

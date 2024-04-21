@@ -6,22 +6,23 @@ import Link from 'next/link';
 import { useStatusStore } from '@/store';
 import Warn from '@/components/shared/Warn';
 import ItemTabs from '@/components/sections/ItemTabs';
+import Logs from '@/components/sections/Logs';
 
 export default function Page() {
   const Status = useStatusStore((state) => state.status);
 
-  const [activeTab, setActiveTab] = useState('');
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
+  const [selectedItem, setSelectedItem] = useState('');
+  const handleTabClick = (item: string) => {
+    setSelectedItem(item);
   };
 
   return (
     <>
       {Status === 'running' ? (
         <>
-          <ItemTabs activeTab={activeTab} handleTabClick={handleTabClick} />
-          {activeTab !== '' ? (
-            <div>Chat Logs</div>
+          <ItemTabs activeTab={selectedItem} handleTabClick={handleTabClick} />
+          {selectedItem !== '' ? (
+            <Logs item={selectedItem} />
           ) : (
             <p className="text-center text-sm text-txt-low xl:text-base">Please select an item to view.</p>
           )}
