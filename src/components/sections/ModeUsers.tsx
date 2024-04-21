@@ -5,8 +5,10 @@ import InputBox from '@/components/InputBox';
 import ControlBtn from '@/components/ControlBtn';
 import InputError from '@/components/InputError';
 
-import { useItemsStore, useStatusStore } from '@/store';
+import { useItemsStore, useSpyStore, useStatusStore } from '@/store';
 import { isEmpty } from '@/lib/utils';
+import Spy from '@/lib/Spy';
+import Chat2Db from '@/lib/Chat2Db';
 
 export default function ModeUsers() {
   const Users = useItemsStore((state) => state.items1);
@@ -43,15 +45,44 @@ export default function ModeUsers() {
     const usersEmpty = isEmpty(Users);
     const channelsEmpty = isEmpty(Channels);
 
-    if (isError.users !== usersEmpty || isError.channels !== channelsEmpty) {
-      setIsError({
-        users: usersEmpty,
-        channels: channelsEmpty,
-      });
+    if (usersEmpty || channelsEmpty) {
+      if (isError.users !== usersEmpty || isError.channels !== channelsEmpty) {
+        setIsError({
+          users: usersEmpty,
+          channels: channelsEmpty,
+        });
+      }
+
+      return;
     }
 
-    if (usersEmpty || channelsEmpty) {
-      return;
+    const spy = new Spy('Users');
+    try {
+      useStatusStore.setState({ status: 'loading' });
+
+      await spy.init(Channels);
+
+      const handle = new Chat2Db(spy.idb, Users);
+      spy.tmiClient.on('message', handle.onMessage.bind(handle));
+      spy.tmiClient.on('subscription', handle.onSubscription.bind(handle));
+      spy.tmiClient.on('resub', handle.onResub.bind(handle));
+      spy.tmiClient.on('cheer', handle.onCheer.bind(handle));
+
+      spy.tmiClient.on('connected', () => {
+        console.log('Connected.');
+      });
+
+      spy.tmiClient.on('disconnected', () => {
+        console.log('Disconnected.');
+      });
+
+      await spy.start();
+    } catch (_) {
+      useStatusStore.setState({ status: 'idle' });
+      console.log('Something went wrong! Please refresh the page and try again.');
+    } finally {
+      useSpyStore.setState({ spy: spy });
+      useStatusStore.setState({ status: 'running' });
     }
   };
 

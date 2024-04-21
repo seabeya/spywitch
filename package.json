@@ -10,15 +10,18 @@
   },
   "dependencies": {
     "clsx": "^2.1.0",
+    "idb": "^8.0.0",
     "next": "14.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "tmi.js": "^1.8.5",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/tmi.js": "^1.8.6",
     "eslint": "^8",
     "eslint-config-next": "14.2.0",
     "postcss": "^8",
