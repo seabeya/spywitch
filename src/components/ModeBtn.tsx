@@ -24,9 +24,9 @@ export default function ModeBtn({ label, desc }: ModeBtnProps) {
   return (
     <button
       className={clsx(
-        'flex cursor-default flex-col gap-[2px] overflow-hidden rounded-middle border border-brdr px-3 pb-3 pt-2 text-start',
+        'flex cursor-not-allowed flex-col gap-[2px] overflow-hidden rounded-middle border border-brdr px-3 pb-3 pt-2 text-start',
         {
-          '!border-brdr-active !bg-neutral-800': isActive,
+          '!cursor-default !border-brdr-active !bg-neutral-800': isActive,
           '!cursor-pointer hover:border-brdr-light': Status === 'idle',
         },
       )}
