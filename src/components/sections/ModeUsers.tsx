@@ -72,10 +72,6 @@ export default function ModeUsers() {
         console.log('Connected.');
       });
 
-      spy.tmiClient.on('disconnected', () => {
-        console.log('Disconnected.');
-      });
-
       await spy.start();
     } catch (_) {
       useStatusStore.setState({ status: 'idle' });
