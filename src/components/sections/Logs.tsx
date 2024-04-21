@@ -5,6 +5,8 @@ import { MessageData } from '@/types';
 import Chat2Print from '@/lib/Chat2Print';
 import SectionArea from '@/components/shared/SectionArea';
 import LogsInfo from '@/components/LogsInfo';
+import { Virtuoso } from 'react-virtuoso';
+import Log from '@/components/Log';
 
 type LogsProps = {
   item: string;
@@ -52,9 +54,18 @@ export default function Logs({ item }: LogsProps) {
   return (
     <SectionArea title="Chat Logs">
       <div className="overflow-hidden">
-        <div className="flex flex-wrap justify-around gap-2 rounded-t border border-brdr px-1 pb-[6px] pt-1">
+        <div className="flex flex-wrap justify-around gap-2 rounded-t border border-b-0 border-brdr px-1 pb-[6px] pt-1">
           <LogsInfo title="Target" data={item} />
           <LogsInfo title="Count" data={messageData.length} />
+        </div>
+        <div className="rounded-b border border-brdr bg-neutral-900 p-1">
+          <Virtuoso
+            style={{ height: '512px' }}
+            className="custom-scrollbar"
+            data={messageData}
+            followOutput={true}
+            itemContent={(_, data) => <Log data={data} />}
+          />
         </div>
       </div>
     </SectionArea>
