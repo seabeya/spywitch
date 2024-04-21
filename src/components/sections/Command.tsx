@@ -13,5 +13,5 @@ export default function Command() {
     Events: <ModeEvents />,
   };
 
-  return <SectionArea label="Command">{modeSections[Mode]}</SectionArea>;
+  return <SectionArea title="Command">{modeSections[Mode]}</SectionArea>;
 }
