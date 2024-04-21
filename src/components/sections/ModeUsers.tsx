@@ -11,15 +11,15 @@ import Spy from '@/lib/Spy';
 import Chat2Db from '@/lib/Chat2Db';
 
 export default function ModeUsers() {
-  const Users = useItemsStore((state) => state.items1);
-  const Channels = useItemsStore((state) => state.items2);
+  const Users = useItemsStore((state) => state.users);
+  const Channels = useItemsStore((state) => state.channels);
 
   const getUsers = (items: string[]) => {
-    useItemsStore.setState({ items1: items });
+    useItemsStore.setState({ users: items });
   };
 
   const getChannels = (items: string[]) => {
-    useItemsStore.setState({ items2: items });
+    useItemsStore.setState({ channels: items });
   };
 
   //

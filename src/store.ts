@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Mode, Status } from '@/types';
+import { Event, Mode, Status } from '@/types';
 import type Spy from '@/lib/Spy';
 
 type useMode = {
@@ -12,13 +12,15 @@ export const useModeStore = create<useMode>()(() => ({
 }));
 
 type useItems = {
-  items1: string[];
-  items2: string[];
+  users: string[];
+  events: Event[];
+  channels: string[];
 };
 
 export const useItemsStore = create<useItems>()(() => ({
-  items1: [],
-  items2: [],
+  users: [],
+  events: [],
+  channels: [],
 }));
 
 type useStatus = {
