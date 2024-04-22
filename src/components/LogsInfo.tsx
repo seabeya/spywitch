@@ -7,7 +7,7 @@ export default function LogsInfo({ title, data }: LogsInfoProps) {
   return (
     <div>
       <span className="mr-1 text-sm text-txt-lower xl:text-base">{title}:</span>
-      <span className="text-sm tabular-nums text-txt-low xl:text-base">{data}</span>
+      <span className="text-sm font-medium tabular-nums text-txt-low xl:text-base">{data}</span>
     </div>
   );
 }
