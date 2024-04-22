@@ -20,7 +20,7 @@ export default function NavBtn({ href, label }: NavBtnProps) {
     <Link
       href={href}
       className={clsx(
-        'rounded-middle flex justify-between overflow-hidden border border-brdr bg-neutral-900 px-4 py-2 text-sm text-txt-low hover:border-brdr-light xl:text-base',
+        'flex justify-between overflow-hidden rounded-middle border border-brdr bg-neutral-900 px-4 py-2 text-sm text-txt-low hover:border-brdr-light xl:text-base',
         {
           '!border-brdr-active !bg-neutral-800 !text-txt-light': isActive,
         },
@@ -28,7 +28,7 @@ export default function NavBtn({ href, label }: NavBtnProps) {
     >
       {label}
       <IconChevron
-        className={clsx('text-txt-lower h-6 w-6 shrink-0', {
+        className={clsx('h-6 w-6 shrink-0 text-txt-lower', {
           '!text-txt-low': isActive,
         })}
       />
@@ -43,7 +43,7 @@ function Bottom({ href, label, icon }: NavBtnProps) {
   return (
     <Link
       href={href}
-      className={clsx('text-txt-lower flex flex-col items-center py-2 text-sm hover:text-txt-low', {
+      className={clsx('flex flex-col items-center py-2 text-sm text-txt-lower hover:text-txt-low', {
         '!text-sky-500': isActive,
       })}
     >

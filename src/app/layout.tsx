@@ -31,7 +31,7 @@ export default function RootLayout({
             <div className="flex flex-col gap-16 overflow-hidden rounded-outher border border-brdr bg-neutral-950 p-5">
               {children}
             </div>
-            <p className="text-txt-lower px-2 pt-1 text-right text-xs">SpyWitch is not affiliated with Twitch.</p>
+            <p className="px-2 pt-1 text-right text-xs text-txt-lower">SpyWitch is not affiliated with Twitch.</p>
           </div>
         </main>
       </body>

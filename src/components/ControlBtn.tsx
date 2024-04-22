@@ -25,7 +25,7 @@ export default function ControlBtn({ variant, isDisabled, onClick }: ControlBtnP
 
   return (
     <button
-      className={`rounded-last flex items-center gap-2 px-6 pb-[6px] pt-1 text-sm font-medium text-txt-light duration-75 disabled:cursor-wait disabled:bg-neutral-600 xl:px-8 xl:text-base ${btn.style}`}
+      className={`flex items-center gap-2 rounded-last px-6 pb-[6px] pt-1 text-sm font-medium text-txt-light duration-75 disabled:cursor-wait disabled:bg-neutral-600 xl:px-8 xl:text-base ${btn.style}`}
       disabled={isDisabled}
       onClick={onClick}
     >

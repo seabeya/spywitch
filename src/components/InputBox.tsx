@@ -59,7 +59,7 @@ export default function InputBox({ id, placeholder, status, items, getItems }: I
   return (
     <ul
       className={clsx(
-        'custom-scrollbar focus-within:border-brdr-active relative flex max-h-32 min-h-[42px] cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded border border-brdr bg-neutral-900 px-3 py-2 text-sm text-txt-light xl:min-h-[46px] xl:text-base',
+        'custom-scrollbar relative flex max-h-32 min-h-[42px] cursor-text flex-wrap items-center gap-1 overflow-y-auto overflow-x-hidden break-all rounded border border-brdr bg-neutral-900 px-3 py-2 text-sm text-txt-light focus-within:border-brdr-active xl:min-h-[46px] xl:text-base',
         {
           '!cursor-default *:cursor-not-allowed': isLocked,
         },
@@ -67,13 +67,13 @@ export default function InputBox({ id, placeholder, status, items, getItems }: I
     >
       {/* Placeholder: */}
       {inputItems.length === 0 && inputValue.length === 0 && (
-        <li className="text-txt-last absolute min-w-max">{placeholder}</li>
+        <li className="absolute min-w-max text-txt-last">{placeholder}</li>
       )}
       {/* Items: */}
       {inputItems.map((item, i) => (
         <li
           key={i}
-          className="rounded-last cursor-pointer bg-neutral-700 px-2 pb-[3px] pt-[1px] hover:bg-red-800"
+          className="cursor-pointer rounded-last bg-neutral-700 px-2 pb-[3px] pt-[1px] hover:bg-red-800"
           onClick={() => handleItemClick(item)}
         >
           {item}

@@ -1,6 +1,6 @@
 export default function AuthorInfo() {
   return (
-    <div className="text-txt-lower hidden px-4 text-center text-xs lg:block">
+    <div className="hidden px-4 text-center text-xs text-txt-lower lg:block">
       <p>
         If you like the project, you can show your support by giving a{' '}
         <a href="https://github.com/seabeya/spywitch" target="_blank" rel="noopener noreferrer" className="underline">
