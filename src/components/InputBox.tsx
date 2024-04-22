@@ -20,6 +20,7 @@ export default function InputBox({ id, placeholder, status, items, getItems }: I
 
   useEffect(() => {
     getItems(inputItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputItems]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

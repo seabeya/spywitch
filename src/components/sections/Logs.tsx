@@ -49,6 +49,8 @@ export default function Logs({ item }: LogsProps) {
       Spy.tmiClient.removeListener('cheer', handleCheer);
       setMessageData(() => []);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item]);
 
   return (
