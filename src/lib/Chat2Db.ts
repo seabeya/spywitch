@@ -15,15 +15,16 @@ export default class Chat2Db extends HandleChat {
     if (users) this.users = new Set(users);
   }
 
-  public async event({ uniqueId, user, channel, message, type }: ChatData): Promise<void> {
+  public async event({ uniqueId, event, user, channel, info, message }: ChatData): Promise<void> {
     if (this.users && !this.users.has(user)) return;
 
     this.db.add('logs', {
       uniqueId,
+      event,
       user,
       channel,
+      info,
       message,
-      type,
       date: new Date(),
     });
   }

@@ -2,7 +2,7 @@ import { useModeStore } from '@/store';
 import { MessageData } from '@/types';
 
 export default function Log({ data }: { data: MessageData }) {
-  const { date, user, channel, message, type } = data;
+  const { date, event, user, channel, info, message } = data;
 
   const time = new Date(date).toLocaleTimeString([], {
     hour12: false,
@@ -33,7 +33,9 @@ export default function Log({ data }: { data: MessageData }) {
         )}
       </div>
       <p className="ml-1 inline text-txt-light">
-        {type !== null && <span className="mr-1 rounded-middle bg-yellow-400 px-1 font-medium text-black">{type}</span>}
+        {event !== 'chat' && (
+          <span className="mr-1 rounded-middle bg-yellow-400 px-1 font-medium text-black">{info}</span>
+        )}
         {message}
       </p>
     </div>

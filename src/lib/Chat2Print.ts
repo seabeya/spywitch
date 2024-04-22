@@ -13,7 +13,7 @@ export default class Chat2Log extends HandleChat {
     super();
   }
 
-  public event({ uniqueId, user, channel, message, type }: ChatData): void {
+  public event({ uniqueId, event, user, channel, info, message }: ChatData): void {
     if (this.filterBy === 'user') {
       if (this.item !== user) return;
     } else {
@@ -24,10 +24,11 @@ export default class Chat2Log extends HandleChat {
       ...prev,
       {
         uniqueId,
+        event,
         user,
         channel,
+        info,
         message,
-        type,
         date: new Date(),
       },
     ]);

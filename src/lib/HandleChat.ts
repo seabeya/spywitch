@@ -3,15 +3,16 @@ import { ChatUserstate, SubMethods, SubUserstate } from 'tmi.js';
 import { ChatData } from '@/types';
 
 export default abstract class HandleChat {
-  abstract event({ uniqueId, user, channel, message, type }: ChatData): void;
+  abstract event({ uniqueId, event, user, channel, info, message }: ChatData): void;
 
   public onMessage(channel: string, tags: ChatUserstate, message: string) {
     this.event({
       uniqueId: tags['id'] as string,
+      event: 'chat',
       user: tags['username'] as string,
       channel: channel.substring(1),
+      info: null,
       message,
-      type: null,
     });
   }
 
@@ -24,10 +25,11 @@ export default abstract class HandleChat {
   ) {
     this.event({
       uniqueId: userstate.id as string,
+      event: 'sub',
       user: username,
       channel: channel.substring(1),
-      message: '',
-      type: 'Subscribed',
+      info: 'Subscribed',
+      message: null,
     });
   }
 
@@ -41,20 +43,22 @@ export default abstract class HandleChat {
   ) {
     this.event({
       uniqueId: userstate.id as string,
+      event: 'resub',
       user: username,
       channel: channel.substring(1),
-      message: message !== null ? message : '',
-      type: `Resubscribed (${userstate['msg-param-cumulative-months'] || 'N/A'} months)`,
+      info: `Resubscribed (${userstate['msg-param-cumulative-months'] || 'N/A'} months)`,
+      message: message,
     });
   }
 
   public onCheer(channel: string, userstate: ChatUserstate, message: string) {
     this.event({
       uniqueId: userstate.id as string,
+      event: 'cheer',
       user: userstate.username as string,
       channel: channel.substring(1),
-      message: message !== null ? message : '',
-      type: `Cheered (${userstate.bits || 'N/A'} bits)`,
+      info: `Cheered (${userstate.bits || 'N/A'} bits)`,
+      message: message,
     });
   }
 }

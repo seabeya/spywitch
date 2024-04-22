@@ -2,16 +2,17 @@ export type Mode = 'Users' | 'Events';
 
 export type Status = 'idle' | 'loading' | 'running';
 
-export type Event = 'sub' | 'resub' | 'cheer';
+export type Event = 'chat' | 'sub' | 'resub' | 'cheer';
 
 export type ChatData = {
   uniqueId: string;
+  event: Event;
   user: string;
   channel: string;
-  message: string;
-  type: null | string;
+  info: string | null;
+  message: string | null;
 };
 
-export type MessageData = ChatData & {
+export type MessageData = {
   date: Date;
-};
+} & ChatData;
