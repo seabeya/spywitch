@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'SpyWitch',
     images: [
       {
-        url: '/icon-96x96.png',
+        url: '/icons/icon-96x96.png',
         alt: 'SpyWitch',
       },
     ],
