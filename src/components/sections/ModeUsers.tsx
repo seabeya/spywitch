@@ -102,19 +102,13 @@ export default function ModeUsers() {
   return (
     <>
       <Label htmlFor="users" title="Users" desc="the users you are going to track">
-        <InputBox
-          id="users"
-          placeholder="Enter user names separated with spaces."
-          status={Status}
-          items={Users}
-          getItems={getUsers}
-        />
+        <InputBox id="users" placeholder="Enter usernames." status={Status} items={Users} getItems={getUsers} />
         {isError.users && <InputError message="Please enter at least one user." />}
       </Label>
       <Label htmlFor="channels" title="Channels" desc="the channels where you want to track the users">
         <InputBox
           id="channels"
-          placeholder="Enter channel names separated with spaces."
+          placeholder="Enter channel names."
           status={Status}
           items={Channels}
           getItems={getChannels}

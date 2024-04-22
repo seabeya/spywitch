@@ -100,7 +100,7 @@ export default function ModeEvents() {
       <Label htmlFor="channels" title="Channels" desc="the channels where you want to track the events">
         <InputBox
           id="channels"
-          placeholder="Enter channel names separated with spaces."
+          placeholder="Enter channel names."
           status={Status}
           items={Channels}
           getItems={getChannels}
