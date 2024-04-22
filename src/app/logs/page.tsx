@@ -3,38 +3,34 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { useAtomValue } from 'jotai';
-import { atom_status } from '@/atoms';
-
+import { useStatusStore } from '@/store';
 import Warn from '@/components/shared/Warn';
-
-import UserTabs from './UserTabs';
-import ChatLogs from './ChatLogs';
+import ItemTabs from '@/components/sections/ItemTabs';
+import Logs from '@/components/sections/Logs';
 
 export default function Page() {
-  const status = useAtomValue(atom_status);
+  const Status = useStatusStore((state) => state.status);
 
-  const [activeTab, setActiveTab] = useState('');
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
+  const [selectedItem, setSelectedItem] = useState('');
+  const handleTabClick = (item: string) => {
+    setSelectedItem(item);
   };
 
   return (
     <>
-      {status.running ? (
+      {Status === 'running' ? (
         <>
-          <UserTabs activeTab={activeTab} handleTabClick={handleTabClick} />
-          {activeTab !== '' ? (
-            <ChatLogs user={activeTab} />
+          <ItemTabs activeTab={selectedItem} handleTabClick={handleTabClick} />
+          {selectedItem !== '' ? (
+            <Logs item={selectedItem} />
           ) : (
-            <p className="text-center text-sm text-gray-300 xl:text-base">Select a user to view their chat logs.</p>
+            <p className="text-center text-sm text-txt-low xl:text-base">Please select an item to view.</p>
           )}
         </>
       ) : (
         <Warn>
           You need to start the application first in order to view the chat logs. Go to the{' '}
-          <Link href="/spy" className="text-white underline">
+          <Link href="/" className="text-txt-light underline">
             Spy tab
           </Link>
           .

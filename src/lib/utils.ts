@@ -6,6 +6,10 @@ export const getUniqueItems = (input: string[]) => {
   return Array.from(new Set(input));
 };
 
+export const isEmpty = (items: string[]) => {
+  return items.length === 0;
+};
+
 export const formatMilliseconds = (milliseconds: number) => {
   const remainder = milliseconds % (1000 * 60 * 60);
 

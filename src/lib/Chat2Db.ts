@@ -5,25 +5,26 @@ import HandleChat from '@/lib/HandleChat';
 import { ChatData } from '@/types';
 
 export default class Chat2Db extends HandleChat {
-  users: Set<string>;
+  private users: Set<string> | undefined;
 
   constructor(
     private db: IDBPDatabase,
-    users: string[],
+    users?: string[],
   ) {
     super();
-    this.users = new Set(users);
+    if (users) this.users = new Set(users);
   }
 
-  public async event({ uniqueId, user, channel, message, type }: ChatData): Promise<void> {
-    if (!this.users.has(user)) return;
+  public async event({ uniqueId, event, user, channel, info, message }: ChatData): Promise<void> {
+    if (this.users && !this.users.has(user)) return;
 
     this.db.add('logs', {
       uniqueId,
+      event,
       user,
       channel,
+      info,
       message,
-      type,
       date: new Date(),
     });
   }

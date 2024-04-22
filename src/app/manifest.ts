@@ -4,11 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'SpyWitch',
     short_name: 'SpyWitch',
-    description: "An open-source tool to track users' chat messages on Twitch.tv.",
+    description: 'An open-source live data tracker for Twitch.tv',
     start_url: '/',
     display: 'standalone',
-    background_color: '#141a1f',
-    theme_color: '#141a1f',
+    background_color: '#000000',
+    theme_color: '#0a0a0a',
     icons: [
       {
         src: '/icons/icon-96x96.png',

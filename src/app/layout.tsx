@@ -2,24 +2,21 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { Provider } from 'jotai';
-
-import Container from '@/components/layout/Container';
-
-import Header from '@/components/zone/Header';
-import Sidebar from '@/components/zone/Sidebar';
+import Header from '@/components/general/Header';
+import Sidebar from '@/components/general/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://spywitch.seabeya.com'),
   title: 'SpyWitch',
-  description: "An open-source tool to track users' chat messages on Twitch.tv.",
+  description: 'An open-source live data tracker for Twitch.tv',
   keywords: [
     'spywitch',
     'twitch',
     'chat',
     'messages',
+    'events',
     'track',
     'open-source',
     'tool',
@@ -31,7 +28,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: '/',
     title: 'SpyWitch',
-    description: "An open-source tool to track users' chat messages on Twitch.tv.",
+    description: 'An open-source live data tracker for Twitch.tv',
     siteName: 'SpyWitch',
     images: [
       {
@@ -49,20 +46,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-[100svh] bg-gradient-to-br from-c_body via-c_body to-c_body2`}>
+      <body className={`${inter.className} min-h-[100svh] bg-black`}>
         <Header />
-        <Provider>
-          <Container>
-            <main className="grid grid-cols-1 items-start gap-3 pb-16 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7 lg:pb-5">
-              <div className="sticky top-1 z-10 sm:static lg:col-start-1 lg:col-end-3">
-                <Sidebar />
-              </div>
-              <div className="flex flex-col gap-16 rounded-xl border border-c_border1 bg-c_main p-5 lg:col-start-3 lg:col-end-8">
-                {children}
-              </div>
-            </main>
-          </Container>
-        </Provider>
+        <main className="container grid grid-cols-1 items-start gap-3 pb-20 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7 lg:pb-5">
+          {/* Sidebar Area: */}
+          <div className="sticky top-1 z-10 sm:static lg:col-start-1 lg:col-end-3">
+            <Sidebar />
+          </div>
+          {/* Page Content Area: */}
+          <div className="lg:col-start-3 lg:col-end-8">
+            <div className="flex flex-col gap-16 overflow-hidden rounded-outher border border-brdr bg-neutral-950 p-5">
+              {children}
+            </div>
+            <p className="px-2 pt-1 text-right text-xs text-txt-lower">SpyWitch is not affiliated with Twitch.</p>
+          </div>
+        </main>
       </body>
     </html>
   );

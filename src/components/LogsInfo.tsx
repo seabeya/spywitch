@@ -1,8 +1,13 @@
-export default function LogsInfo({ label, data }: { label: string; data: string | number }) {
+type LogsInfoProps = {
+  title: string;
+  data: string | number;
+};
+
+export default function LogsInfo({ title, data }: LogsInfoProps) {
   return (
     <div>
-      <span className="mr-1 text-sm text-gray-400 xl:text-base">{label}:</span>
-      <span className="text-sm text-gray-300 xl:text-base">{data}</span>
+      <span className="mr-1 text-sm text-txt-lower xl:text-base">{title}:</span>
+      <span className="text-sm font-medium tabular-nums text-txt-low xl:text-base">{data}</span>
     </div>
   );
 }

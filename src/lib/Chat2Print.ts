@@ -7,22 +7,28 @@ import { ChatData, MessageData } from '@/types';
 export default class Chat2Log extends HandleChat {
   constructor(
     private writer: Dispatch<SetStateAction<MessageData[]>>,
-    private user: string,
+    private item: string,
+    private filterBy: 'user' | 'channel',
   ) {
     super();
   }
 
-  public event({ uniqueId, user, channel, message, type }: ChatData): void {
-    if (this.user !== user) return;
+  public event({ uniqueId, event, user, channel, info, message }: ChatData): void {
+    if (this.filterBy === 'user') {
+      if (this.item !== user) return;
+    } else {
+      if (this.item !== channel) return;
+    }
 
     this.writer((prev) => [
       ...prev,
       {
         uniqueId,
+        event,
         user,
         channel,
+        info,
         message,
-        type,
         date: new Date(),
       },
     ]);
