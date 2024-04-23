@@ -14,7 +14,7 @@ export default function Log({ data }: { data: MessageData }) {
   const Mode = useModeStore.getState().mode;
 
   return (
-    <div className="mb-1 inline-block w-full break-words border-l-2 border-brdr-light pl-2 text-xs hover:border-green-500 hover:bg-neutral-800 sm:text-sm xl:mb-2 xl:text-base">
+    <div className="mb-1 inline-block w-full break-words border-l-2 border-brdr-light pl-2 text-sm hover:border-green-500 hover:bg-neutral-800 xl:mb-2 xl:text-base">
       <div className="inline-flex gap-1 text-txt-lower">
         <span className="group">
           {time.substring(0, 5)}
