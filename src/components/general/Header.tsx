@@ -5,7 +5,7 @@ import IconGithub from '@/components/shared/Icons/IconGithub';
 
 export default function Header() {
   return (
-    <header className="border-b border-brdr bg-black sm:sticky sm:top-0 sm:z-20">
+    <header className="border-b border-brdr bg-black sm:sticky sm:top-0 sm:z-30">
       <div className="container flex h-full items-center justify-between px-2 py-1">
         <Logo />
         <GitHub />

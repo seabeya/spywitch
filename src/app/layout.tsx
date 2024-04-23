@@ -50,7 +50,7 @@ export default function RootLayout({
         <Header />
         <main className="container grid grid-cols-1 items-start gap-3 pb-20 pt-3 sm:gap-5 sm:pt-5 lg:grid-cols-7 lg:pb-5">
           {/* Sidebar Area: */}
-          <div className="sticky top-1 z-10 sm:static lg:col-start-1 lg:col-end-3">
+          <div className="sticky top-1 z-20 sm:static lg:col-start-1 lg:col-end-3">
             <Sidebar />
           </div>
           {/* Page Content Area: */}
