@@ -2,7 +2,7 @@ export type Mode = 'Users' | 'Events';
 
 export type Status = 'idle' | 'loading' | 'running';
 
-export type Event = 'chat' | 'sub' | 'resub' | 'cheer';
+export type Event = 'chat' | 'sub' | 'resub' | 'cheer' | 'subgift';
 
 export type ChatData = {
   uniqueId: string;

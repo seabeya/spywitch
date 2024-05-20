@@ -1,4 +1,4 @@
-import { ChatUserstate, SubMethods, SubUserstate } from 'tmi.js';
+import { ChatUserstate, SubMethods, SubMysteryGiftUserstate, SubUserstate } from 'tmi.js';
 
 import { ChatData } from '@/types';
 
@@ -59,6 +59,23 @@ export default abstract class HandleChat {
       channel: channel.substring(1),
       info: `Cheered (${userstate.bits || 'N/A'} bits)`,
       message: message,
+    });
+  }
+
+  public onSubgift(
+    channel: string,
+    username: string,
+    numbOfSubs: number,
+    _methods: SubMethods,
+    userstate: SubMysteryGiftUserstate,
+  ) {
+    this.event({
+      uniqueId: userstate.id as string,
+      event: 'subgift',
+      user: username,
+      channel: channel.substring(1),
+      info: `Subgifted (${numbOfSubs} subs)`,
+      message: null,
     });
   }
 }

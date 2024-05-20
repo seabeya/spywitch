@@ -67,6 +67,7 @@ export default function ModeUsers() {
       spy.tmiClient.on('subscription', handle.onSubscription.bind(handle));
       spy.tmiClient.on('resub', handle.onResub.bind(handle));
       spy.tmiClient.on('cheer', handle.onCheer.bind(handle));
+      spy.tmiClient.on('submysterygift', handle.onSubgift.bind(handle));
 
       spy.tmiClient.on('connected', () => {
         console.log('Connected.');
