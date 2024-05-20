@@ -93,9 +93,8 @@ export default function ModeEvents() {
   return (
     <>
       <Label htmlFor="events" title="Events" desc="the events you are going to track">
-        <p className="rounded bg-yellow-400 p-2 *:font-medium *:underline">
-          Currently, you can only track predefined events such as <span>subscriptions</span>,{' '}
-          <span>resubscriptions</span>, and <span>cheers</span>. More events and picking options will be available soon.
+        <p className="rounded bg-neutral-400 p-2 *:font-medium *:underline">
+          Currently available events: <span>Sub</span>, <span>Resub</span>, <span>Cheer</span>, <span>Subgift</span>.
         </p>
       </Label>
       <Label htmlFor="channels" title="Channels" desc="the channels where you want to track the events">
