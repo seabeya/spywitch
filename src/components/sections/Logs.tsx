@@ -45,11 +45,11 @@ export default function Logs({ item }: LogsProps) {
     Spy.tmiClient.on('resub', handleResub);
     Spy.tmiClient.on('cheer', handleCheer);
 
-    // 500ms delay before showing the data:
+    // 200ms delay before showing the data:
     setIsVisible(false);
     const timeoutId = setTimeout(() => {
       setIsVisible(true);
-    }, 500);
+    }, 200);
 
     return () => {
       Spy.tmiClient.removeListener('message', handleMessage);
