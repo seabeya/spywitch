@@ -84,7 +84,7 @@ export default function Logs({ item }: LogsProps) {
             <i></i>
             <i></i>
           </div>
-          <LogsInfo title="Target" data={item} />
+          <LogsInfo title="Target" data={item} clickable />
           <LogsInfo title="Count" data={messageData.length} />
         </div>
         <div className="relative rounded-b border border-brdr bg-neutral-900 p-1">
