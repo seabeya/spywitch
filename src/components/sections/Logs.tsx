@@ -38,6 +38,7 @@ export default function Logs({ item }: LogsProps) {
     const handleResub = handle.onResub.bind(handle);
     const handleCheer = handle.onCheer.bind(handle);
     const handleSubgift = handle.onSubgift.bind(handle);
+    const handleSubmysterygift = handle.onSubmysterygift.bind(handle);
 
     if (Spy.mode === 'Users') {
       Spy.tmiClient.on('message', handleMessage);
@@ -45,7 +46,8 @@ export default function Logs({ item }: LogsProps) {
     Spy.tmiClient.on('subscription', handleSubscription);
     Spy.tmiClient.on('resub', handleResub);
     Spy.tmiClient.on('cheer', handleCheer);
-    Spy.tmiClient.on('submysterygift', handleSubgift);
+    Spy.tmiClient.on('subgift', handleSubgift);
+    Spy.tmiClient.on('submysterygift', handleSubmysterygift);
 
     // 200ms delay before showing the data:
     setIsVisible(false);
@@ -58,7 +60,8 @@ export default function Logs({ item }: LogsProps) {
       Spy.tmiClient.removeListener('subscription', handleSubscription);
       Spy.tmiClient.removeListener('resub', handleResub);
       Spy.tmiClient.removeListener('cheer', handleCheer);
-      Spy.tmiClient.removeListener('submysterygift', handleSubgift);
+      Spy.tmiClient.removeListener('subgift', handleSubgift);
+      Spy.tmiClient.removeListener('submysterygift', handleSubmysterygift);
       setMessageData(() => []);
       clearTimeout(timeoutId);
     };
