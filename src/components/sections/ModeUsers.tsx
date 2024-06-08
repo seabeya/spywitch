@@ -9,6 +9,7 @@ import { useItemsStore, useSpyStore, useStatusStore } from '@/store';
 import { isEmpty } from '@/lib/utils';
 import Spy from '@/lib/Spy';
 import Chat2Db from '@/lib/Chat2Db';
+import { eventOptions } from '@/consts';
 
 export default function ModeUsers() {
   const Users = useItemsStore((state) => state.users);
@@ -63,16 +64,7 @@ export default function ModeUsers() {
       await spy.init(Channels);
 
       const handle = new Chat2Db(spy.idb, Users);
-      spy.tmiClient.on('message', handle.onMessage.bind(handle));
-      spy.tmiClient.on('subscription', handle.onSubscription.bind(handle));
-      spy.tmiClient.on('resub', handle.onResub.bind(handle));
-      spy.tmiClient.on('cheer', handle.onCheer.bind(handle));
-      spy.tmiClient.on('subgift', handle.onSubgift.bind(handle));
-      spy.tmiClient.on('submysterygift', handle.onSubmysterygift.bind(handle));
-
-      spy.tmiClient.on('connected', () => {
-        console.log('Connected.');
-      });
+      spy.setListeners(handle, eventOptions);
 
       await spy.start();
     } catch (_) {

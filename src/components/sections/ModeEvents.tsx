@@ -9,6 +9,7 @@ import { useItemsStore, useSpyStore, useStatusStore } from '@/store';
 import { isEmpty } from '@/lib/utils';
 import Spy from '@/lib/Spy';
 import Chat2Db from '@/lib/Chat2Db';
+import { Event } from '@/types';
 
 export default function ModeEvents() {
   const Channels = useItemsStore((state) => state.channels);
@@ -33,7 +34,9 @@ export default function ModeEvents() {
   //
   const startHandler = async () => {
     // Currently manually defining events:
-    useItemsStore.setState({ events: ['sub', 'resub', 'cheer', 'subgift'] });
+    const currEvents: Event[] = ['sub', 'resub', 'cheer', 'subgift'];
+
+    useItemsStore.setState({ events: currEvents });
 
     const channelsEmpty = isEmpty(Channels);
 
@@ -43,7 +46,6 @@ export default function ModeEvents() {
           channels: channelsEmpty,
         });
       }
-
       return;
     }
 
@@ -54,15 +56,7 @@ export default function ModeEvents() {
       await spy.init(Channels);
 
       const handle = new Chat2Db(spy.idb);
-      spy.tmiClient.on('subscription', handle.onSubscription.bind(handle));
-      spy.tmiClient.on('resub', handle.onResub.bind(handle));
-      spy.tmiClient.on('cheer', handle.onCheer.bind(handle));
-      spy.tmiClient.on('subgift', handle.onSubgift.bind(handle));
-      spy.tmiClient.on('submysterygift', handle.onSubmysterygift.bind(handle));
-
-      spy.tmiClient.on('connected', () => {
-        console.log('Connected.');
-      });
+      spy.setListeners(handle, currEvents);
 
       await spy.start();
     } catch (_) {
