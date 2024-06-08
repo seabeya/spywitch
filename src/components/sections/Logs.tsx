@@ -40,7 +40,7 @@ export default function Logs({ item }: LogsProps) {
     const handleSubgift = handle.onSubgift.bind(handle);
     const handleSubmysterygift = handle.onSubmysterygift.bind(handle);
 
-    if (Spy.mode === 'Users') {
+    if (Spy.mode === 'users') {
       Spy.tmiClient.on('message', handleMessage);
     }
     Spy.tmiClient.on('subscription', handleSubscription);

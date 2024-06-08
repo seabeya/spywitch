@@ -56,7 +56,7 @@ export default function ModeUsers() {
       return;
     }
 
-    const spy = new Spy('Users');
+    const spy = new Spy('users');
     try {
       useStatusStore.setState({ status: 'loading' });
 

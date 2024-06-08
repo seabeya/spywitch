@@ -9,8 +9,8 @@ export default function Command() {
   const Mode = useModeStore((state) => state.mode);
 
   const modeSections = {
-    Users: <ModeUsers />,
-    Events: <ModeEvents />,
+    users: <ModeUsers />,
+    events: <ModeEvents />,
   };
 
   return <SectionArea title="Command">{modeSections[Mode]}</SectionArea>;

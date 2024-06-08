@@ -47,7 +47,7 @@ export default function ModeEvents() {
       return;
     }
 
-    const spy = new Spy('Events');
+    const spy = new Spy('events');
     try {
       useStatusStore.setState({ status: 'loading' });
 

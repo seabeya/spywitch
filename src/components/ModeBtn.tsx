@@ -38,7 +38,7 @@ export default function ModeBtn({ label, desc }: ModeBtnProps) {
           '!text-txt-lower': Status !== 'idle' && isActive === false,
         })}
       >
-        {label}
+        {label[0].toUpperCase() + label.slice(1)}
       </span>
       <p
         className={clsx('text-xs text-txt-lower xl:text-sm', {

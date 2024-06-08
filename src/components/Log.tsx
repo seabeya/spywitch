@@ -20,7 +20,7 @@ export default function Log({ data }: { data: MessageData }) {
           {time.substring(0, 5)}
           <span className="hidden group-hover:inline-block">{time.substring(5, 8)}</span>
         </span>
-        {Mode === 'Users' ? (
+        {Mode === 'users' ? (
           <>
             <span className="font-bold text-purple-500">{channel}</span>
             <span>{'<--'}</span>

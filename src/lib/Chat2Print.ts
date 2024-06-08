@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction } from 'react';
 
 import HandleChat from '@/lib/HandleChat';
 
-import { ChatData, MessageData } from '@/types';
+import { ChatData, DBIndex, MessageData } from '@/types';
 
 export default class Chat2Log extends HandleChat {
   constructor(
     private writer: Dispatch<SetStateAction<MessageData[]>>,
     private item: string,
-    private filterBy: 'user' | 'channel',
+    private filterBy: DBIndex,
   ) {
     super();
   }

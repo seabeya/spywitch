@@ -14,7 +14,7 @@ export default function Statusbar() {
   let items2Count = 0;
 
   if (Status === 'running') {
-    items1Count = Mode === 'Users' ? useItemsStore.getState().users.length : useItemsStore.getState().events.length;
+    items1Count = Mode === 'users' ? useItemsStore.getState().users.length : useItemsStore.getState().events.length;
     items2Count = useItemsStore.getState().channels.length;
   }
 

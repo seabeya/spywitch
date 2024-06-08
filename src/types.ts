@@ -1,8 +1,12 @@
-export type Mode = 'Users' | 'Events';
+import { eventOptions, dbIndex, modeOptions, statusOptions } from '@/consts';
 
-export type Status = 'idle' | 'loading' | 'running';
+export type Mode = (typeof modeOptions)[number];
 
-export type Event = 'chat' | 'sub' | 'resub' | 'cheer' | 'subgift';
+export type Status = (typeof statusOptions)[number];
+
+export type Event = (typeof eventOptions)[number];
+
+export type DBIndex = (typeof dbIndex)[keyof typeof dbIndex];
 
 export type ChatData = {
   uniqueId: string;

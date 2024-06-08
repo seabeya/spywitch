@@ -1,19 +1,18 @@
 import tmi from 'tmi.js';
 import { deleteDB, openDB, IDBPDatabase } from 'idb';
 
-import { Mode } from '@/types';
+import { DBIndex, Mode } from '@/types';
+import { dbPrefix, dbIndex } from '@/consts';
 
 export default class Spy {
   public tmiClient = {} as tmi.Client;
   public idb = {} as IDBPDatabase;
-  public idbIndex: 'user' | 'channel';
+  public idbIndex: DBIndex;
+
+  // Setup:
 
   constructor(public mode: Mode) {
-    if (mode === 'Users') {
-      this.idbIndex = 'user';
-    } else {
-      this.idbIndex = 'channel';
-    }
+    this.idbIndex = dbIndex[mode];
   }
 
   private initTmi(channels: string[]) {
@@ -28,7 +27,7 @@ export default class Spy {
   }
 
   private async initIdb() {
-    const dbName = `spywitch${this.mode}`;
+    const dbName = `${dbPrefix}${this.mode}`;
 
     await deleteDB(dbName);
 
@@ -43,6 +42,8 @@ export default class Spy {
     });
   }
 
+  // Actions:
+
   public async init(channels: string[]) {
     this.initTmi(channels);
     await this.initIdb();
@@ -55,6 +56,6 @@ export default class Spy {
   public async stop() {
     await this.tmiClient.disconnect();
     this.idb.close();
-    await deleteDB(`spywitch${this.mode}`);
+    await deleteDB(`${dbPrefix}${this.mode}`);
   }
 }
