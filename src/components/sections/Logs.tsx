@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import clsx from 'clsx';
 
-import { useSpyStore } from '@/store';
+import { useItemsStore, useSpyStore } from '@/store';
 import { MessageData } from '@/types';
+import { eventOptions } from '@/consts';
 import Chat2Print from '@/lib/Chat2Print';
 import SectionArea from '@/components/shared/SectionArea';
 import LogsInfo from '@/components/LogsInfo';
 import Log from '@/components/Log';
 
 type LogsProps = {
-  item: string;
+  target: string;
 };
 
-export default function Logs({ item }: LogsProps) {
+export default function Logs({ target }: LogsProps) {
   const Spy = useSpyStore.getState().spy;
+  const Events = Spy.mode === 'users' ? eventOptions : useItemsStore.getState().events;
 
   const [messageData, setMessageData] = useState<MessageData[]>([]);
 
@@ -24,30 +26,16 @@ export default function Logs({ item }: LogsProps) {
     // Get existing data from indexedDB:
     (async () => {
       try {
-        setMessageData(await Spy.idb.getAllFromIndex('logs', Spy.idbIndex, item));
+        setMessageData(await Spy.idb.getAllFromIndex('logs', Spy.idbIndex, target));
       } catch (_) {
         console.log('Something went wrong while fetching data from IndexedDB. Please refresh the page and try again.');
       }
     })();
 
     // Listening to new messages:
-    const handle = new Chat2Print(setMessageData, item, Spy.idbIndex);
+    const handle = new Chat2Print(setMessageData, target, Spy.idbIndex);
 
-    const handleMessage = handle.onMessage.bind(handle);
-    const handleSubscription = handle.onSubscription.bind(handle);
-    const handleResub = handle.onResub.bind(handle);
-    const handleCheer = handle.onCheer.bind(handle);
-    const handleSubgift = handle.onSubgift.bind(handle);
-    const handleSubmysterygift = handle.onSubmysterygift.bind(handle);
-
-    if (Spy.mode === 'users') {
-      Spy.tmiClient.on('message', handleMessage);
-    }
-    Spy.tmiClient.on('subscription', handleSubscription);
-    Spy.tmiClient.on('resub', handleResub);
-    Spy.tmiClient.on('cheer', handleCheer);
-    Spy.tmiClient.on('subgift', handleSubgift);
-    Spy.tmiClient.on('submysterygift', handleSubmysterygift);
+    const eventHandlerMap = Spy.setListeners(handle, Events);
 
     // 200ms delay before showing the data:
     setIsVisible(false);
@@ -56,18 +44,13 @@ export default function Logs({ item }: LogsProps) {
     }, 200);
 
     return () => {
-      Spy.tmiClient.removeListener('message', handleMessage);
-      Spy.tmiClient.removeListener('subscription', handleSubscription);
-      Spy.tmiClient.removeListener('resub', handleResub);
-      Spy.tmiClient.removeListener('cheer', handleCheer);
-      Spy.tmiClient.removeListener('subgift', handleSubgift);
-      Spy.tmiClient.removeListener('submysterygift', handleSubmysterygift);
+      Spy.unsetListeners(eventHandlerMap);
       setMessageData(() => []);
       clearTimeout(timeoutId);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [item]);
+  }, [target]);
 
   return (
     <SectionArea title="Chat Logs">
@@ -84,7 +67,7 @@ export default function Logs({ item }: LogsProps) {
             <i></i>
             <i></i>
           </div>
-          <LogsInfo title="Target" data={item} clickable />
+          <LogsInfo title="Target" data={target} clickable />
           <LogsInfo title="Count" data={messageData.length} />
         </div>
         <div className="relative rounded-b border border-brdr bg-neutral-900 p-1">

@@ -22,7 +22,7 @@ export default function Page() {
         <>
           <ItemTabs activeTab={selectedItem} handleTabClick={handleTabClick} />
           {selectedItem !== '' ? (
-            <Logs item={selectedItem} />
+            <Logs target={selectedItem} />
           ) : (
             <p className="text-center text-sm text-txt-low xl:text-base">Please select an item to view.</p>
           )}
