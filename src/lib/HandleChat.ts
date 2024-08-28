@@ -9,7 +9,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: tags['id'] as string,
       event: 'chat',
-      fromUser: tags['username'] as string,
+      fromUser: tags['username']?.toLowerCase() as string,
       channel: channel.substring(1),
       info: null,
       message,
@@ -26,7 +26,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'sub',
-      fromUser: username,
+      fromUser: username.toLowerCase(),
       channel: channel.substring(1),
       info: 'Subscribed',
       message: null,
@@ -44,7 +44,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'resub',
-      fromUser: username,
+      fromUser: username.toLowerCase(),
       channel: channel.substring(1),
       info: `Resubscribed (${userstate['msg-param-cumulative-months'] || 'N/A'} months)`,
       message: message,
@@ -55,7 +55,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'cheer',
-      fromUser: userstate.username as string,
+      fromUser: userstate.username?.toLowerCase() as string,
       channel: channel.substring(1),
       info: `Cheered (${userstate.bits || 'N/A'} bits)`,
       message: message,
@@ -73,7 +73,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'subgift',
-      fromUser: username,
+      fromUser: username.toLowerCase(),
       channel: channel.substring(1),
       info: `Subgifted (to ${recipient})`,
       message: null,
@@ -90,7 +90,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'subgift',
-      fromUser: username,
+      fromUser: username.toLowerCase(),
       channel: channel.substring(1),
       info: `Subgifted (${numbOfSubs} subs)`,
       message: null,
