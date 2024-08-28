@@ -13,9 +13,9 @@ export default class Chat2Log extends HandleChat {
     super();
   }
 
-  public event({ uniqueId, event, user, channel, info, message }: ChatData): void {
-    if (this.filterBy === 'user') {
-      if (this.item !== user) return;
+  public event({ uniqueId, event, fromUser, channel, info, message }: ChatData): void {
+    if (this.filterBy === 'fromUser') {
+      if (this.item !== fromUser) return;
     } else {
       if (this.item !== channel) return;
     }
@@ -25,7 +25,7 @@ export default class Chat2Log extends HandleChat {
       {
         uniqueId,
         event,
-        user,
+        fromUser,
         channel,
         info,
         message,

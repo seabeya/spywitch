@@ -3,13 +3,13 @@ import { ChatUserstate, SubGiftUserstate, SubMethods, SubMysteryGiftUserstate, S
 import { ChatData } from '@/types';
 
 export default abstract class HandleChat {
-  abstract event({ uniqueId, event, user, channel, info, message }: ChatData): void;
+  abstract event({ uniqueId, event, fromUser, channel, info, message }: ChatData): void;
 
   public onMessage(channel: string, tags: ChatUserstate, message: string) {
     this.event({
       uniqueId: tags['id'] as string,
       event: 'chat',
-      user: tags['username'] as string,
+      fromUser: tags['username'] as string,
       channel: channel.substring(1),
       info: null,
       message,
@@ -26,7 +26,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'sub',
-      user: username,
+      fromUser: username,
       channel: channel.substring(1),
       info: 'Subscribed',
       message: null,
@@ -44,7 +44,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'resub',
-      user: username,
+      fromUser: username,
       channel: channel.substring(1),
       info: `Resubscribed (${userstate['msg-param-cumulative-months'] || 'N/A'} months)`,
       message: message,
@@ -55,7 +55,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'cheer',
-      user: userstate.username as string,
+      fromUser: userstate.username as string,
       channel: channel.substring(1),
       info: `Cheered (${userstate.bits || 'N/A'} bits)`,
       message: message,
@@ -73,7 +73,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'subgift',
-      user: username,
+      fromUser: username,
       channel: channel.substring(1),
       info: `Subgifted (to ${recipient})`,
       message: null,
@@ -90,7 +90,7 @@ export default abstract class HandleChat {
     this.event({
       uniqueId: userstate.id as string,
       event: 'subgift',
-      user: username,
+      fromUser: username,
       channel: channel.substring(1),
       info: `Subgifted (${numbOfSubs} subs)`,
       message: null,

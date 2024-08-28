@@ -12,6 +12,6 @@ export const statusOptions = ['idle', 'loading', 'running'] as const;
 export const eventOptions = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
 
 export const dbIndex = {
-  users: 'user',
+  users: 'fromUser',
   events: 'channel',
 } as const;

@@ -2,7 +2,7 @@ import { useModeStore } from '@/store';
 import { MessageData } from '@/types';
 
 export default function Log({ data }: { data: MessageData }) {
-  const { date, event, user, channel, info, message } = data;
+  const { date, event, fromUser, channel, info, message } = data;
 
   const time = new Date(date).toLocaleTimeString([], {
     hour12: false,
@@ -27,7 +27,7 @@ export default function Log({ data }: { data: MessageData }) {
           </>
         ) : (
           <span className="font-bold text-purple-500">
-            {user}
+            {fromUser}
             <span className="font-normal text-txt-lower">:</span>
           </span>
         )}

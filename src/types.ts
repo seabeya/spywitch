@@ -11,7 +11,7 @@ export type DBIndex = (typeof dbIndex)[keyof typeof dbIndex];
 export type ChatData = {
   uniqueId: string;
   event: Event;
-  user: string;
+  fromUser: string;
   channel: string;
   info: string | null;
   message: string | null;
