@@ -4,6 +4,7 @@ import Label from '@/components/shared/Label';
 import InputBox from '@/components/InputBox';
 import ControlBtn from '@/components/ControlBtn';
 import InputError from '@/components/InputError';
+import RunningAppNavigateInfo from '@/components/RunningAppNavigateInfo';
 
 import { useItemsStore, useSpyStore, useStatusStore } from '@/store';
 import { isEmpty } from '@/lib/utils';
@@ -116,6 +117,7 @@ export default function ModeUsers() {
           <ControlBtn variant="stop" isDisabled={isDisabled} onClick={stopHandler} />
         )}
       </div>
+      {Status === 'running' && <RunningAppNavigateInfo />}
     </>
   );
 }
