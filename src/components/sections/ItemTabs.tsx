@@ -1,7 +1,6 @@
 import { useItemsStore, useModeStore } from '@/store';
 import SectionArea from '@/components/shared/SectionArea';
 import ItemTab from '@/components/ItemTab';
-import { dbIndex } from '@/consts';
 
 type ItemTabsProps = {
   activeTab: string;
@@ -11,14 +10,15 @@ type ItemTabsProps = {
 export default function ItemTabs({ activeTab, handleTabClick }: ItemTabsProps) {
   const Mode = useModeStore.getState().mode;
 
-  const sectionTitle = `${dbIndex[Mode][0].toUpperCase() + dbIndex[Mode].slice(1)}s`;
-
+  let sectionTitle = '';
   let items: string[] = [];
 
   if (Mode === 'users') {
     items = useItemsStore.getState().users;
+    sectionTitle = 'Users';
   } else if (Mode === 'events') {
     items = useItemsStore.getState().channels;
+    sectionTitle = 'Channels';
   }
 
   return (
