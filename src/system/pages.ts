@@ -1,7 +1,7 @@
 const SYS_PAGES = {
-  control: {
-    name: 'control',
-    label: 'Control',
+  spy: {
+    name: 'spy',
+    label: 'Spy',
     path: '/',
   },
   logs: {
@@ -12,7 +12,7 @@ const SYS_PAGES = {
 } as const;
 
 const SYS_PAGE_GROUPS = {
-  side_nav: [SYS_PAGES.control, SYS_PAGES.logs],
+  side_nav: [SYS_PAGES.spy, SYS_PAGES.logs],
 };
 
 export { SYS_PAGES, SYS_PAGE_GROUPS };
