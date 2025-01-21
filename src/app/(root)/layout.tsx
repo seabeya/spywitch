@@ -1,3 +1,4 @@
+import AuthorInfo from '@/components/author-info';
 import GitHubBtn from '@/components/github-btn';
 import Logo from '@/components/logo';
 import Navbar from '@/features/navigation/navbar';
@@ -16,6 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex w-full max-w-80 flex-col gap-s-gap">
           <Statusbar />
           <Navbar />
+          <AuthorInfo />
         </div>
         <main className="flex-1 rounded-lg border border-c-line bg-c-fg p-s-gap">{children}</main>
       </div>

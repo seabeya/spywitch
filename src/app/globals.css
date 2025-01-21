@@ -26,5 +26,6 @@
 body {
   color: red;
   background: hsl(var(--c-bg));
+  text-underline-offset: 2px;
   font-family: Arial, Helvetica, sans-serif;
 }
