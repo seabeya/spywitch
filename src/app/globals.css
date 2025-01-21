@@ -2,7 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --c-bg: 0 0% 0%; /* black */
+    --c-fg: 0 0% 9%; /* neutral-900 */
+
+    --c-primary: 272 72% 47%; /* purple-700 */
+    --c-primary-text: 220 14% 96%; /* gray-100 */
+
+    --c-secondary: 0 0% 15%; /* neutral-800 */
+    --c-secondary-text: 0 0% 83%; /* neutral-300 */
+    --c-secondary-fg: 0 0% 20%; /* neutral-750 */
+
+    --c-line: 0 0% 20%; /* neutral-750 */
+    --c-line-low: 0 0% 15%; /* neutral-800 */
+  }
+}
+
 body {
   color: red;
+  background: hsl(var(--c-bg));
   font-family: Arial, Helvetica, sans-serif;
 }

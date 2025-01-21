@@ -9,8 +9,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        'c-bg': 'hsl(var(--c-bg))',
+        'c-fg': 'hsl(var(--c-fg))',
+        'c-primary': {
+          DEFAULT: 'hsl(var(--c-primary))',
+          text: 'hsl(var(--c-primary-text))',
+        },
+        'c-secondary': {
+          DEFAULT: 'hsl(var(--c-secondary))',
+          text: 'hsl(var(--c-secondary-text))',
+          fg: 'hsl(var(--c-secondary-fg))',
+        },
+        'c-line': {
+          DEFAULT: 'hsl(var(--c-line))',
+          low: 'hsl(var(--c-line-low))',
+        },
       },
     },
   },
