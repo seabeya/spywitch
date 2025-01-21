@@ -2,14 +2,16 @@ import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import Link from 'next/link';
 
-const variants = cva('whitespace-nowrap flex items-center justify-center rounded-sm text-sm shrink-0', {
+const variants = cva('whitespace-nowrap flex items-center justify-center rounded-md text-sm shrink-0', {
   variants: {
     variant: {
       outline: 'text-c-secondary-text',
       ghost: 'text-c-secondary-text',
+      secondary: 'text-c-secondary-text bg-c-secondary',
     },
     size: {
-      header: 'h-8 px-s-gap ',
+      header: 'h-8 px-s-gap',
+      side: 'h-10 px-s-gap',
     },
     border: {
       low: 'border',
@@ -19,12 +21,12 @@ const variants = cva('whitespace-nowrap flex items-center justify-center rounded
   compoundVariants: [
     // border: outline, ghost
     {
-      variant: 'outline',
+      variant: ['outline', 'secondary'],
       border: 'low',
       class: 'border-c-line-low hover:border-c-line',
     },
     {
-      variant: 'outline',
+      variant: ['outline', 'secondary'],
       border: 'mid',
       class: 'border-c-line hover:border-c-line-high',
     },

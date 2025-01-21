@@ -1,5 +1,7 @@
 import GitHubBtn from '@/components/github-btn';
 import Logo from '@/components/logo';
+import Navbar from '@/features/navigation/navbar';
+import Statusbar from '@/features/status/statusbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -10,7 +12,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <GitHubBtn />
         </div>
       </header>
-      <main>{children}</main>
+      <div className="container mx-auto flex gap-s-gap p-s-gap">
+        <div className="flex w-full max-w-80 flex-col gap-s-gap">
+          <Statusbar />
+          <Navbar />
+        </div>
+        <main className="flex-1 rounded-lg border border-c-line bg-c-fg p-s-gap">{children}</main>
+      </div>
     </>
   );
 }
