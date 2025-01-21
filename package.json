@@ -4,7 +4,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write .",
+    "prettier:report": "prettier --check ."
   },
   "dependencies": {
     "next": "15.1.5",
