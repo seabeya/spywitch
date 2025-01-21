@@ -23,7 +23,19 @@ export default {
         'c-line': {
           DEFAULT: 'hsl(var(--c-line))',
           low: 'hsl(var(--c-line-low))',
+          high: 'hsl(var(--c-line-high))',
         },
+      },
+      spacing: {
+        's-gap': 'var(--s-gap)',
+      },
+    },
+    container: {
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
       },
     },
   },

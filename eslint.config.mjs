@@ -13,7 +13,7 @@ const eslintConfig = [
       'boundaries/elements': [
         {
           type: 'shared',
-          pattern: ['src/lib/**/*'],
+          pattern: ['src/components/**/*', 'src/lib/**/*', 'src/system/**/*'],
           mode: 'full',
         },
         {

@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --s-gap: 0.75rem;
+
+    /* Colors: */
     --c-bg: 0 0% 0%; /* black */
     --c-fg: 0 0% 9%; /* neutral-900 */
 
@@ -15,6 +18,7 @@
     --c-secondary-fg: 0 0% 20%; /* neutral-750 */
 
     --c-line: 0 0% 20%; /* neutral-750 */
+    --c-line-high: 0 0% 25%; /* neutral-700 */
     --c-line-low: 0 0% 15%; /* neutral-800 */
   }
 }
