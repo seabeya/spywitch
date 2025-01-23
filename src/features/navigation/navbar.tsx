@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <nav className="hidden flex-col gap-s-gap rounded-lg border border-c-line bg-c-fg p-s-gap lg:flex">
-      {SYS_PAGE_GROUPS.side_nav.map((page) => {
+      {SYS_PAGE_GROUPS.navbar.map((page) => {
         return (
           <Button.Link
             key={page.name}

@@ -12,7 +12,7 @@ const SYS_PAGES = {
 } as const;
 
 const SYS_PAGE_GROUPS = {
-  side_nav: [SYS_PAGES.spy, SYS_PAGES.logs],
+  navbar: [SYS_PAGES.spy, SYS_PAGES.logs],
 };
 
 export { SYS_PAGES, SYS_PAGE_GROUPS };

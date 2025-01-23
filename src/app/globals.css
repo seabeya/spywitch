@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --s-gap: 0.75rem;
+    --s-nav-height: 3rem;
 
     /* Colors: */
     --c-bg: 0 0% 0%; /* black */

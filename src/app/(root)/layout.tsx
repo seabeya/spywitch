@@ -1,6 +1,7 @@
 import AuthorInfo from '@/components/author-info';
 import GitHubBtn from '@/components/github-btn';
 import Logo from '@/components/logo';
+import MobileNavbar from '@/features/navigation/mobile-navbar';
 import Navbar from '@/features/navigation/navbar';
 import Statusbar from '@/features/status/statusbar';
 
@@ -13,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <GitHubBtn />
         </div>
       </header>
-      <div className="container mx-auto flex flex-col gap-s-gap p-s-gap lg:flex-row">
+      <div className="container mx-auto mb-s-nav-height flex flex-col gap-s-gap p-s-gap lg:flex-row">
         <div className="sticky top-1 flex w-full flex-col gap-s-gap sm:static lg:max-w-72 xl:max-w-80">
           <Statusbar />
           <Navbar />
@@ -21,6 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <main className="flex-1 rounded-lg border border-c-line bg-c-fg p-s-gap">{children}</main>
       </div>
+      <MobileNavbar />
     </>
   );
 }

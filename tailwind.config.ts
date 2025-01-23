@@ -29,6 +29,7 @@ export default {
       },
       spacing: {
         's-gap': 'var(--s-gap)',
+        's-nav-height': 'var(--s-nav-height)',
       },
     },
     container: {
