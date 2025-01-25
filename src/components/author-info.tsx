@@ -1,6 +1,6 @@
 function AuthorInfo() {
   return (
-    <div className="hidden flex-col gap-1 text-center text-xs text-c-secondary-text/75 lg:flex lg:px-5 xl:px-0">
+    <div className="hidden flex-col gap-1 text-balance text-center text-xs text-c-secondary-text/75 lg:flex">
       <p>
         {'If you liked the project, you can show your support by giving a '}
         <a href="https://github.com/seabeya/spywitch" target="_blank" className="underline hover:text-c-primary-text">
