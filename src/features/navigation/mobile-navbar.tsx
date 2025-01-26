@@ -26,9 +26,9 @@ function MobileNavbar() {
 
   return (
     <nav className="fixed bottom-0 grid h-s-nav-height w-full auto-cols-fr grid-flow-col border-t border-c-line bg-c-fg/75 backdrop-blur-sm lg:hidden">
-      {SYS_PAGE_GROUPS.navbar.map((page) => {
+      {SYS_PAGE_GROUPS.navbar.map((page, i) => {
         return (
-          <Button.Link key={page.name} href={page.path} variant={'ghost'} className="flex-col rounded-none">
+          <Button.Link key={i} href={page.path} variant={'ghost'} className="flex-col rounded-none">
             {pathname === page.path ? pageIcons[page.name].active : pageIcons[page.name].default}
             <span>{page.label}</span>
           </Button.Link>
