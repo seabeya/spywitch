@@ -1,6 +1,14 @@
 import { create } from 'zustand';
-import { ModeName } from './spy';
+import { FieldName, ModeName } from './spy';
 
 const useModeStore = create<ModeName>()(() => 'users');
 
-export { useModeStore };
+type useInput = Record<FieldName, string[]>;
+
+const useInputStore = create<useInput>()(() => ({
+  users: [],
+  events: [],
+  channels: [],
+}));
+
+export { useModeStore, useInputStore };

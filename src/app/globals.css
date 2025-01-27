@@ -31,3 +31,8 @@ body {
   overflow-y: scroll;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #636363 #2b2b2b;
+}
