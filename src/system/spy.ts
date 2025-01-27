@@ -15,4 +15,6 @@ const MODES = [
   },
 ] as const satisfies Modes;
 
-export { MODES };
+type ModeName = (typeof MODES)[number]['name'];
+
+export { MODES, type ModeName };

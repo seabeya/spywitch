@@ -2,16 +2,14 @@
 
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
-import { MODES } from '@/system/spy';
-import { useState } from 'react';
-
-type ModeName = (typeof MODES)[number]['name'];
+import { ModeName, MODES } from '@/system/spy';
+import { useModeStore } from '@/system/store';
 
 function Modes() {
-  const [currentMode, setCurrentMode] = useState<ModeName>('users');
+  const currentMode = useModeStore();
 
   const handleModeChange = (mode: ModeName) => {
-    setCurrentMode(mode);
+    useModeStore.setState(mode);
   };
 
   return (
