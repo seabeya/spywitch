@@ -1,4 +1,4 @@
-import { SYS_EVENTS } from '@/system/consts';
+import { EVENTS } from '@/system/consts';
 import { z } from 'zod';
 
 const username = z
@@ -9,9 +9,9 @@ const username = z
   .max(25, 'Must be at most 25 characters long.')
   .toLowerCase();
 
-const events = z.enum(SYS_EVENTS, {
+const events = z.enum(EVENTS, {
   invalid_type_error: 'Invalid event type',
-  message: `Must be one of: ${SYS_EVENTS.join(', ')}.`,
+  message: `Must be one of: ${EVENTS.join(', ')}.`,
 });
 
 const inputDefinitions = {

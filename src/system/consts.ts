@@ -1,3 +1,3 @@
-const SYS_EVENTS = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
+const EVENTS = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
 
-export { SYS_EVENTS };
+export { EVENTS };
