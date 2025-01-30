@@ -1,7 +1,6 @@
 import { cn, isUnique } from '@/lib/utils';
 import { FieldName, FieldType } from '@/system/spy';
 import { useInputStore } from '@/system/store';
-import IconRemove from '@/components/icons/remove';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 
@@ -9,19 +8,13 @@ interface InputProps {
   name: FieldName;
   type: FieldType;
   placeholder: string;
+  children: React.ReactNode;
 }
 
-function Input({ name, type, placeholder }: InputProps) {
+function Input({ name, type, placeholder, children }: InputProps) {
   const [error, setError] = useState('');
 
   const data = useInputStore((state) => state[name]);
-
-  const handleRemove = (removeItem: string) => {
-    const newData = data.filter((item) => item !== removeItem);
-    useInputStore.setState(() => ({
-      [name]: newData,
-    }));
-  };
 
   const handleNewItem = (inputValue: string) => {
     const result = inputDefinitions[name].safeParse(inputValue);
@@ -45,25 +38,8 @@ function Input({ name, type, placeholder }: InputProps) {
   return (
     <>
       <ul className="custom-scrollbar flex max-h-28 min-h-9 flex-wrap items-center gap-1 overflow-y-auto border border-c-line p-1 text-sm focus-within:border-c-line-high">
-        {data.map((value) => {
-          return (
-            <li
-              key={value}
-              className="flex items-center gap-1 border border-c-line bg-c-secondary px-1 text-c-secondary-text"
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <span>{value}</span>
-              <IconRemove className="size-4 shrink-0 hover:bg-c-secondary-fg" onClick={() => handleRemove(value)} />
-            </li>
-          );
-        })}
-        <li
-          className={cn('w-32', {
-            'w-full px-1': data.length === 0,
-          })}
-        >
+        {children}
+        <li className={cn('w-32', { 'w-full px-1': data.length === 0 })}>
           <input
             type="text"
             enterKeyHint="enter"
