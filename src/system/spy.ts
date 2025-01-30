@@ -7,7 +7,7 @@ const fields = {
   },
   events: {
     name: 'events',
-    type: 'pick',
+    type: 'select',
     hint: 'The events you want to track',
     placeholder: 'Pick events from the list above',
   },

@@ -3,6 +3,7 @@ import { FieldName, FieldType } from '@/system/spy';
 import { useInputStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
+import { EVENTS } from '@/system/consts';
 
 interface InputProps {
   name: FieldName;
@@ -37,7 +38,32 @@ function Input({ name, type, placeholder, children }: InputProps) {
 
   return (
     <>
-      <ul className="custom-scrollbar flex max-h-28 min-h-9 flex-wrap items-center gap-1 overflow-y-auto border border-c-line p-1 text-sm focus-within:border-c-line-high">
+      {type === 'select' && (
+        <ul className="flex flex-wrap justify-center gap-1 pb-1">
+          {EVENTS.map((event) => {
+            const isDisabled = data.includes(event);
+            return (
+              <li
+                key={event}
+                className={cn(
+                  'rounded-md border border-c-line bg-c-secondary px-s-gap py-1 text-sm text-c-secondary-text',
+                  {
+                    'cursor-pointer hover:border-c-line-high': !isDisabled,
+                    'border-c-line-low bg-c-secondary/25 text-c-secondary-text/75': isDisabled,
+                  },
+                )}
+                onClick={() => {
+                  if (isDisabled) return;
+                  handleNewItem(event);
+                }}
+              >
+                {event}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <ul className="custom-scrollbar flex max-h-28 min-h-10 flex-wrap items-center gap-1 overflow-y-auto rounded-sm border border-c-line p-2 text-sm focus-within:border-c-line-high">
         {children}
         <li className={cn('w-32', { 'w-full px-1': data.length === 0 })}>
           <input
