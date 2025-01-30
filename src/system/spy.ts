@@ -27,18 +27,13 @@ type Modes = { name: string; description: string; fields: (typeof fields)[FieldN
 const MODES = [
   {
     name: 'users',
-    description: 'Monitor chat messages and events from selected users in selected channels',
+    description: 'Monitor all events from chosen users in selected channels',
     fields: [fields.users, fields.channels],
   },
   {
     name: 'events',
-    description: 'Monitor selected events in selected channels',
+    description: 'Monitor selected events from everyone in selected channels',
     fields: [fields.events, fields.channels],
-  },
-  {
-    name: 'everything',
-    description: 'Monitor all chat messages and events in selected channels',
-    fields: [fields.channels],
   },
 ] as const satisfies Modes;
 
