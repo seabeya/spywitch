@@ -16,4 +16,11 @@ const useInputStore = create<Record<FieldName, string[]>>()(() => ({
 type Status = (typeof STATUS)[number];
 const useStatusStore = create<Status>()(() => 'idle');
 
-export { useModeStore, useInputStore, useStatusStore };
+// Spying State
+const useSpyStore = create<'on' | 'off'>()(() => 'off');
+
+useStatusStore.subscribe((state) => {
+  useSpyStore.setState(state === 'idle' ? 'off' : 'on');
+});
+
+export { useModeStore, useInputStore, useStatusStore, useSpyStore };

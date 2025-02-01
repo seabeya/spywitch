@@ -3,12 +3,17 @@
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
 import { ModeName, MODES } from '@/system/spy';
-import { useModeStore } from '@/system/store';
+import { useModeStore, useSpyStore } from '@/system/store';
 
 function Modes() {
+  const spyState = useSpyStore();
+  const isActive = spyState === 'on';
+
   const currentMode = useModeStore();
 
   const handleModeChange = (mode: ModeName) => {
+    if (isActive) return;
+
     useModeStore.setState(mode);
   };
 
@@ -22,6 +27,7 @@ function Modes() {
             border={'mid'}
             className={cn('flex-col items-start justify-start gap-1 p-s-gap', {
               'border-c-line-high bg-c-secondary-fg': currentMode === mode.name,
+              'pointer-events-none': isActive,
             })}
             onClick={() => handleModeChange(mode.name)}
           >

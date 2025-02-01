@@ -1,15 +1,21 @@
 import IconRemove from '@/components/icons/remove';
+import { cn } from '@/lib/utils';
 import { FieldName } from '@/system/spy';
-import { useInputStore } from '@/system/store';
+import { useInputStore, useSpyStore } from '@/system/store';
 
 interface InputItemsProps {
   name: FieldName;
 }
 
 function InputItems({ name }: InputItemsProps) {
+  const spyState = useSpyStore();
+  const isActive = spyState === 'on';
+
   const data = useInputStore((state) => state[name]);
 
   const handleRemove = (removeItem: string) => {
+    if (isActive) return;
+
     const newData = data.filter((item) => item !== removeItem);
     useInputStore.setState(() => ({
       [name]: newData,
@@ -27,7 +33,9 @@ function InputItems({ name }: InputItemsProps) {
       >
         <span>{value}</span>
         <IconRemove
-          className="size-4 shrink-0 cursor-pointer hover:bg-c-secondary-fg"
+          className={cn('size-4 shrink-0 cursor-pointer text-c-secondary-text/75 hover:bg-c-secondary-fg', {
+            'pointer-events-none text-c-secondary-text/55': isActive,
+          })}
           onClick={() => handleRemove(value)}
         />
       </li>

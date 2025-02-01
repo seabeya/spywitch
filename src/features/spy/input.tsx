@@ -1,6 +1,6 @@
 import { cn, isUnique } from '@/lib/utils';
 import { FieldName, FieldType } from '@/system/spy';
-import { useInputStore } from '@/system/store';
+import { useInputStore, useSpyStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { EVENTS } from '@/system/consts';
@@ -15,9 +15,14 @@ interface InputProps {
 function Input({ name, type, placeholder, children }: InputProps) {
   const [error, setError] = useState('');
 
+  const spyState = useSpyStore();
+  const isActive = spyState === 'on';
+
   const data = useInputStore((state) => state[name]);
 
   const handleNewItem = (inputValue: string) => {
+    if (isActive) return;
+
     const result = inputDefinitions[name].safeParse(inputValue);
 
     if (!result.success) {
@@ -41,15 +46,14 @@ function Input({ name, type, placeholder, children }: InputProps) {
       {type === 'select' && (
         <ul className="flex flex-wrap justify-center gap-1 pb-1">
           {EVENTS.map((event) => {
-            const isDisabled = data.includes(event);
+            const isDisabled = data.includes(event) || isActive;
             return (
               <li
                 key={event}
                 className={cn(
-                  'rounded-md border border-c-line bg-c-secondary px-s-gap py-1 text-sm text-c-secondary-text',
+                  'cursor-pointer rounded-md border border-c-line bg-c-secondary px-s-gap py-1 text-sm text-c-secondary-text hover:border-c-line-high',
                   {
-                    'cursor-pointer hover:border-c-line-high': !isDisabled,
-                    'border-c-line-low bg-c-secondary/25 text-c-secondary-text/75': isDisabled,
+                    'pointer-events-none border-c-line-low bg-c-secondary/25 text-c-secondary-text/75': isDisabled,
                   },
                 )}
                 onClick={() => {
@@ -71,7 +75,7 @@ function Input({ name, type, placeholder, children }: InputProps) {
             enterKeyHint="enter"
             className="w-full bg-transparent text-c-secondary-text outline-none placeholder:text-c-secondary-text/75"
             placeholder={data.length === 0 ? placeholder : ''}
-            disabled={type !== 'input'}
+            disabled={type !== 'input' || isActive}
             onKeyDown={(event) => {
               if (event.key === ' ' || event.key === 'Enter') {
                 event.preventDefault();
