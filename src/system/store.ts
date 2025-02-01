@@ -1,14 +1,19 @@
 import { create } from 'zustand';
 import { FieldName, ModeName } from './spy';
+import { STATUS } from './consts';
 
+// Mode
 const useModeStore = create<ModeName>()(() => 'users');
 
-type useInput = Record<FieldName, string[]>;
-
-const useInputStore = create<useInput>()(() => ({
+// Inputs
+const useInputStore = create<Record<FieldName, string[]>>()(() => ({
   users: [],
   events: [],
   channels: [],
 }));
 
-export { useModeStore, useInputStore };
+// Status
+type Status = (typeof STATUS)[number];
+const useStatusStore = create<Status>()(() => 'idle');
+
+export { useModeStore, useInputStore, useStatusStore };
