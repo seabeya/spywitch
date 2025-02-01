@@ -26,7 +26,10 @@ function InputItems({ name }: InputItemsProps) {
         }}
       >
         <span>{value}</span>
-        <IconRemove className="size-4 shrink-0 hover:bg-c-secondary-fg" onClick={() => handleRemove(value)} />
+        <IconRemove
+          className="size-4 shrink-0 cursor-pointer hover:bg-c-secondary-fg"
+          onClick={() => handleRemove(value)}
+        />
       </li>
     );
   });
