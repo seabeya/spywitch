@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Navbar />
           <AuthorInfo />
         </div>
-        <main className="flex-1 rounded-lg border border-c-line bg-c-fg">{children}</main>
+        <main className="w-full flex-1 rounded-lg border border-c-line bg-c-fg">{children}</main>
       </div>
       <MobileNavbar />
     </>
