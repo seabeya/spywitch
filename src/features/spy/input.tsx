@@ -87,7 +87,7 @@ function Input({ name, type, placeholder, children }: InputProps) {
           />
         </li>
       </ul>
-      <div className="pl-1 text-xs text-red-500">{error}</div>
+      {error.length > 0 && <div className="pl-1 text-xs text-red-500">{error}.</div>}
     </>
   );
 }
