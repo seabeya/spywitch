@@ -33,6 +33,7 @@ function Input({ name, type, placeholder, children }: InputProps) {
     setError('');
 
     if (!isUnique(data, result.data)) {
+      setError('Must be unique');
       return;
     }
 
