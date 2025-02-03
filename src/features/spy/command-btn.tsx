@@ -1,15 +1,23 @@
-'use client';
-
 import Button from '@/components/blocks/button';
 import IconStart from '@/components/icons/start';
 import IconStop from '@/components/icons/stop';
-import { cn } from '@/lib/utils';
-import { useStatusStore } from '@/system/store';
+import { cn, isAnyEmptyField } from '@/lib/utils';
+import { useModeStore, useStatusStore } from '@/system/store';
+import { useState } from 'react';
 
 function CommandBtn() {
+  const [error, setError] = useState('');
+
   const currentStatus = useStatusStore();
 
   const handleClick = () => {
+    if (isAnyEmptyField(useModeStore.getState())) {
+      setError('Some fields are missing. Please fill them in and try again');
+      return;
+    }
+
+    setError('');
+
     if (currentStatus === 'idle') {
       useStatusStore.setState('loading');
       setTimeout(() => {
@@ -24,7 +32,7 @@ function CommandBtn() {
   };
 
   return (
-    <div className="flex justify-end">
+    <div className="flex flex-col items-end gap-s-gap">
       <Button
         size={'regular'}
         className={cn(
@@ -49,6 +57,7 @@ function CommandBtn() {
           </>
         )}
       </Button>
+      {error.length > 0 && <div className="pl-1 text-xs text-red-500">{error}.</div>}
     </div>
   );
 }
