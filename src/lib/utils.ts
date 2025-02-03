@@ -7,16 +7,16 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const isUnique = (arr: string[], input: string) => {
+function isUnique(arr: string[], input: string) {
   if (new Set(arr).has(input)) {
     return false;
   }
   return true;
-};
+}
 
-const isAnyEmptyField = (currMode: ModeName) => {
+function isAnyEmptyField(currentMode: ModeName) {
   for (const mode of MODES) {
-    if (mode.name === currMode) {
+    if (mode.name === currentMode) {
       for (const field of mode.fields) {
         const input = useInputStore.getState()[field.name];
         if (input.length === 0) {
@@ -27,9 +27,9 @@ const isAnyEmptyField = (currMode: ModeName) => {
   }
 
   return false;
-};
+}
 
-const msToTime = (milliseconds: number) => {
+function msToTime(milliseconds: number) {
   const remainder = milliseconds % (1000 * 60 * 60);
 
   const hours = Math.floor(milliseconds / (1000 * 60 * 60));
@@ -45,6 +45,6 @@ const msToTime = (milliseconds: number) => {
   formattedTime += `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
   return formattedTime;
-};
+}
 
 export { cn, isUnique, isAnyEmptyField, msToTime };
