@@ -2,11 +2,11 @@
 
 import FieldLabel from '@/components/field-label';
 import { MODES } from '@/system/spy';
-import Input from './input';
-import InputItems from './input-items';
+import Field from './field';
+import Items from './items';
 import { useModeStore } from '@/system/store';
 
-function CommandForm() {
+function CommandFields() {
   const currentMode = useModeStore();
 
   return MODES.map((mode) => {
@@ -14,9 +14,9 @@ function CommandForm() {
       return mode.fields.map((field, i) => {
         return (
           <FieldLabel key={i} title={field.name} hint={field.hint}>
-            <Input name={field.name} type={field.type} placeholder={field.placeholder}>
-              <InputItems name={field.name} />
-            </Input>
+            <Field name={field.name} type={field.type} placeholder={field.placeholder}>
+              <Items name={field.name} />
+            </Field>
           </FieldLabel>
         );
       });
@@ -24,4 +24,4 @@ function CommandForm() {
   });
 }
 
-export default CommandForm;
+export default CommandFields;

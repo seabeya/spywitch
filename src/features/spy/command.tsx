@@ -1,10 +1,10 @@
 import CommandBtn from './command-btn';
-import CommandForm from './command-form';
+import CommandFields from './command-fields';
 
 function Command() {
   return (
     <div className="flex flex-col gap-s-gap">
-      <CommandForm />
+      <CommandFields />
       <CommandBtn />
     </div>
   );

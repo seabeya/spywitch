@@ -3,11 +3,11 @@ import { cn } from '@/lib/utils';
 import { FieldName } from '@/system/spy';
 import { useInputStore, useSpyStore } from '@/system/store';
 
-interface InputItemsProps {
+interface ItemsProps {
   name: FieldName;
 }
 
-function InputItems({ name }: InputItemsProps) {
+function Items({ name }: ItemsProps) {
   const spyState = useSpyStore();
   const isActive = spyState === 'on';
 
@@ -43,4 +43,4 @@ function InputItems({ name }: InputItemsProps) {
   });
 }
 
-export default InputItems;
+export default Items;

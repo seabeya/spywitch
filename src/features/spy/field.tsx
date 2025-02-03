@@ -5,14 +5,14 @@ import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { EVENTS } from '@/system/consts';
 
-interface InputProps {
+interface FieldProps {
   name: FieldName;
   type: FieldType;
   placeholder: string;
   children: React.ReactNode;
 }
 
-function Input({ name, type, placeholder, children }: InputProps) {
+function Field({ name, type, placeholder, children }: FieldProps) {
   const [error, setError] = useState('');
 
   const spyState = useSpyStore();
@@ -93,4 +93,4 @@ function Input({ name, type, placeholder, children }: InputProps) {
   );
 }
 
-export default Input;
+export default Field;
