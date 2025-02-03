@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import StatusInfo from './status-info';
-import { useStatusStore } from '@/system/store';
+import { useIsActiveStore } from '@/system/store';
 import { msToTime } from '@/lib/utils';
 
 function DataTime() {
   const [uptime, setUptime] = useState('00:00');
 
-  const currentStatus = useStatusStore();
+  const isActive = useIsActiveStore();
 
   useEffect(() => {
-    if (currentStatus !== 'running') {
+    if (!isActive) {
       setUptime('00:00');
       return;
     }
@@ -26,7 +26,7 @@ function DataTime() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentStatus]);
+  }, [isActive]);
 
   return <StatusInfo label={'up time'} data={uptime} />;
 }

@@ -17,10 +17,10 @@ type Status = (typeof STATUS)[number];
 const useStatusStore = create<Status>()(() => 'idle');
 
 // Spying State
-const useSpyStore = create<'on' | 'off'>()(() => 'off');
+const useIsActiveStore = create<boolean>()(() => false);
 
 useStatusStore.subscribe((state) => {
-  useSpyStore.setState(state === 'idle' ? 'off' : 'on');
+  useIsActiveStore.setState(state === 'idle' ? false : true);
 });
 
-export { useModeStore, useInputStore, useStatusStore, useSpyStore };
+export { useModeStore, useInputStore, useStatusStore, useIsActiveStore };

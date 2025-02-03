@@ -1,6 +1,6 @@
 import { cn, isUnique } from '@/lib/utils';
 import { FieldName, FieldType } from '@/system/spy';
-import { useInputStore, useSpyStore } from '@/system/store';
+import { useInputStore, useIsActiveStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { EVENTS } from '@/system/consts';
@@ -15,8 +15,7 @@ interface FieldProps {
 function Field({ name, type, placeholder, children }: FieldProps) {
   const [error, setError] = useState('');
 
-  const spyState = useSpyStore();
-  const isActive = spyState === 'on';
+  const isActive = useIsActiveStore();
 
   const data = useInputStore((state) => state[name]);
 

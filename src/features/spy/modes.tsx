@@ -3,11 +3,10 @@
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
 import { ModeName, MODES } from '@/system/spy';
-import { useModeStore, useSpyStore } from '@/system/store';
+import { useIsActiveStore, useModeStore } from '@/system/store';
 
 function Modes() {
-  const spyState = useSpyStore();
-  const isActive = spyState === 'on';
+  const isActive = useIsActiveStore();
 
   const currentMode = useModeStore();
 

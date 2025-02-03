@@ -1,15 +1,14 @@
 import IconRemove from '@/components/icons/remove';
 import { cn } from '@/lib/utils';
 import { FieldName } from '@/system/spy';
-import { useInputStore, useSpyStore } from '@/system/store';
+import { useInputStore, useIsActiveStore } from '@/system/store';
 
 interface ItemsProps {
   name: FieldName;
 }
 
 function Items({ name }: ItemsProps) {
-  const spyState = useSpyStore();
-  const isActive = spyState === 'on';
+  const isActive = useIsActiveStore();
 
   const data = useInputStore((state) => state[name]);
 
