@@ -1,7 +1,7 @@
 import IconRemove from '@/components/icons/remove';
 import { cn } from '@/lib/utils';
-import { FieldName } from '@/system/spy';
 import { useInputStore, useIsActiveStore } from '@/system/store';
+import { FieldName } from '@/system/types';
 
 interface ItemsProps {
   name: FieldName;

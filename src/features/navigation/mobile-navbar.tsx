@@ -6,9 +6,8 @@ import IconLogsFill from '@/components/icons/logs-fill';
 import IconSpy from '@/components/icons/spy';
 import IconSpyFill from '@/components/icons/spy-fill';
 import { SYS_PAGE_GROUPS } from '@/system/pages';
+import { NavItems } from '@/system/types';
 import { usePathname } from 'next/navigation';
-
-type NavItems = (typeof SYS_PAGE_GROUPS.navbar)[number]['name'];
 
 const pageIcons: Record<NavItems, Record<'default' | 'active', React.ReactNode>> = {
   spy: {

@@ -1,9 +1,9 @@
 import { cn, isUnique } from '@/lib/utils';
-import { FieldName, FieldType } from '@/system/spy';
 import { useInputStore, useIsActiveStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
-import { EVENTS } from '@/system/consts';
+import { FieldName, FieldType } from '@/system/types';
+import { EVENTS } from '@/system/spy';
 
 interface FieldProps {
   name: FieldName;

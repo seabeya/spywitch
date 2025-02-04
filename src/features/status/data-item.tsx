@@ -1,6 +1,6 @@
-import { FieldName } from '@/system/spy';
 import { useInputStore } from '@/system/store';
 import StatusInfo from './status-info';
+import { FieldName } from '@/system/types';
 
 interface DataItemProps {
   name: FieldName;

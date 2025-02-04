@@ -1,5 +1,6 @@
-import { ModeName, MODES } from '@/system/spy';
+import { MODES } from '@/system/spy';
 import { useInputStore } from '@/system/store';
+import { ModeName } from '@/system/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 

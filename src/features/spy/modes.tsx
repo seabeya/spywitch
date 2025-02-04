@@ -2,8 +2,9 @@
 
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
-import { ModeName, MODES } from '@/system/spy';
+import { MODES } from '@/system/spy';
 import { useIsActiveStore, useModeStore } from '@/system/store';
+import { ModeName } from '@/system/types';
 
 function Modes() {
   const isActive = useIsActiveStore();

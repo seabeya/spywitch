@@ -1,4 +1,6 @@
-const fields = {
+import { Modes } from './types';
+
+const FIELDS = {
   users: {
     name: 'users',
     type: 'input',
@@ -19,24 +21,19 @@ const fields = {
   },
 } as const;
 
-type FieldName = (typeof fields)[keyof typeof fields]['name'];
-type FieldType = (typeof fields)[keyof typeof fields]['type'];
-
-type Modes = { name: string; description: string; fields: (typeof fields)[FieldName][] }[];
-
 const MODES = [
   {
     name: 'users',
     description: 'Monitor all events from chosen users in selected channels',
-    fields: [fields.users, fields.channels],
+    fields: [FIELDS.users, FIELDS.channels],
   },
   {
     name: 'events',
     description: 'Monitor selected events from everyone in selected channels',
-    fields: [fields.events, fields.channels],
+    fields: [FIELDS.events, FIELDS.channels],
   },
 ] as const satisfies Modes;
 
-type ModeName = (typeof MODES)[number]['name'];
+const EVENTS = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
 
-export { MODES, type FieldName, type FieldType, type ModeName };
+export { FIELDS, MODES, EVENTS };
