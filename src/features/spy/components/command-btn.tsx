@@ -1,9 +1,10 @@
 import Button from '@/components/blocks/button';
 import IconStart from '@/components/icons/start';
 import IconStop from '@/components/icons/stop';
-import { cn, isAnyEmptyField } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import { useModeStore, useStatusStore } from '@/system/store';
 import { useState } from 'react';
+import { isAnyEmptyField } from '../utils';
 
 function CommandBtn() {
   const [error, setError] = useState('');

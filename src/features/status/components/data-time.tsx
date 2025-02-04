@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import StatusInfo from './status-info';
 import { useIsActiveStore } from '@/system/store';
-import { msToTime } from '@/lib/utils';
+import { msToTime } from '../utils';
 
 function DataTime() {
   const [uptime, setUptime] = useState('00:00');

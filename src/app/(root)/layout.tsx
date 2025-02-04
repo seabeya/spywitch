@@ -3,7 +3,7 @@ import GitHubBtn from '@/components/github-btn';
 import Logo from '@/components/logo';
 import MobileNavbar from '@/features/navigation/mobile-navbar';
 import Navbar from '@/features/navigation/navbar';
-import Statusbar from '@/features/status/statusbar';
+import Statusbar from '@/features/status/components/statusbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
