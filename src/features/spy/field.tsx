@@ -1,5 +1,5 @@
 import { cn, isUnique } from '@/lib/utils';
-import { useInputStore, useIsActiveStore } from '@/system/store';
+import { useIsActiveStore, useItemsStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { FieldName, FieldType } from '@/system/types';
@@ -17,7 +17,7 @@ function Field({ name, type, placeholder, children }: FieldProps) {
 
   const isActive = useIsActiveStore();
 
-  const data = useInputStore((state) => state[name]);
+  const data = useItemsStore((state) => state[name]);
 
   const handleNewItem = (inputValue: string) => {
     if (isActive) return;
@@ -36,7 +36,7 @@ function Field({ name, type, placeholder, children }: FieldProps) {
       return;
     }
 
-    useInputStore.setState(() => ({
+    useItemsStore.setState(() => ({
       [name]: [...data, result.data],
     }));
   };

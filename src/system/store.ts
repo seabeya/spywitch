@@ -4,8 +4,8 @@ import { FieldName, ModeName, Status } from './types';
 // Mode
 const useModeStore = create<ModeName>()(() => 'users');
 
-// Inputs
-const useInputStore = create<Record<FieldName, string[]>>()(() => ({
+// Items
+const useItemsStore = create<Record<FieldName, string[]>>()(() => ({
   users: [],
   events: [],
   channels: [],
@@ -21,4 +21,4 @@ useStatusStore.subscribe((state) => {
   useIsActiveStore.setState(state === 'idle' ? false : true);
 });
 
-export { useModeStore, useInputStore, useStatusStore, useIsActiveStore };
+export { useModeStore, useItemsStore, useStatusStore, useIsActiveStore };

@@ -1,5 +1,5 @@
 import { MODES } from '@/system/spy';
-import { useInputStore } from '@/system/store';
+import { useItemsStore } from '@/system/store';
 import { ModeName } from '@/system/types';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -19,8 +19,8 @@ function isAnyEmptyField(currentMode: ModeName) {
   for (const mode of MODES) {
     if (mode.name === currentMode) {
       for (const field of mode.fields) {
-        const input = useInputStore.getState()[field.name];
-        if (input.length === 0) {
+        const items = useItemsStore.getState()[field.name];
+        if (items.length === 0) {
           return true;
         }
       }

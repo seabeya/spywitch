@@ -1,6 +1,6 @@
 import IconRemove from '@/components/icons/remove';
 import { cn } from '@/lib/utils';
-import { useInputStore, useIsActiveStore } from '@/system/store';
+import { useIsActiveStore, useItemsStore } from '@/system/store';
 import { FieldName } from '@/system/types';
 
 interface ItemsProps {
@@ -10,13 +10,13 @@ interface ItemsProps {
 function Items({ name }: ItemsProps) {
   const isActive = useIsActiveStore();
 
-  const data = useInputStore((state) => state[name]);
+  const data = useItemsStore((state) => state[name]);
 
   const handleRemove = (removeItem: string) => {
     if (isActive) return;
 
     const newData = data.filter((item) => item !== removeItem);
-    useInputStore.setState(() => ({
+    useItemsStore.setState(() => ({
       [name]: newData,
     }));
   };

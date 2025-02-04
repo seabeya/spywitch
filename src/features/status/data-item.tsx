@@ -1,4 +1,4 @@
-import { useInputStore } from '@/system/store';
+import { useItemsStore } from '@/system/store';
 import StatusInfo from './status-info';
 import { FieldName } from '@/system/types';
 
@@ -7,7 +7,7 @@ interface DataItemProps {
 }
 
 function DataItem({ name }: DataItemProps) {
-  const data = useInputStore((state) => state[name]);
+  const data = useItemsStore((state) => state[name]);
 
   return <StatusInfo label={name} data={data.length} />;
 }
