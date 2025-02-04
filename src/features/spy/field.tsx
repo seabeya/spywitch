@@ -4,6 +4,7 @@ import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { FieldName, FieldType } from '@/system/types';
 import { EVENTS } from '@/system/spy';
+import SelectList from './select-list';
 
 interface FieldProps {
   name: FieldName;
@@ -43,30 +44,9 @@ function Field({ name, type, placeholder, children }: FieldProps) {
 
   return (
     <>
-      {type === 'select' && (
-        <ul className="flex flex-wrap justify-center gap-1 pb-1">
-          {EVENTS.map((event) => {
-            const isDisabled = data.includes(event) || isActive;
-            return (
-              <li
-                key={event}
-                className={cn(
-                  'cursor-pointer rounded-md border border-c-line bg-c-secondary px-s-gap py-1 text-sm text-c-secondary-text hover:border-c-line-high',
-                  {
-                    'pointer-events-none border-c-line-low bg-c-secondary/25 text-c-secondary-text/75': isDisabled,
-                  },
-                )}
-                onClick={() => {
-                  if (isDisabled) return;
-                  handleNewItem(event);
-                }}
-              >
-                {event}
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {/* TODO: Currently passing list items hardcoded / go with a different way when have multiple select lists */}
+      {type === 'select' && <SelectList list={EVENTS} data={data} newItemHandler={handleNewItem} />}
+      {/*  */}
       <ul className="custom-scrollbar flex max-h-28 min-h-10 flex-wrap items-center gap-1 overflow-y-auto rounded-sm border border-c-line p-2 text-sm focus-within:border-c-line-high">
         {children}
         <li className={cn('w-32', { 'w-full px-1': data.length === 0 })}>
