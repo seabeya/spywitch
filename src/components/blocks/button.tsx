@@ -8,6 +8,7 @@ const variants = cva('whitespace-nowrap flex items-center justify-center rounded
       outline: 'text-c-secondary-text',
       ghost: 'text-c-secondary-text',
       secondary: 'text-c-secondary-text bg-c-secondary',
+      primary: 'bg-c-primary text-c-primary-text hover:bg-c-primary/90',
     },
     size: {
       header: 'h-8 px-s-gap',

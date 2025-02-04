@@ -34,14 +34,11 @@ function CommandBtn() {
   return (
     <div className="flex flex-col items-end gap-s-gap">
       <Button
+        variant={'primary'}
         size={'regular'}
-        className={cn(
-          'rounded-sm text-c-primary-text disabled:cursor-wait disabled:bg-c-secondary-fg disabled:text-c-secondary-text',
-          {
-            'bg-c-primary hover:bg-c-primary/90': currentStatus === 'idle',
-            'bg-red-700 hover:bg-red-700/90': currentStatus === 'running',
-          },
-        )}
+        className={cn('rounded-sm disabled:cursor-wait disabled:bg-c-secondary-fg disabled:text-c-secondary-text', {
+          'bg-red-700 hover:bg-red-700/90': currentStatus === 'running',
+        })}
         disabled={currentStatus === 'loading'}
         onClick={handleClick}
       >
