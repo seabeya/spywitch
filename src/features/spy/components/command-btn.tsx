@@ -3,7 +3,7 @@ import IconStart from '@/components/icons/start';
 import IconStop from '@/components/icons/stop';
 import { useModeStore, useStatusStore } from '@/system/store';
 import { useState } from 'react';
-import { isAnyEmptyField } from '../utils';
+import { hasAnyEmptyField } from '../utils';
 
 function CommandBtn() {
   const [error, setError] = useState('');
@@ -11,7 +11,7 @@ function CommandBtn() {
   const currentStatus = useStatusStore();
 
   const handleStart = () => {
-    if (isAnyEmptyField(useModeStore.getState())) {
+    if (hasAnyEmptyField(useModeStore.getState())) {
       setError('Some fields are missing. Please fill them in and try again');
       return;
     }

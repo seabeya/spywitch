@@ -2,7 +2,7 @@ import { MODES } from '@/system/spy';
 import { useItemsStore } from '@/system/store';
 import { ModeName } from '@/system/types';
 
-function isAnyEmptyField(currentMode: ModeName) {
+function hasAnyEmptyField(currentMode: ModeName) {
   for (const mode of MODES) {
     if (mode.name === currentMode) {
       for (const field of mode.fields) {
@@ -17,4 +17,4 @@ function isAnyEmptyField(currentMode: ModeName) {
   return false;
 }
 
-export { isAnyEmptyField };
+export { hasAnyEmptyField };
