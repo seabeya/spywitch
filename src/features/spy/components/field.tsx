@@ -3,7 +3,7 @@ import { useIsActiveStore, useItemsStore } from '@/system/store';
 import { useState } from 'react';
 import inputDefinitions from '@/lib/input-definitions';
 import { FieldName, FieldType } from '@/system/types';
-import { EVENTS } from '@/system/spy';
+import { EVENTS } from '@/system/consts';
 import SelectList from './select-list';
 
 interface FieldProps {

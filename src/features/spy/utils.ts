@@ -1,4 +1,4 @@
-import { MODES } from '@/system/spy';
+import { MODES } from '@/system/consts';
 import { useItemsStore } from '@/system/store';
 import { ModeName } from '@/system/types';
 

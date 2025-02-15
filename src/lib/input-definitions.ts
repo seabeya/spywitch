@@ -1,4 +1,4 @@
-import { EVENTS } from '@/system/spy';
+import { EVENTS } from '@/system/consts';
 import { z } from 'zod';
 
 const username = z

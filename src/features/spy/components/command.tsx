@@ -1,7 +1,7 @@
 'use client';
 
 import FieldLabel from '@/components/field-label';
-import { MODES } from '@/system/spy';
+import { MODES } from '@/system/consts';
 import { useModeStore } from '@/system/store';
 import { Fragment } from 'react';
 import Field from './field';

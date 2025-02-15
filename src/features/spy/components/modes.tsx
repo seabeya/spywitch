@@ -2,7 +2,7 @@
 
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
-import { MODES } from '@/system/spy';
+import { MODES } from '@/system/consts';
 import { useIsActiveStore, useModeStore } from '@/system/store';
 import { ModeName } from '@/system/types';
 

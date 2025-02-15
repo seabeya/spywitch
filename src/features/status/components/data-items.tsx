@@ -1,6 +1,6 @@
 'use client';
 
-import { MODES } from '@/system/spy';
+import { MODES } from '@/system/consts';
 import { useModeStore } from '@/system/store';
 import DataItem from './data-item';
 

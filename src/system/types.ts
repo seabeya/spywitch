@@ -1,5 +1,5 @@
 import { SYS_PAGE_GROUPS } from './pages';
-import { FIELDS, MODES } from './spy';
+import { FIELDS, MODES } from './consts';
 
 export type NavItems = (typeof SYS_PAGE_GROUPS.navbar)[number]['name'];
 
