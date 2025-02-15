@@ -1,5 +1,3 @@
-import { Modes } from './types';
-
 const FIELDS = {
   users: {
     name: 'users',
@@ -21,18 +19,18 @@ const FIELDS = {
   },
 } as const;
 
-const MODES = [
-  {
+const MODES = {
+  users: {
     name: 'users',
     description: 'Monitor all events from chosen users in selected channels',
     fields: [FIELDS.users, FIELDS.channels],
   },
-  {
+  events: {
     name: 'events',
     description: 'Monitor selected events from everyone in selected channels',
     fields: [FIELDS.events, FIELDS.channels],
   },
-] as const satisfies Modes;
+} as const;
 
 const EVENTS = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
 

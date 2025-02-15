@@ -19,7 +19,7 @@ function Modes() {
 
   return (
     <div className="grid auto-rows-fr grid-cols-1 gap-s-gap *:whitespace-normal sm:grid-cols-2">
-      {MODES.map((mode, i) => {
+      {Object.values(MODES).map((mode, i) => {
         return (
           <Button
             key={i}
