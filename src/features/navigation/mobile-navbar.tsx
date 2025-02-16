@@ -1,34 +1,38 @@
 'use client';
 
 import Button from '@/components/blocks/button';
-import IconLogs from '@/components/icons/logs';
-import IconLogsFill from '@/components/icons/logs-fill';
-import IconSpy from '@/components/icons/spy';
-import IconSpyFill from '@/components/icons/spy-fill';
+import IconHistory from '@/components/icons/history';
+import IconHome from '@/components/icons/home';
+import IconMonitor from '@/components/icons/monitor';
+import IconSetup from '@/components/icons/setup';
+import { cn } from '@/lib/utils';
 import { SYS_PAGE_GROUPS } from '@/system/pages';
 import { NavItems } from '@/system/types';
 import { usePathname } from 'next/navigation';
 
-const pageIcons: Record<NavItems, Record<'default' | 'active', React.ReactNode>> = {
-  spy: {
-    default: <IconSpy className="size-5 shrink-0" />,
-    active: <IconSpyFill className="size-5 shrink-0" />,
-  },
-  logs: {
-    default: <IconLogs className="size-5 shrink-0" />,
-    active: <IconLogsFill className="size-5 shrink-0" />,
-  },
+const pageIcons: Record<NavItems, React.ReactNode> = {
+  home: <IconHome className="size-5 shrink-0" />,
+  setup: <IconSetup className="size-5 shrink-0" />,
+  monitor: <IconMonitor className="size-5 shrink-0" />,
+  history: <IconHistory className="size-5 shrink-0" />,
 };
 
 function MobileNavbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 grid h-s-nav-height w-full auto-cols-fr grid-flow-col border-t border-c-line bg-c-fg/75 backdrop-blur-sm lg:hidden">
+    <nav className="fixed bottom-0 grid h-s-nav-height w-full auto-cols-fr grid-flow-col gap-s-gap border-t border-c-line bg-c-fg/75 backdrop-blur-sm lg:hidden">
       {SYS_PAGE_GROUPS.navbar.map((page, i) => {
         return (
-          <Button.Link key={i} href={page.path} variant={'ghost'} className="flex-col rounded-none">
-            {pathname === page.path ? pageIcons[page.name].active : pageIcons[page.name].default}
+          <Button.Link
+            key={i}
+            href={page.path}
+            variant={'ghost'}
+            className={cn('flex-col rounded-none border-t border-transparent', {
+              'border-c-secondary-text text-c-primary-text': pathname === page.path,
+            })}
+          >
+            {pageIcons[page.name]}
             <span>{page.label}</span>
           </Button.Link>
         );

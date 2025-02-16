@@ -4,7 +4,7 @@ import { SYS_PAGES } from '@/system/pages';
 
 function Logo() {
   return (
-    <Link href={SYS_PAGES.spy.path} className="flex">
+    <Link href={SYS_PAGES.home.path} className="flex">
       <IconSpyWitch className="size-11 shrink-0 -rotate-12" />
       <span className="-ml-2 text-sm">
         <span className="text-c-primary-text">Spy</span>

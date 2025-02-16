@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>Logs</div>;
+  return <div>History</div>;
 }
