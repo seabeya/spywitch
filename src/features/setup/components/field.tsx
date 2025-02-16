@@ -49,7 +49,7 @@ function Field({ name, type, placeholder, children }: FieldProps) {
       {/*  */}
       <ul className="custom-scrollbar flex max-h-28 min-h-10 flex-wrap items-center gap-1 overflow-y-auto rounded-sm border border-c-line p-2 text-sm focus-within:border-c-line-high">
         {children}
-        <li className={cn('w-32', { 'w-full px-1': data.length === 0 })}>
+        <li className={cn('w-32 px-1', { 'w-full': data.length === 0 })}>
           <input
             type="text"
             enterKeyHint="enter"
