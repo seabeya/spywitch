@@ -32,7 +32,7 @@ function Modes() {
             onClick={() => handleModeChange(mode.name)}
           >
             <span className="capitalize">{mode.name}</span>
-            <p className="text-start text-c-secondary-text/75">{mode.description}</p>
+            <p className="text-start text-c-secondary-text/75">{mode.description}.</p>
           </Button>
         );
       })}
