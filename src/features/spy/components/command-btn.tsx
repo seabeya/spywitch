@@ -1,34 +1,59 @@
 import Button from '@/components/blocks/button';
 import IconStart from '@/components/icons/start';
 import IconStop from '@/components/icons/stop';
-import { useModeStore, useStatusStore } from '@/system/store';
+import { useItemsStore, useModeStore, useSpyStore, useStatusStore } from '@/system/store';
 import { useState } from 'react';
 import { hasAnyEmptyField } from '../utils';
+import Spy from '@/lib/action/spy';
+import ToSave from '@/lib/action/to-save';
+import { EVENTS } from '@/system/consts';
 
 function CommandBtn() {
   const [error, setError] = useState('');
 
   const currentStatus = useStatusStore();
 
-  const handleStart = () => {
-    if (hasAnyEmptyField(useModeStore.getState())) {
+  const handleStart = async () => {
+    const currentMode = useModeStore.getState();
+
+    if (hasAnyEmptyField(currentMode)) {
       setError('Some fields are missing. Please fill them in and try again');
       return;
     }
 
     setError('');
-
     useStatusStore.setState('loading');
-    setTimeout(() => {
+
+    try {
+      const users = useItemsStore.getState().users;
+      const channels = useItemsStore.getState().channels;
+      const events = currentMode === 'users' ? [...EVENTS] : useItemsStore.getState().events;
+
+      const spy = new Spy(currentMode);
+      await spy.connect(channels);
+
+      const handlers = new ToSave(spy.idb, currentMode, users);
+      spy.setListeners(handlers, events);
+
+      useSpyStore.setState(spy, true);
       useStatusStore.setState('running');
-    }, 1000);
+    } catch (_) {
+      setError('Something went wrong. Please refresh the page and try again.');
+      useStatusStore.setState('idle');
+    }
   };
 
-  const handleStop = () => {
+  const handleStop = async () => {
     useStatusStore.setState('loading');
-    setTimeout(() => {
+
+    try {
+      const spy = useSpyStore.getState();
+      await spy?.disconnect();
       useStatusStore.setState('idle');
-    }, 1000);
+    } catch (error) {
+      setError('Something went wrong. Please refresh the page.');
+      useStatusStore.setState('running');
+    }
   };
 
   return (

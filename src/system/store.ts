@@ -1,11 +1,16 @@
 import { create } from 'zustand';
-import { FieldName, ModeName, Status } from './types';
+import { EventType, FieldName, ModeName, Status } from './types';
+import Spy from '@/lib/action/spy';
 
 // Mode
 const useModeStore = create<ModeName>()(() => 'users');
 
 // Items
-const useItemsStore = create<Record<FieldName, string[]>>()(() => ({
+type ItemsStore = Record<FieldName, string[]> & {
+  events: EventType[];
+};
+
+const useItemsStore = create<ItemsStore>()(() => ({
   users: [],
   events: [],
   channels: [],
@@ -21,4 +26,7 @@ useStatusStore.subscribe((state) => {
   useIsActiveStore.setState(state === 'idle' ? false : true);
 });
 
-export { useModeStore, useItemsStore, useStatusStore, useIsActiveStore };
+// Spy Class
+const useSpyStore = create<Spy | undefined>()(() => undefined);
+
+export { useModeStore, useItemsStore, useStatusStore, useIsActiveStore, useSpyStore };

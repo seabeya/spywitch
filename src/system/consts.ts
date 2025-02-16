@@ -24,11 +24,13 @@ const MODES = {
     name: 'users',
     description: 'Monitor all events from chosen users in selected channels',
     fields: [FIELDS.users, FIELDS.channels],
+    filterBy: 'user',
   },
   events: {
     name: 'events',
     description: 'Monitor selected events from everyone in selected channels',
     fields: [FIELDS.events, FIELDS.channels],
+    filterBy: 'channel',
   },
 } as const;
 
