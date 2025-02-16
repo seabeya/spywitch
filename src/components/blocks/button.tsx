@@ -14,6 +14,7 @@ const variants = cva('whitespace-nowrap flex items-center justify-center rounded
       header: 'h-8 px-s-gap',
       side: 'h-10 px-s-gap',
       regular: 'h-8 w-24',
+      small: 'h-7 px-2',
     },
     border: {
       low: 'border',
