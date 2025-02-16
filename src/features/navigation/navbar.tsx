@@ -17,7 +17,7 @@ function Navbar() {
             key={i}
             href={path}
             variant={'secondary'}
-            size={'side'}
+            size={'big'}
             border={'mid'}
             className={cn('justify-between', {
               'border-c-line-high bg-c-secondary-fg text-c-primary-text': currentPath === path,

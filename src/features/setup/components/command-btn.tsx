@@ -58,22 +58,24 @@ function CommandBtn() {
 
   return (
     <div className="flex flex-col items-end gap-s-gap">
-      {currentStatus === 'idle' ? (
-        <Button variant={'primary'} size={'regular'} className="rounded-sm" onClick={handleStart}>
-          <span>Start</span>
-          <IconStart className="size-5 shrink-0" />
-        </Button>
-      ) : (
-        <Button
-          size={'regular'}
-          className="rounded-sm bg-red-700 text-c-primary-text hover:bg-red-700/90 disabled:cursor-wait disabled:bg-c-secondary-fg disabled:text-c-secondary-text"
-          disabled={currentStatus === 'loading'}
-          onClick={handleStop}
-        >
-          <span>Stop</span>
-          <IconStop className="size-5 shrink-0" />
-        </Button>
-      )}
+      <div className="w-24">
+        {currentStatus === 'idle' ? (
+          <Button variant={'primary'} size={'regular'} className="w-full rounded-sm" onClick={handleStart}>
+            <span>Start</span>
+            <IconStart className="size-5 shrink-0" />
+          </Button>
+        ) : (
+          <Button
+            size={'regular'}
+            className="w-full rounded-sm bg-red-700 text-c-primary-text hover:bg-red-700/90 disabled:cursor-wait disabled:bg-c-secondary-fg disabled:text-c-secondary-text"
+            disabled={currentStatus === 'loading'}
+            onClick={handleStop}
+          >
+            <span>Stop</span>
+            <IconStop className="size-5 shrink-0" />
+          </Button>
+        )}
+      </div>
       {error.length > 0 && <div className="pl-1 text-xs text-red-500">{error}.</div>}
     </div>
   );

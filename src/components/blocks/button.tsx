@@ -11,9 +11,8 @@ const variants = cva('whitespace-nowrap flex items-center justify-center rounded
       primary: 'bg-c-primary text-c-primary-text hover:bg-c-primary/90',
     },
     size: {
-      header: 'h-8 px-s-gap',
-      side: 'h-10 px-s-gap',
-      regular: 'h-8 w-24',
+      big: 'h-10 px-s-gap',
+      regular: 'h-8 px-s-gap',
       small: 'h-7 px-2',
     },
     border: {

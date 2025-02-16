@@ -7,7 +7,7 @@ function GitHubBtn() {
       href="https://github.com/seabeya/spywitch"
       target="_blank"
       variant={'outline'}
-      size={'header'}
+      size={'regular'}
       border={'mid'}
       className="gap-1 hover:text-c-primary-text"
     >
