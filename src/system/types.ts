@@ -1,13 +1,27 @@
-import { SYS_PAGE_GROUPS } from './pages';
-import { EVENTS, FIELDS, MODES } from './consts';
+import { EVENTS } from './consts';
 
-export type NavItems = (typeof SYS_PAGE_GROUPS.navbar)[number]['name'];
+export type FieldName = 'users' | 'events' | 'channels';
+export type FieldType = 'input' | 'select';
+export type Fields = {
+  [T in FieldName]: {
+    name: T;
+    type: FieldType;
+    hint: string;
+    placeholder: string;
+  };
+};
 
-export type FieldName = (typeof FIELDS)[keyof typeof FIELDS]['name'];
-export type FieldType = (typeof FIELDS)[keyof typeof FIELDS]['type'];
+export type ModeName = 'users' | 'events';
 
-export type ModeName = (typeof MODES)[keyof typeof MODES]['name'];
-export type FilterBy = (typeof MODES)[keyof typeof MODES]['filterBy'];
+export type FilterBy = `${FieldName extends `${infer T}s` ? T : FieldName}`;
+export type Modes = {
+  [T in ModeName]: {
+    name: T;
+    description: string;
+    fields: Fields[keyof Fields][];
+    filterBy: FilterBy;
+  };
+};
 
 export type Status = 'idle' | 'loading' | 'running';
 
@@ -21,7 +35,3 @@ export type EventData = {
   message: string | null;
   extra: string | null;
 };
-
-export type MessageData = {
-  date: Date;
-} & EventData;

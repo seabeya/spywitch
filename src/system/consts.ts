@@ -1,4 +1,6 @@
-const FIELDS = {
+import { Fields, Modes } from './types';
+
+const FIELDS: Fields = {
   users: {
     name: 'users',
     type: 'input',
@@ -17,9 +19,9 @@ const FIELDS = {
     hint: 'The channels where you want to perform the tracking',
     placeholder: 'Enter channel names',
   },
-} as const;
+};
 
-const MODES = {
+const MODES: Modes = {
   users: {
     name: 'users',
     description: 'Monitor all events from chosen users in selected channels',
@@ -32,7 +34,7 @@ const MODES = {
     fields: [FIELDS.events, FIELDS.channels],
     filterBy: 'channel',
   },
-} as const;
+};
 
 const EVENTS = ['chat', 'sub', 'resub', 'cheer', 'subgift'] as const;
 
