@@ -29,11 +29,11 @@ function CommandBtn() {
       const channels = useItemsStore.getState().channels;
       const events = currentMode === 'users' ? [...EVENTS] : useItemsStore.getState().events;
 
-      const spy = new Spy(currentMode);
+      const spy = new Spy(currentMode, events);
       await spy.connect(channels);
 
       const handlers = new ToSave(spy.idb, currentMode, users);
-      spy.setListeners(handlers, events);
+      spy.setListeners(handlers);
 
       useSpyStore.setState(spy, true);
       useStatusStore.setState('running');

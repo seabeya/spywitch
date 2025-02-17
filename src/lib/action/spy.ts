@@ -1,6 +1,7 @@
 import tmi, { Events } from 'tmi.js';
 import { openDB, IDBPDatabase } from 'idb';
 import ToSave from './to-save';
+import ToShow from './to-show';
 import { MODES } from '@/system/consts';
 import { EventType, FilterBy, ModeName } from '@/system/types';
 import { v7 as uuidv7 } from 'uuid';
@@ -9,10 +10,13 @@ class Spy {
   #tmiClient = {} as tmi.Client;
   idb = {} as IDBPDatabase;
   #dbName = uuidv7();
-  #idbIndex: FilterBy;
+  idbIndex: FilterBy;
 
-  constructor(public mode: ModeName) {
-    this.#idbIndex = MODES[mode].filterBy;
+  constructor(
+    mode: ModeName,
+    private events: EventType[],
+  ) {
+    this.idbIndex = MODES[mode].filterBy;
   }
 
   #tmiSetup(channels: string[]) {
@@ -33,7 +37,7 @@ class Spy {
           keyPath: 'id',
           autoIncrement: true,
         });
-        store.createIndex(this.#idbIndex, this.#idbIndex);
+        store.createIndex(this.idbIndex, this.idbIndex);
       },
     });
   }
@@ -50,11 +54,11 @@ class Spy {
     this.idb.close();
   }
 
-  setListeners(handler: ToSave, events: EventType[]) {
+  setListeners(handler: ToSave | ToShow) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const eventHandlers = new Map<keyof Events, (...args: any[]) => void>();
 
-    for (const event of events) {
+    for (const event of this.events) {
       switch (event) {
         case 'chat': {
           const fn = handler.onMessage.bind(handler);

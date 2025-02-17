@@ -35,3 +35,7 @@ export type EventData = {
   message: string | null;
   extra: string | null;
 };
+
+export type Log = {
+  date: Date;
+} & EventData;

@@ -4,6 +4,7 @@ import PageArea from '@/components/layout/page-area';
 import Section from '@/components/layout/section';
 import PageFeedback from '@/components/page-feedback';
 import ItemTabs from '@/features/monitor/item-tabs';
+import Logs from '@/features/monitor/logs';
 import { MODES } from '@/system/consts';
 import { SYS_PAGES } from '@/system/pages';
 import { useIsActiveStore, useModeStore } from '@/system/store';
@@ -12,6 +13,7 @@ import { useState } from 'react';
 
 export default function Page() {
   const currentStatus = useIsActiveStore();
+  const filterBy = MODES[useModeStore.getState()].filterBy;
 
   const [selectedItem, setSelectedItem] = useState('');
 
@@ -23,12 +25,12 @@ export default function Page() {
     <PageArea>
       {currentStatus ? (
         <>
-          <Section title={`${MODES[useModeStore.getState()].filterBy}s`}>
-            <ItemTabs selectedItem={selectedItem} selectHandler={handleSelect} />
+          <Section title={`${filterBy}s`}>
+            <ItemTabs filterBy={filterBy} selectedItem={selectedItem} selectHandler={handleSelect} />
           </Section>
           <Section title="Logs">
             {selectedItem.length > 0 ? (
-              <div>Logs</div>
+              <Logs target={selectedItem} filterBy={filterBy} />
             ) : (
               <PageFeedback>
                 <p>Please select an item to view.</p>

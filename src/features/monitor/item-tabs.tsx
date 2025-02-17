@@ -1,16 +1,16 @@
 import Button from '@/components/blocks/button';
 import { cn } from '@/lib/utils';
-import { MODES } from '@/system/consts';
-import { useItemsStore, useModeStore } from '@/system/store';
+import { useItemsStore } from '@/system/store';
+import { FilterBy } from '@/system/types';
 
 interface ItemTabsProps {
+  filterBy: FilterBy;
   selectedItem: string;
   selectHandler: (item: string) => void;
 }
 
-function ItemTabs({ selectedItem, selectHandler }: ItemTabsProps) {
-  const currentMode = useModeStore.getState();
-  const items = useItemsStore.getState()[`${MODES[currentMode].filterBy}s`];
+function ItemTabs({ filterBy, selectedItem, selectHandler }: ItemTabsProps) {
+  const items = useItemsStore.getState()[`${filterBy}s`];
 
   return (
     <div className="custom-scrollbar flex max-h-36 flex-wrap gap-2 overflow-y-auto rounded-md border border-c-line p-2">
