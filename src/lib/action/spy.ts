@@ -51,7 +51,8 @@ class Spy {
   }
 
   setListeners(handler: ToSave, events: EventType[]) {
-    const eventHandlers = new Map<keyof Events, Function>();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const eventHandlers = new Map<keyof Events, (...args: any[]) => void>();
 
     for (const event of events) {
       switch (event) {
