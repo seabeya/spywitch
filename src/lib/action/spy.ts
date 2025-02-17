@@ -61,9 +61,9 @@ class Spy {
     for (const event of this.events) {
       switch (event) {
         case 'chat': {
-          const fn = handler.onMessage.bind(handler);
-          eventHandlers.set('message', fn);
-          this.#tmiClient.on('message', fn);
+          const fn = handler.onChat.bind(handler);
+          eventHandlers.set('chat', fn);
+          this.#tmiClient.on('chat', fn);
           break;
         }
         case 'sub': {

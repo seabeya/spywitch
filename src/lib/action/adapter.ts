@@ -4,11 +4,11 @@ import { ChatUserstate, SubGiftUserstate, SubMethods, SubMysteryGiftUserstate, S
 abstract class Adapter {
   abstract event({ uid, name, user, channel, message, extra }: EventData): void;
 
-  public onMessage(channel: string, tags: ChatUserstate, message: string) {
+  public onChat(channel: string, userstate: ChatUserstate, message: string) {
     this.event({
-      uid: tags['id'] as string,
+      uid: userstate.id as string,
       name: 'chat',
-      user: tags['username']?.toLowerCase() as string,
+      user: userstate.username?.toLowerCase() as string,
       channel: channel.substring(1),
       message: message,
       extra: null,
