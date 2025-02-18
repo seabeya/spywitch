@@ -20,7 +20,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Navbar />
           <AuthorInfo />
         </div>
-        <main className="w-full flex-1 rounded-lg border border-c-line bg-c-fg">{children}</main>
+        <div className="w-full flex-1">
+          <main className="rounded-lg border border-c-line bg-c-fg">{children}</main>
+          <p className="p-2 text-end text-xs text-c-secondary-text/75">SpyWitch is not affiliated with Twitch.</p>
+        </div>
       </div>
       <MobileNavbar />
     </>
