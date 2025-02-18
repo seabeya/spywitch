@@ -7,8 +7,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://spywitch.seabeya.com'),
   title: 'SpyWitch',
-  description: 'SpyWitch',
+  description: 'An open-source live data tracker for Twitch.tv',
+  keywords: ['spywitch', 'twitch', 'chat', 'messages', 'data-tracker', 'moderation-tool', 'open-source', 'seabeya'],
+  openGraph: {
+    type: 'website',
+    url: '/',
+    title: 'SpyWitch',
+    description: 'An open-source live data tracker for Twitch.tv',
+    siteName: 'SpyWitch',
+    images: [
+      {
+        url: '/icons/icon-96x96.png',
+        alt: 'SpyWitch',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
