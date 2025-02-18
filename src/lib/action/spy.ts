@@ -1,5 +1,5 @@
 import tmi, { Events } from 'tmi.js';
-import { openDB, IDBPDatabase } from 'idb';
+import { openDB, IDBPDatabase, deleteDB } from 'idb';
 import ToSave from './to-save';
 import ToShow from './to-show';
 import { MODES } from '@/system/consts';
@@ -52,6 +52,7 @@ class Spy {
     this.#tmiClient.removeAllListeners();
     await this.#tmiClient.disconnect();
     this.idb.close();
+    await deleteDB(this.#dbName);
   }
 
   setListeners(handler: ToSave | ToShow) {
