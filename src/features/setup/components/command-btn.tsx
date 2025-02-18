@@ -76,7 +76,10 @@ function CommandBtn() {
           </Button>
         )}
       </div>
-      {error.length > 0 && <div className="pl-1 text-xs text-red-500">{error}.</div>}
+      {error.length > 0 && <div className="text-xs text-red-500">{error}.</div>}
+      {currentStatus === 'running' && (
+        <div className="text-xs text-green-500 *:inline *:text-xs">Go to the monitor page to view the logs.</div>
+      )}
     </div>
   );
 }
