@@ -104,6 +104,10 @@ class Spy {
       this.#tmiClient.removeListener(key, value);
     });
   }
+
+  getAllByTarget(target: string) {
+    return this.idb.getAllFromIndex('logs', this.idbIndex, target);
+  }
 }
 
 export default Spy;

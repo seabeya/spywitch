@@ -21,7 +21,7 @@ function Logs({ target, filterBy }: LogsProps) {
     // Load data from idb:
     (async () => {
       try {
-        setLogs(await spy.idb.getAllFromIndex('logs', spy.idbIndex, target));
+        setLogs(await spy.getAllByTarget(target));
       } catch {}
     })();
 
