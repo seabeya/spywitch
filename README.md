@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  SpyWitch allows you to track users' chat messages or events such as subscriptions, resubscriptions, cheers, etc., in any channel on the platform.
+  SpyWitch allows you to track chat events, such as messages, subs, cheers, etc., in any channel on the platform.
 </p>
 
 <br>

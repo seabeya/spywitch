@@ -1,39 +1,38 @@
 import type { Config } from 'tailwindcss';
 
-const config: Config = {
+export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        txt: {
-          DEFAULT: '#fff', // white
-          light: '#f5f5f5', // neutral-100
-          low: '#d4d4d4', // neutral-300
-          lower: '#a3a3a3', // neutral-400
-          last: '#737373', // neutral-500
+        'c-bg': 'hsl(var(--c-bg))',
+        'c-fg': 'hsl(var(--c-fg))',
+        'c-primary': {
+          DEFAULT: 'hsl(var(--c-primary))',
+          text: 'hsl(var(--c-primary-text))',
         },
-        brdr: {
-          active: '#525252', // neutral-600
-          light: '#404040', // neutral-700
-          DEFAULT: '#262626', // neutral-800
-          dark: '#171717', // neutral-900
+        'c-secondary': {
+          DEFAULT: 'hsl(var(--c-secondary))',
+          text: 'hsl(var(--c-secondary-text))',
+          fg: 'hsl(var(--c-secondary-fg))',
+        },
+        'c-line': {
+          DEFAULT: 'hsl(var(--c-line))',
+          low: 'hsl(var(--c-line-low))',
+          high: 'hsl(var(--c-line-high))',
         },
       },
-      borderRadius: {
-        outher: '12px',
-        middle: '8px',
-        inner: '6px',
-        DEFAULT: '4px',
-        last: '2px',
+      spacing: {
+        's-gap': 'var(--s-gap)',
+        's-nav-height': 'var(--s-nav-height)',
       },
     },
     container: {
-      center: true,
-      padding: '5px',
       screens: {
         sm: '640px',
         md: '768px',
@@ -43,5 +42,4 @@ const config: Config = {
     },
   },
   plugins: [],
-};
-export default config;
+} satisfies Config;
