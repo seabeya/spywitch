@@ -16,8 +16,8 @@ function MobileNavbar() {
             key={i}
             href={path}
             variant={'ghost'}
-            className={cn('flex-col rounded-none border-t border-transparent', {
-              'border-c-secondary-text text-c-primary-text': currentPath === path,
+            className={cn('flex-col overflow-hidden rounded-none', {
+              'border-c-secondary-text text-c-primary-text shadow-[0_-1px_0_0_#d4d4d4]': currentPath === path,
             })}
           >
             <Icon className="size-5 shrink-0" />
