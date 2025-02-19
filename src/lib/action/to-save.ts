@@ -16,7 +16,7 @@ class ToSave extends Adapter {
     }
   }
 
-  public async event({ uid, name, user, channel, message, extra }: EventData) {
+  public event({ uid, name, user, channel, message, extra }: EventData) {
     if (this.mode === 'users' && !this.#users.has(user)) {
       return;
     }
