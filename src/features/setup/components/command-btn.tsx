@@ -38,7 +38,7 @@ function CommandBtn() {
       useSpyStore.setState(spy, true);
       useStatusStore.setState('running');
     } catch {
-      setError('Something went wrong. Please refresh the page and try again.');
+      setError('Something went wrong. Please refresh the page and try again');
       useStatusStore.setState('idle');
     }
   };
@@ -51,7 +51,7 @@ function CommandBtn() {
       await spy?.disconnect();
       useStatusStore.setState('idle');
     } catch {
-      setError('Something went wrong. Please refresh the page.');
+      setError('Something went wrong. Please refresh the page');
       useStatusStore.setState('running');
     }
   };
