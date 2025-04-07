@@ -13,7 +13,7 @@
     "clsx": "^2.1.1",
     "eslint-plugin-boundaries": "^5.0.1",
     "idb": "^8.0.2",
-    "next": "15.2.3",
+    "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-virtuoso": "^4.12.5",
