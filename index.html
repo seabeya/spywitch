@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An open source tool to track users' chat messages on Twitch.tv"
+    />
+    <meta
+      name="keywords"
+      content="spywitch, SpyWitch, spy-witch, spy, chat, logs, chat-logs, messages, twitch, twitch-logs"
+    />
+    <meta name="author" content="shaanaliyev" />
+    <title>SpyWitch</title>
+    <link rel="icon" type="image/x-icon" href="./src/ui/spywitch.webp" />
+    <link rel="stylesheet" href="./src/ui/style.css?v=1" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="w ns">
+      <img
+        src="./src/ui/spywitch.webp"
+        width="45"
+        height="38"
+        alt="spywitch"
+        onclick="location.reload()"
+      />
+      <h1>SpyWitch</h1>
+      <a target="_blank" href="https://github.com/shaanaliyev/spywitch">
+        <img
+          src="./src/ui/github.webp"
+          alt="spywitch-github"
+          width="25"
+          height="24"
+        />
+      </a>
+    </header>
+    <!-- Main -->
+    <main class="w">
+      <!-- Navbar -->
+      <nav>
+        <!-- indicator -->
+        <div class="indicator">
+          <span id="i-status">Not Activated</span>
+          <div>
+            <span>Users: <b id="i-users">0</b></span
+            ><span>Channels: <b id="i-channels">0</b></span>
+          </div>
+        </div>
+        <!-- sidebar -->
+        <div class="sidebar">
+          <a href="#setup" id="#setup">Setup</a>
+          <a href="#spy" id="#spy">Spy</a>
+          <a href="#watch" id="#watch">Watch</a>
+          <a href="#about" id="#about">About</a>
+        </div>
+      </nav>
+      <!-- Pages -->
+      <div class="pages">
+        <!-- Page: setup -->
+        <div page="#setup" class="page setup-page">
+          <section>
+            <div class="s-docs">
+              <span>Notice:</span>
+              <ol>
+                <li>
+                  This application accesses data by using Twitch's official
+                  APIs.
+                </li>
+                <li>
+                  The app only requests
+                  <b>"View live Stream Chat and Rooms messages"</b> permission
+                  when accessing your account.
+                </li>
+                <li>
+                  When you log in, the app saves your <b>username</b> and
+                  <b>Oauth key</b> data in your browser's local storage. This
+                  information will remain there unless you revoke access.
+                </li>
+              </ol>
+            </div>
+          </section>
+          <section>
+            <span class="section-title">Twitch</span>
+            <div class="s-login active" id="s-login">
+              <button id="login">Log in with Twitch</button>
+            </div>
+            <div class="s-account" id="s-account">
+              <div class="account">
+                <span>Connected With Twitch</span>
+                <span>Account: <b id="username"></b></span>
+                <button id="revoke">Revoke Access</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Page: spy -->
+        <div page="#spy" class="page">
+          <section>
+            <span class="section-title">Controller</span>
+            <div class="s-search-mode" id="s-search-mode">
+              <span class="section-label">Search Mode:</span>
+              <!-- radio buttons start -->
+              <input
+                type="radio"
+                name="mode"
+                id="auto"
+                class="radio-btn"
+                checked
+              />
+              <label for="auto">Auto</label>
+              <input type="radio" name="mode" id="manual" class="radio-btn" />
+              <label for="manual">Manual</label>
+              <small id="search-mode-auto-desc-2" class="active">
+                The API endpoint that this tool uses to collect channel data has
+                been deprecated. As a result, the auto mode is no longer
+                functioning. I will refactor the project soon and add some other
+                functionalities. In the meantime, you can still use the manual
+                mode.
+              </small>
+              <small id="search-mode-auto-desc" class="active"
+                >Enter the usernames you would like to track, and the system
+                will do the rest.</small
+              >
+              <small id="search-mode-manual-desc"
+                >Enter the usernames you want to track and the channel names
+                where you would like to track them. The system will then start
+                listening to these channels and track the specified
+                usernames.</small
+              >
+              <!-- radio buttons end -->
+            </div>
+            <div class="s-spy">
+              <label for="usernames" class="section-label active"
+                >Usernames:
+              </label>
+              <textarea
+                id="usernames"
+                class="active ns"
+                rows="1"
+                placeholder="username1, username2, username3"
+              ></textarea>
+              <label for="channels" id="channels-label" class="section-label"
+                >Channels:
+              </label>
+              <textarea
+                id="channels"
+                class="ns"
+                rows="2"
+                placeholder="channel1, channel2, channel3"
+              ></textarea>
+              <button id="spy-btn" status="off">Start</button>
+            </div>
+          </section>
+          <section>
+            <span class="section-title">Status</span>
+            <div class="console">
+              <ul id="status-logs"></ul>
+            </div>
+          </section>
+        </div>
+        <!-- Page: watch -->
+        <div page="#watch" class="page watch-page">
+          <section>
+            <span class="section-title">Chat Logs</span>
+            <div class="s-users" id="s-users">
+              <span class="section-label">Chatters:</span>
+              <div class="users" id="users"></div>
+            </div>
+            <div class="s-chat" id="s-chat">
+              <span class="section-label"
+                >Messages from: <b id="from"></b
+              ></span>
+              <div class="console" id="chats"></div>
+            </div>
+          </section>
+        </div>
+        <!-- Page: about -->
+        <div page="#about" class="page">
+          <section class="about">
+            <h3>
+              An open source tool to track users' chat messages on twitch.tv
+            </h3>
+            <p>
+              You can open
+              <a
+                href="https://github.com/shaanaliyev/spywitch/issues"
+                target="_blank"
+                >github issues</a
+              >
+              for feature requests, questions and bug reports.
+            </p>
+            <p>
+              Also, if you like the project, you can give it a star on
+              <a href="https://github.com/shaanaliyev/spywitch">GitHub</a>. It's
+              a free and simple way to show your support.
+            </p>
+          </section>
+          <hr />
+          <section>
+            <span class="section-title">Questions</span>
+            <div class="s-about">
+              <span class="section-label">What is it?</span>
+              <p>
+                It is a tool that allows you to track users' chat messages on
+                Twitch.tv.
+              </p>
+              <span class="section-label">Why?</span>
+              <p>
+                When doing channel moderation, there may be situations where it
+                is necessary to monitor users/chat participants not only within
+                the channel, but also across the platform.
+              </p>
+              <span class="section-label">Is this legal?</span>
+              <p>
+                It was made with Twitch policies in mind and does not oppose
+                current policies.
+              </p>
+              <span class="section-label">How does it work?</span>
+              <p>
+                Twitch has some public APIs that allow you to do such things.
+                This tool presents filtered data using some of those APIs, with
+                a user-friendly interface.
+              </p>
+              <span class="section-label"
+                >Why do I need to "log in with Twitch" to use it?</span
+              >
+              <p>
+                This tool is completely browser-based and takes you directly to
+                the APIs without any intermediaries. To have direct access to
+                the APIs from the browser, you need to authenticate with Twitch.
+              </p>
+              <span class="section-label"
+                >What data will this tool access if I log in?</span
+              >
+              <p>
+                This tool only requires permission to "View live Stream Chat and
+                Rooms messages". This permission allows reading public chat
+                messages on the platform, which enables this tool to collect
+                chat message data, which is the main logic of this tool.
+              </p>
+              <span class="section-label">Do you collect my data?</span>
+              <p>
+                No, this tool does not collect any data from you as a user. This
+                means that we do not collect any statistics regarding who uses
+                the tool, how they use it, or when.
+              </p>
+              <span class="section-label">Do you store chat logs?</span>
+              <p>
+                No, we do not store chat logs. This goes against Twitch's
+                policies. The chat logs disappear when you refresh the page.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./src/ui/ui.js"></script>
+    <script src="./src/worker/setup.js"></script>
+  </body>
+</html>
