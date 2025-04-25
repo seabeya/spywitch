@@ -4,7 +4,7 @@ import IconGithub from './icons/github';
 function GitHubBtn() {
   return (
     <Button.Link
-      href="https://github.com/seabeya/spywitch"
+      href="https://github.com/sh2aliyev/spywitch"
       target="_blank"
       variant={'outline'}
       size={'regular'}

@@ -19,7 +19,7 @@
 
 <br>
 
-Website: https://spywitch.seabeya.com
+Website: https://spywitch.sh2a.org
 
 ---
 
